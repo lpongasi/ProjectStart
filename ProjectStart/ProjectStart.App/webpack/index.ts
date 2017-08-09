@@ -97,7 +97,7 @@ export const module = {
             }
         },
         {
-            test: /\.(scss)$/,
+            test: /\.(scss|css)$/,
             exclude: /node_modules/,
             use: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
@@ -127,8 +127,7 @@ export const module = {
                         loader: 'sass-loader',
                         options: {
                             modules: false,
-                            importLoaders: 3,
-                            includePaths: path.resolve(root, 'node_modules', 'onsenui', 'css')
+                            importLoaders: 3
                         }
                     }
                 ]
