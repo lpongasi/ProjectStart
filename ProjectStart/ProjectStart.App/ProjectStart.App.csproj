@@ -8,6 +8,11 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-ProjectStart.App-4c2fdc78-48b1-47b4-9478-06f9410bda80</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="tsconfig.json" />
+    <Content Remove="tsconfigs.json" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
