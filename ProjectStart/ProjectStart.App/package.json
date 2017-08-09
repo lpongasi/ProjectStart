@@ -1,0 +1,13 @@
+{
+  "name": "ProjectStart",
+  "description": "Starting Project",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "devDependencies": {
+    "react": "^15.6.1"
+  }
+}
