@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "sourceMap": true,
-    "moduleResolution": "node",
-    "jsx": "react",
-    "target": "es2016",
-    "module": "commonjs"
-  }
-}
