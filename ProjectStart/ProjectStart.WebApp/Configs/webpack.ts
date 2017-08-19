@@ -1,14 +1,11 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import { mode } from './global';
+
 declare var __dirname;
 
 const root = path.resolve(__dirname, '..');
-
-export const mode = {
-  IS_DEV: process.env['NODE_ENV'] !== 'production',
-  IS_PROD: process.env['NODE_ENV'] === 'production'
-}
 
 export const entry = {
   bundle: [
@@ -19,8 +16,7 @@ export const entry = {
 export const output = {
   filename: '[name].js',
   chunkFilename: '[id].js',
-  path: path.resolve(root, 'wwwroot', 'js'),
-  publicPath: '/'
+  path: path.resolve(root, 'wwwroot', 'js')
 }
 
 export const stats = {
@@ -53,8 +49,7 @@ export const resolve = {
 export const plugins = [
   new webpack.DefinePlugin({
     "process.env": {
-      "NODE_ENV": JSON.stringify(process.env['NODE_ENV']),
-      "ASSET_PATH": JSON.stringify(process.env['ASSET_PATH']),
+      "NODE_ENV": JSON.stringify(process.env['NODE_ENV'])
     }
   }),
   new ExtractTextPlugin({

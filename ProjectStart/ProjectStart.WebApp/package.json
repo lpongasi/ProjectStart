@@ -13,7 +13,6 @@
     "@types/node": "^8.0.20",
     "@types/react": "^16.0.2",
     "@types/react-dom": "^15.5.3",
-    "@types/react-hot-loader": "^3.0.3",
     "@types/react-redux": "^5.0.4",
     "@types/react-router": "^4.0.15",
     "@types/react-router-dom": "^4.0.7",
@@ -21,10 +20,6 @@
     "@types/redux-logger": "^3.0.0",
     "@types/redux-thunk": "^2.1.0",
     "@types/webpack": "^3.0.6",
-    "@types/webpack-env": "^1.13.0",
-    "aspnet-prerendering": "^3.0.1",
-    "aspnet-webpack": "^2.0.1",
-    "aspnet-webpack-react": "^3.0.0",
     "css-loader": "^0.28.4",
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -56,9 +51,7 @@
     "ts-loader": "^2.3.2",
     "ts-node": "^3.3.0",
     "typescript": "^2.4.2",
-    "webpack": "^3.5.2",
-    "webpack-dev-middleware": "^1.12.0",
-    "webpack-hot-middleware": "^2.18.2"
+    "webpack": "^3.5.2"
   },
   "scripts": {
     "watch": "npm run build -- --watch",

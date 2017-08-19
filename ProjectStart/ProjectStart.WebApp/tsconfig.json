@@ -6,15 +6,16 @@
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
+    "allowJs": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
     "skipDefaultLibCheck": true,
+    "sourceMap": false,
     "strict": true,
     "noImplicitAny": false,
+    "noEmitOnError": false,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "lib": [ "es6", "dom" ],
-    "types": [ "webpack-env" ]
+    "lib": [ "es6", "dom" ]
   },
   "exclude": [
     "bin",
