@@ -1,22 +1,23 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { mode } from './global';
-
-declare var __dirname;
-
-const root = path.resolve(__dirname, '..');
+import { mode, root, outputPath, scssInputPath, commonLibPaths, clientAppAssetPath } from './global';
 
 export const entry = {
-  bundle: [
-    path.resolve(root, 'ClientApp', 'main.tsx')
-  ]
+  bundle: commonLibPaths.concat ([
+    path.resolve(root, 'ClientApp', 'main.tsx'),
+  ])
 }
+
+export const includePaths = [
+  scssInputPath,
+  clientAppAssetPath,
+]
 
 export const output = {
   filename: '[name].js',
   chunkFilename: '[id].js',
-  path: path.resolve(root, 'wwwroot', 'js')
+  path: outputPath
 }
 
 export const stats = {
@@ -40,7 +41,7 @@ export const resolve = {
   extensions: [
     '.ts', '.tsx',
     '.js', '.jsx',
-    '.CSS', '.SCSS',
+    '.css', '.scss',
     '.otf', '.eot', '.svg', '.ttf', '.woff', '.woff2',
     '.png', '.jpg', '.jpeg', '.gif'
   ]
@@ -94,7 +95,7 @@ export const webpackModule = {
     },
     {
       test: /\.(scss|css)$/,
-      exclude: /node_modules/,
+      //exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
@@ -123,10 +124,7 @@ export const webpackModule = {
             loader: 'sass-loader',
             options: {
               modules: false,
-              importLoaders: 3,
-              includePaths: [
-                path.resolve(root, 'wwwroot', 'scss'),
-              ]
+              importLoaders: 3
             }
           }
         ]
