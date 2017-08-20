@@ -1,22 +1,18 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { mode, root, outputPath, scssInputPath, commonLibPaths, clientAppAssetPath } from './global';
+import { mode, root, outputPath, commonLibPaths } from './global';
 
 export const entry = {
-  bundle: commonLibPaths.concat ([
+  lib: commonLibPaths,
+  main: [
     path.resolve(root, 'ClientApp', 'main.tsx'),
-  ])
+  ]
 }
 
-export const includePaths = [
-  scssInputPath,
-  clientAppAssetPath,
-]
-
 export const output = {
-  filename: '[name].js',
-  chunkFilename: '[id].js',
+  filename: '[name].bundle.js',
+  chunkFilename: '[id].bundle.js',
   path: outputPath
 }
 
@@ -54,18 +50,23 @@ export const plugins = [
     }
   }),
   new ExtractTextPlugin({
-    filename: "[name].css",
+    filename: "[name].bundle.css",
     allChunks: true
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    name: "shared",
-    filename: "shared.js"
+    name: "common",
+    filename: "common.js"
   }),
   new webpack.LoaderOptionsPlugin({
     minimize: mode.IS_PROD,
     debug: mode.IS_DEV
   }),
   new webpack.optimize.UglifyJsPlugin({
+    beautify: mode.IS_DEV,
+    mangle: {
+      screw_ie8: mode.IS_PROD,
+      keep_fnames: mode.IS_PROD
+    },
     compress: {
       warnings: mode.IS_DEV,
       screw_ie8: mode.IS_PROD,
@@ -77,7 +78,8 @@ export const plugins = [
       evaluate: mode.IS_PROD,
       if_return: mode.IS_PROD,
       join_vars: mode.IS_PROD
-    }
+    },
+    comments: mode.IS_DEV
   })
 ];
 
@@ -95,7 +97,7 @@ export const webpackModule = {
     },
     {
       test: /\.(scss|css)$/,
-      //exclude: /node_modules/,
+      exclude: /node_modules/,
       use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
@@ -116,7 +118,7 @@ export const webpackModule = {
                 require('postcss-svg')(),
                 require('postcss-sprites')(),
                 require('postcss-browser-reporter')(),
-                require('postcss-reporter')()
+                require('postcss-reporter')(),                
               ]
             }
           },

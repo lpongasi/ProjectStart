@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebApp</title>
     <base href="~/" />
-    <link rel="stylesheet" href="~/assets/bundle.css" asp-append-version="true" />
+    <link href="~/assets/lib.bundle.css" rel="stylesheet" />
 </head>
 <body>
     @RenderBody()
-    <script src="~/assets/shared.js"></script>
+    <script src="~/assets/common.js"></script>
+    <script src="~/assets/lib.bundle.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

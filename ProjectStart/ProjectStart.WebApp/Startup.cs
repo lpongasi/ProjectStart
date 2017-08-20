@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjectStart.WebApp.Data;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
-//using Microsoft.AspNetCore.SpaServices.Webpack;
+using ProjectStart.Commerce;
 
 namespace ProjectStart.WebApp
 {
@@ -27,8 +27,12 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContextPool<CommerceContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CommerceConnection")));
+
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
