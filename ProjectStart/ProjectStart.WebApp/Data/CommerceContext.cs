@@ -12,23 +12,7 @@ namespace ProjectStart.WebApp
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Node>(entity =>
-            {
-                entity
-                .ToTable("Node");
-
-                entity
-                .Property(p => p.Name)
-                .IsRequired();
-
-                entity
-                .HasMany(m => m.SubNodes)
-                .WithOne(o => o.ParentNode)
-                .HasForeignKey(f => f.ParentId)
-                .HasPrincipalKey(k => k.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            });
+            modelBuilder.InitializeCommerceModel();
         }
     }
 }

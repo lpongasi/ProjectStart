@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20170820162440_InitCommerce_08212017")]
-    partial class InitCommerce_08212017
+    [Migration("20170821091552_Commerce_20170821_171534")]
+    partial class Commerce_20170821_171534
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,10 +26,24 @@ namespace ProjectStart.WebApp.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
+                    b.Property<DateTime?>("DateRemoved");
+
+                    b.Property<bool>("IsRemoved");
+
+                    b.Property<string>("ModifiedBy");
+
                     b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<int?>("ParentId");
+
+                    b.Property<string>("RemovedBy");
 
                     b.HasKey("Id");
 

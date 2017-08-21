@@ -57,6 +57,9 @@
     "watch": "npm run build -- --watch",
     "watch-dev": "npm run build-dev -- --watch",
     "build": "SET NODE_ENV=production&& webpack",
-    "build-dev": "SET NODE_ENV=development&& webpack"
+    "build-dev": "SET NODE_ENV=development&& webpack",
+    "migrate-commerce-create": "MigrationScripts\\migration-commerce-create.bat",
+    "migrate-commerce-apply": "MigrationScripts\\migration-commerce-apply.bat",
+    "migrate-commerce": "npm run migrate-commerce-create&&npm run migrate-commerce-apply"
   }
 }

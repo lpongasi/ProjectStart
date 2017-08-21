@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectStart.Commerce.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +8,7 @@ using System.Text;
 namespace ProjectStart.Commerce
 {
     [Table("Node")]
-    public class Node
+    public class Node : Audit
     {
         public Node()
         {

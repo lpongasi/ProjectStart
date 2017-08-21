@@ -24,7 +24,7 @@ namespace ProjectStart.WebApp.Controllers
         [HttpGet]
         public IEnumerable<Node> GetNodes()
         {
-            return _context.Nodes.ToList();
+            return _context.Nodes;
         }
 
         // GET: api/Category/5
