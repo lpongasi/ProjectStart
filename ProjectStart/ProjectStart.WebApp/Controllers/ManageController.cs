@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -9,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using ProjectStart.WebApp.Extensions;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Models.ManageViewModels;
 using ProjectStart.WebApp.Services;
@@ -41,7 +40,7 @@ namespace ProjectStart.WebApp.Controllers
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
-
+        
         [TempData]
         public string StatusMessage { get; set; }
 

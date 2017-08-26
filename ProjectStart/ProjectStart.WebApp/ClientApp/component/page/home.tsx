@@ -7,6 +7,10 @@ Link
 export default () => (
   <div>
     HELLO HOME PAGE
-    <Link to='/Manage/Item' className='waves-effect waves-light btn'>LINK</Link>
+<input type="checkbox" id="text"/>
+<label htmlFor="text">asdawda</label>
+    <Link to='/Manage/Item' className='waves-effect waves-light btn'>
+    <span className="fa fa-user"> </span> 
+      LINK</Link>
     </div>
 );

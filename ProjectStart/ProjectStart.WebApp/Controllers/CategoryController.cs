@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjectStart.Common;
 using ProjectStart.Commerce;
+using ProjectStart.Commerce.Entity;
+using ProjectStart.Commerce.Model;
 
 namespace ProjectStart.WebApp.Controllers
 {
@@ -22,9 +23,20 @@ namespace ProjectStart.WebApp.Controllers
 
         // GET: api/Category
         [HttpGet]
-        public IEnumerable<Node> GetNodes()
+        public AppResponse<IEnumerable<NodeModel>> GetNodes()
         {
-            return _context.Nodes;
+            Response.StatusCode = 400;
+            var node = _context.Nodes
+                .Where(w=>!w.IsRemoved)
+                .Select(s => new NodeModel
+            {
+                Id = s.Id,
+                ParentId = s.ParentId,
+                Name = s.Name
+            }).ToList()
+            .ToSubNodes();
+
+            return node.ToResponse();
         }
 
         // GET: api/Category/5

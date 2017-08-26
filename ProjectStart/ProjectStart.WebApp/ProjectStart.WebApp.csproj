@@ -24,11 +24,11 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="wwwroot\assets\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectStart.Commerce\ProjectStart.Commerce.csproj" />
+    <ProjectReference Include="..\ProjectStart.Common\ProjectStart.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,10 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
+  "files": [
+    "Configs/global.ts",
+    "Configs/webpack.ts",
+    "webpack.config.ts"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
     "module": "commonjs",

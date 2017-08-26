@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using ProjectStart.WebApp;
 using System;
+using ProjectStart.Commerce;
 
 namespace ProjectStart.WebApp.Migrations
 {

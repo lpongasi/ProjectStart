@@ -1,13 +1,21 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { mode, root, outputPath, commonLibPaths } from './global';
+import { mode, outputPath, clientAppPath } from './global';
 
 export const entry = {
-  lib: commonLibPaths,
-  main: [
-    path.resolve(root, 'ClientApp', 'main.tsx'),
-  ]
+  common: ['react',
+    'redux',
+    'react-dom',
+    'react-redux',
+    'redux-thunk',
+    'react-router-dom',
+    'jquery',
+    path.resolve(clientAppPath, 'assets', 'materialize', 'js', 'materialize.min.js'),
+    path.resolve(clientAppPath, 'assets', 'fontawesome', 'scss', 'font-awesome.scss'),
+    path.resolve(clientAppPath, 'assets', 'materialize', 'scss', 'materialize.scss')
+  ],
+  main: path.resolve(clientAppPath, 'main.tsx')
 }
 
 export const output = {
@@ -50,38 +58,35 @@ export const plugins = [
     }
   }),
   new ExtractTextPlugin({
-    filename: "[name].bundle.css",
+    filename: 'style.css',
     allChunks: true
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    name: "common",
-    filename: "common.js"
+    name: 'common',
+    filename: 'common.js'
   }),
   new webpack.LoaderOptionsPlugin({
     minimize: mode.IS_PROD,
     debug: mode.IS_DEV
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    beautify: mode.IS_DEV,
-    mangle: {
-      screw_ie8: mode.IS_PROD,
-      keep_fnames: mode.IS_PROD
-    },
-    compress: {
-      warnings: mode.IS_DEV,
-      screw_ie8: mode.IS_PROD,
-      conditionals: mode.IS_PROD,
-      unused: mode.IS_PROD,
-      comparisons: mode.IS_PROD,
-      sequences: mode.IS_PROD,
-      dead_code: mode.IS_PROD,
-      evaluate: mode.IS_PROD,
-      if_return: mode.IS_PROD,
-      join_vars: mode.IS_PROD
-    },
-    comments: mode.IS_DEV
   })
-];
+].concat(mode.IS_PROD
+  ? [
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        warnings: false,
+        screw_ie8: true
+      },
+      comments: false
+    })
+  ]
+    : [
+
+  ]);
 
 export const webpackModule = {
   rules: [
@@ -118,7 +123,7 @@ export const webpackModule = {
                 require('postcss-svg')(),
                 require('postcss-sprites')(),
                 require('postcss-browser-reporter')(),
-                require('postcss-reporter')(),                
+                require('postcss-reporter')(),
               ]
             }
           },
@@ -126,7 +131,8 @@ export const webpackModule = {
             loader: 'sass-loader',
             options: {
               modules: false,
-              importLoaders: 3
+              importLoaders: 3,
+
             }
           }
         ]
@@ -137,8 +143,8 @@ export const webpackModule = {
       use: [{
         loader: 'file-loader',
         options: {
-          modules: true,
-          name: '../font/[name].[ext]'
+          //modules: true,
+          name: '../fonts/[name].[ext]'
         }
       }]
     },
@@ -147,8 +153,8 @@ export const webpackModule = {
       use: [{
         loader: 'file-loader',
         options: {
-          modules: true,
-          name: '../image/[name].[ext]'
+          //modules: true,
+          name: '../images/[name].[ext]'
         }
       }]
     },

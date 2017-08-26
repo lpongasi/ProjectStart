@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using ProjectStart.WebApp.Services;
 
-namespace ProjectStart.WebApp.Services
+namespace ProjectStart.WebApp.Extensions
 {
     public static class EmailSenderExtensions
     {

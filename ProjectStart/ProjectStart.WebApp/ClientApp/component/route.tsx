@@ -5,9 +5,9 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Navigation from '../component/navigation';
-import Home from '../component/page/home';
-import ManageItem from '../component/page/manage-item';
+import Navigation from './page/navigation';
+import Home from './page/home';
+import ManageItem from './page/manage-item';
 
 export default () => (
   <BrowserRouter>

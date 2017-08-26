@@ -1,7 +1,18 @@
 ﻿import * as React from 'react';
+import * as $ from 'jquery';
+import { api,MethodType } from '../api';
+import { connect } from 'react-redux';
 
-export default class Navigation extends React.Component<{}, {}> {
-    
+
+export default class Navigation extends React.Component {
+  componentDidMount() {
+    $('.button-collapse').sideNav({
+      menuWidth: 300,
+      closeOnClick: true,
+      draggable: true
+    });
+    api('TEST', MethodType.Get, 'api/category', {name:'LOKI'});
+  }
   render() {
     return (
       <nav>

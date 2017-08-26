@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using ProjectStart.WebApp.Controllers;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace ProjectStart.WebApp.Extensions
 {
     public static class UrlHelperExtensions
     {
