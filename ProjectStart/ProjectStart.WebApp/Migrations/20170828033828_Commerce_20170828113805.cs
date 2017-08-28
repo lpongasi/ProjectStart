@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ProjectStart.WebApp.Migrations
 {
-    public partial class Commerce_20170825_232947 : Migration
+    public partial class Commerce_20170828113805 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

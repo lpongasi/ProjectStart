@@ -1,10 +1,12 @@
 ﻿import { combineReducers } from 'redux';
-import manageItem from './manageItem';
-import loading from './loading';
+import loading from './loading-reducer';
+import node from './node-reducer';
+import manageItem from './manageItem-reducer';
 
 const allreducers = combineReducers({
     manageItem,
-    loading
+    loading,
+    node
 });
 
 export default allreducers;

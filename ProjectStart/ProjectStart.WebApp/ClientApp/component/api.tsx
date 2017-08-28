@@ -1,6 +1,6 @@
 ﻿import * as $ from 'jquery';
 import Store from './store';
-import {StateLifeCycle} from './common';
+import { StateLifeCycle } from './common';
 
 export enum MethodType {
   Get = ('get') as any,
@@ -9,33 +9,36 @@ export enum MethodType {
   Delete = ('delete') as any
 }
 
-const dispatcher = (type: string = null, payload: any = null) => {
-  return {
+export const dispatcher = (type: string, payload: any = null) =>
+  Store.dispatch({
     type: type,
-    payload: {...payload}
-  }
-};
+    payload: { ...payload }
+  });
 
-export const api = (dispatchPrefix: string = 'FETCH', methodType: MethodType = MethodType.Get, url: string = '', data: any = null) => {
-  Store.dispatch(dispatcher(`${dispatchPrefix}_${StateLifeCycle.Started}`));
-  Store.dispatch(dispatcher(`LOADING_${StateLifeCycle.Started}`));
+export const api = (
+  dispatchPrefix: string = 'FETCH',
+  methodType: MethodType = MethodType.Get,
+  url: string = '',
+  data: any = null
+  ) => {
+  dispatcher(`${dispatchPrefix}_${StateLifeCycle.Started}`);
+  dispatcher(`LOADING_${StateLifeCycle.Started}`);
   $.ajax({
-      method: methodType,
-      url: url,
-      dataType: 'json',
-      cache: false,
-      data: { ...data }
-    })
+    method: methodType.toString(),
+    url: url,
+    dataType: 'json',
+    cache: false,
+    data: { ...data }
+  })
     .done((data) => {
-      Store.dispatch(dispatcher(`${dispatchPrefix}_${StateLifeCycle.Success}`, data));
-      Store.dispatch(dispatcher(`LOADING_${StateLifeCycle.End}`));
+      dispatcher(`${dispatchPrefix}_${StateLifeCycle.Success}`, data);
+      dispatcher(`LOADING_${StateLifeCycle.End}`);
     })
     .fail((jqXhr, textStatus, errorThrown) => {
-      Store.dispatch(dispatcher(`${dispatchPrefix}_${StateLifeCycle.Error}`, { ...jqXhr.responseJSON, errorThrown }));
-      Store.dispatch(dispatcher(`LOADING_${StateLifeCycle.Error}`, { ...jqXhr.responseJSON, errorThrown }));
+      dispatcher(`${dispatchPrefix}_${StateLifeCycle.Error}`, { ...jqXhr.responseJSON, errorThrown, textStatus });
+      dispatcher(`LOADING_${StateLifeCycle.Error}`, { ...jqXhr.responseJSON, errorThrown });
     })
     .always(() => {
-      Store.dispatch(dispatcher(`${dispatchPrefix}_${StateLifeCycle.End}`));
-      Store.dispatch(dispatcher(`LOADING_${StateLifeCycle.End}`));
+      dispatcher(`${dispatchPrefix}_${StateLifeCycle.End}`);
     });
 };

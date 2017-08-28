@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectStart.Commerce.Entity;
+using System;
 
 namespace ProjectStart.Commerce
 {
@@ -16,12 +17,12 @@ namespace ProjectStart.Commerce
                     .ToTable("Node");
 
                 entity
-                    .Property(p => p.Id)
-                    .ValueGeneratedOnAdd();
+                .Property(p => p.DateCreated)
+                .ValueGeneratedOnAdd();
 
                 entity
-                    .Property(p => p.Name)
-                    .IsRequired();
+                .Property(p => p.DateModified)
+                .ValueGeneratedOnUpdate();
 
                 entity
                     .HasMany(m => m.SubNodes)

@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ProjectStart.Commerce\ProjectStart.Commerce.csproj" />
     <ProjectReference Include="..\ProjectStart.Common\ProjectStart.Common.csproj" />
   </ItemGroup>

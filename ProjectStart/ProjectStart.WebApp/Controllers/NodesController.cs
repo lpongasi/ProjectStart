@@ -1,45 +1,60 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProjectStart.Common;
 using ProjectStart.Commerce;
 using ProjectStart.Commerce.Entity;
 using ProjectStart.Commerce.Model;
+using ProjectStart.Common;
 
 namespace ProjectStart.WebApp.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Category")]
-    public class CategoryController : Controller
+    [Route("api/Nodes")]
+    public class NodesController : Controller
     {
         private readonly CommerceContext _context;
 
-        public CategoryController(CommerceContext context)
+        public NodesController(CommerceContext context)
         {
             _context = context;
         }
 
-        // GET: api/Category
+        // GET: api/Nodes
         [HttpGet]
         public AppResponse<IEnumerable<NodeModel>> GetNodes()
         {
-            Response.StatusCode = 400;
-            var node = _context.Nodes
-                .Where(w=>!w.IsRemoved)
-                .Select(s => new NodeModel
+            //var nodes =
+            //    Enumerable.Range(1, 10).Select(n => new Node
+            //    {
+            //        Code = $"C{n}",
+            //        Name = $"TEST {n}",
+            //        CreatedBy = "Loki",
+            //        DateCreated = DateTime.Now,
+            //        SubNodes = Enumerable.Range(1, 10).Select(sn => new Node
+            //        {
+            //            Code = $"C{n}-{sn}",
+            //            Name = $"TEST {n}-{sn}",
+            //            CreatedBy = "Loki",
+            //            DateCreated = DateTime.Now,
+            //        }).ToList()
+            //    }).ToList();
+            //_context.AddRange(nodes);
+            //_context.SaveChanges();
+
+            return _context.Nodes.Select(s=>new NodeModel
             {
                 Id = s.Id,
-                ParentId = s.ParentId,
-                Name = s.Name
-            }).ToList()
-            .ToSubNodes();
-
-            return node.ToResponse();
+                Code = s.Code,
+                Name = s.Name,
+                ParentId = s.ParentId
+            }).ToList().ToSubNodes().ToResponse();
         }
 
-        // GET: api/Category/5
+        // GET: api/Nodes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetNode([FromRoute] int id)
         {
@@ -58,7 +73,7 @@ namespace ProjectStart.WebApp.Controllers
             return Ok(node);
         }
 
-        // PUT: api/Category/5
+        // PUT: api/Nodes/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNode([FromRoute] int id, [FromBody] Node node)
         {
@@ -93,7 +108,7 @@ namespace ProjectStart.WebApp.Controllers
             return NoContent();
         }
 
-        // POST: api/Category
+        // POST: api/Nodes
         [HttpPost]
         public async Task<IActionResult> PostNode([FromBody] Node node)
         {
@@ -108,7 +123,7 @@ namespace ProjectStart.WebApp.Controllers
             return CreatedAtAction("GetNode", new { id = node.Id }, node);
         }
 
-        // DELETE: api/Category/5
+        // DELETE: api/Nodes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNode([FromRoute] int id)
         {

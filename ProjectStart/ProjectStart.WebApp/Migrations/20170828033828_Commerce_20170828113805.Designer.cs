@@ -5,15 +5,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using ProjectStart.WebApp;
-using System;
 using ProjectStart.Commerce;
+using System;
 
 namespace ProjectStart.WebApp.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20170821092101_Commerce_20170821_172035")]
-    partial class Commerce_20170821_172035
+    [Migration("20170828033828_Commerce_20170828113805")]
+    partial class Commerce_20170828113805
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,16 +21,21 @@ namespace ProjectStart.WebApp.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjectStart.Commerce.Node", b =>
+            modelBuilder.Entity("ProjectStart.Commerce.Entity.Node", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Code")
+                        .IsRequired();
+
                     b.Property<string>("CreatedBy");
 
-                    b.Property<DateTime>("DateCreated");
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateModified");
+                    b.Property<DateTime?>("DateModified")
+                        .ValueGeneratedOnUpdate();
 
                     b.Property<DateTime?>("DateRemoved");
 
@@ -53,9 +57,9 @@ namespace ProjectStart.WebApp.Migrations
                     b.ToTable("Node");
                 });
 
-            modelBuilder.Entity("ProjectStart.Commerce.Node", b =>
+            modelBuilder.Entity("ProjectStart.Commerce.Entity.Node", b =>
                 {
-                    b.HasOne("ProjectStart.Commerce.Node", "ParentNode")
+                    b.HasOne("ProjectStart.Commerce.Entity.Node", "ParentNode")
                         .WithMany("SubNodes")
                         .HasForeignKey("ParentId");
                 });

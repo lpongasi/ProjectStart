@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations
 {
     [DbContext(typeof(CommerceContext))]
-    [Migration("20170825153007_Commerce_20170825_232947")]
-    partial class Commerce_20170825_232947
+    [Migration("20170828034007_Commerce_20170828113940")]
+    partial class Commerce_20170828113940
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,16 +21,21 @@ namespace ProjectStart.WebApp.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjectStart.Commerce.Node", b =>
+            modelBuilder.Entity("ProjectStart.Commerce.Entity.Node", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Code")
+                        .IsRequired();
+
                     b.Property<string>("CreatedBy");
 
-                    b.Property<DateTime>("DateCreated");
+                    b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("DateModified");
+                    b.Property<DateTime?>("DateModified")
+                        .ValueGeneratedOnUpdate();
 
                     b.Property<DateTime?>("DateRemoved");
 
@@ -52,9 +57,9 @@ namespace ProjectStart.WebApp.Migrations
                     b.ToTable("Node");
                 });
 
-            modelBuilder.Entity("ProjectStart.Commerce.Node", b =>
+            modelBuilder.Entity("ProjectStart.Commerce.Entity.Node", b =>
                 {
-                    b.HasOne("ProjectStart.Commerce.Node", "ParentNode")
+                    b.HasOne("ProjectStart.Commerce.Entity.Node", "ParentNode")
                         .WithMany("SubNodes")
                         .HasForeignKey("ParentId");
                 });

@@ -1,4 +1,4 @@
-﻿import { StateLifeCycle } from '../Component/common';
+﻿import { StateLifeCycle } from '../component/common';
 let initialState = {
     status: StateLifeCycle.End
 }
@@ -27,8 +27,7 @@ export default function (state = initialState, action) {
       break;
       default :
         newState = {
-          ...state,
-          status:StateLifeCycle.End
+          ...state
         }
       break;
     }
