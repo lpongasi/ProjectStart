@@ -31,13 +31,12 @@ namespace ProjectStart.Commerce.Common
                 IsRemoved = true;
             }
         }
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long Id { get; set; }
         [Required]
         public string Code { get; set; }
+        [Required]
+        public string Name { get; set; }
         [Required]
         public string CreatedBy { get; set; }
         [Required]
