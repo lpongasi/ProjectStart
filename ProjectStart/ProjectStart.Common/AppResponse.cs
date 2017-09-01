@@ -9,7 +9,7 @@ namespace ProjectStart.Common
         public AppResponse(bool success = true, string message = null, IDictionary<string, string> errors = null)
         {
             Message = message;
-            Success = success && (Errors == null || !Errors.Any());
+            Success = success;
             Errors = errors;
         }
 
@@ -19,24 +19,24 @@ namespace ProjectStart.Common
             set => _success = value;
         }
 
-        public bool Error => !Success || Errors != null && Errors.Any();
+        public bool Error => !Success;
         public IDictionary<string, string> Errors { get; set; }
         public string Message { get; set; }
     }
     public class AppResponse<T> : AppResponse
     {
-        public AppResponse(T result, bool success = true, string message = null, IDictionary<string, string> errors = null) : base(success, message, errors)
+        public AppResponse(T data, bool success = true, string message = null, IDictionary<string, string> errors = null) : base(success, message, errors)
         {
-            Result = result;
+            Data = data;
         }
-        public T Result { get; set; }
+        public T Data { get; set; }
     }
     public static class AppResponseExtension
     {
         public static AppResponse Create(this AppResponse response, bool success = true, string message = null, IDictionary<string, string> errors = null)
             => new AppResponse(success, message, errors);
 
-        public static AppResponse<T> ToResponse<T>(this T result, bool success = true, string message = null, IDictionary<string, string> errors = null)
-            => new AppResponse<T>(result, success, message, errors);
+        public static AppResponse<T> ToResponse<T>(this T data, bool success = true, string message = null, IDictionary<string, string> errors = null)
+            => new AppResponse<T>(data, success, message, errors);
     }
 }
