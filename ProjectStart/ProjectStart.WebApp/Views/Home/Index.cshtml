@@ -1,4 +1,9 @@
 ﻿<div id="main-app">Loading...</div>
 @section scripts {
-<script src="~/assets/main.bundle.js"></script>
+    <environment exclude="Development">
+        <script src="~/assets/main.bundle.js"></script>
+    </environment>
+    <environment include="Development">
+        <script src="http://localhost:9000/assets/main.bundle.js"></script>
+    </environment>
 }

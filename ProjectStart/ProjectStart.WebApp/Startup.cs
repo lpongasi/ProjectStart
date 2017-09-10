@@ -38,7 +38,8 @@ namespace ProjectStart.WebApp
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
+            /* these are the default values */
+   
             services.AddMvc()
             .AddJsonOptions(
                 options =>

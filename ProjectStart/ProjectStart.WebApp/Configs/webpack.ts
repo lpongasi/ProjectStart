@@ -1,10 +1,11 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { mode, outputPath, clientAppPath } from './global';
+import { outputPath, clientAppPath,assetPath, isProd } from './global';
 
 export const entry = {
-  common: ['react',
+  common: [
+    'react',
     'redux',
     'react-dom',
     'react-redux',
@@ -15,15 +16,22 @@ export const entry = {
     path.resolve(clientAppPath, 'assets', 'fontawesome', 'scss', 'font-awesome.scss'),
     path.resolve(clientAppPath, 'assets', 'materialize', 'scss', 'materialize.scss')
   ],
-  main: path.resolve(clientAppPath, 'main.tsx')
+  main:  path.resolve(clientAppPath, 'main.tsx')
 }
 
 export const output = {
+  publicPath: '/assets/',
   filename: '[name].bundle.js',
   chunkFilename: '[id].bundle.js',
-  path: outputPath
+  path: outputPath,
 }
-
+export const devServer = {
+  headers: { 'Access-Control-Allow-Origin': '*' },
+  contentBase: assetPath,
+  port: 9000,
+  compress: true,
+  hot:true,
+}
 export const stats = {
   assets: true,
   children: true,
@@ -59,6 +67,7 @@ export const plugins = [
   }),
   new ExtractTextPlugin({
     filename: 'style.css',
+    disable: !isProd,
     allChunks: true
   }),
   new webpack.optimize.CommonsChunkPlugin({
@@ -66,10 +75,10 @@ export const plugins = [
     filename: 'common.js'
   }),
   new webpack.LoaderOptionsPlugin({
-    minimize: mode.IS_PROD,
-    debug: mode.IS_DEV
+    minimize: isProd,
+    debug: !isProd
   })
-].concat(mode.IS_PROD
+].concat(isProd
   ? [
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
@@ -85,27 +94,10 @@ export const plugins = [
     })
   ]
     : [
-
+    new webpack.HotModuleReplacementPlugin(),
   ]);
 
-export const webpackModule = {
-  rules: [
-    {
-      test: /\.tsx?$/,
-      exclude: /node_modules/,
-      use: {
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true
-        }
-      }
-    },
-    {
-      test: /\.(scss|css)$/,
-      exclude: /node_modules/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
+const cssLoaders = [
           {
             loader: 'css-loader',
             options: {
@@ -135,15 +127,35 @@ export const webpackModule = {
 
             }
           }
-        ]
-      })
+        ];
+const cssDev = [{loader:'style-loader'}].concat([...cssLoaders]);
+const cssProd = ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use:[...cssLoaders] });
+const cssConfig = isProd? cssProd: cssDev;
+
+export const webpackModule = {
+  rules: [
+    {
+      test: /\.tsx?$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true
+        }
+      }
+    },
+    {
+      test: /\.(scss|css)$/,
+      exclude: /node_modules/,
+      use: cssConfig
     },
     {
       test: /\.(otf|eot|ttf|svg|woff|woff2)$/,
       use: [{
         loader: 'file-loader',
         options: {
-          //modules: true,
           name: '../fonts/[name].[ext]'
         }
       }]
@@ -153,7 +165,6 @@ export const webpackModule = {
       use: [{
         loader: 'file-loader',
         options: {
-          //modules: true,
           name: '../images/[name].[ext]'
         }
       }]

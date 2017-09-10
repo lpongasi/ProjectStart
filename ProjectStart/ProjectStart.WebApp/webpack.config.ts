@@ -1,9 +1,10 @@
 ﻿import * as webpack from 'webpack';
-import { mode } from './Configs/global';
-import { entry, output, stats, resolve, plugins, webpackModule } from './Configs/webpack';
+import { isProd } from './Configs/global';
+import { devServer, entry, output, stats, resolve, plugins, webpackModule } from './Configs/webpack';
 
 const config: webpack.Configuration = {
-  devtool: mode.IS_DEV ? false : 'source-map',
+  devtool: isProd ? false : 'source-map',
+  devServer,
   stats,
   resolve,
   module: webpackModule,
