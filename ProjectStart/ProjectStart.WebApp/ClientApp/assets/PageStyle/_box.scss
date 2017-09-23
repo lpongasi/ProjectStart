@@ -50,8 +50,11 @@ $box-content-main-color: #000000;
                     top: -125%;
                     left: 33.33%;
                 }
-                .box-inputs{
-                    background-color:t;
+
+                .box-inputs {
+                    position: absolute;
+                    bottom:0;
+                    left:0;
                 }
             }
         }

@@ -21,19 +21,33 @@ export const entry = {
 }
 
 export const output = {
-    publicPath: '/assets/',
+    publicPath: '/',
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js',
     path: outputPath,
 }
 export const devServer = {
+    publicPath: '/assets/',
     headers: { 'Access-Control-Allow-Origin': '*' },
     contentBase: assetPath,
     port: 9000,
+    open: true,
     //https: true,
     compress: true,
     inline: true,
-    hot: true
+    hot: true,
+    overlay: {
+        warnings: true,
+        errors: true
+    },
+    proxy: {
+        "**": {
+            target: "http://localhost:49992",
+            secure: false
+            //pathRewrite: { "^/assets": "" },
+            //target: "https://localhost:44390",
+        }
+    }
 }
 export const stats = {
     assets: true,
