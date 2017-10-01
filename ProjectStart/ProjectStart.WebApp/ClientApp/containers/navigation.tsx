@@ -4,7 +4,6 @@ import * as $ from 'jquery';
 
 export default class Navigation extends React.Component {
   componentDidMount() {
-
     $('.button-collapse').sideNav({
       menuWidth: 300,
       closeOnClick: true,

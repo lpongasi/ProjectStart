@@ -1,6 +1,6 @@
 ﻿import * as webpack from 'webpack';
-import { isProd } from './Configs/global';
-import { devServer, entry, output, stats, resolve, plugins, webpackModule } from './Configs/webpack';
+import { isProd } from './webpack/global';
+import { devServer, entry, output, stats, resolve, plugins, webpackModule } from './webpack/config';
 
 const config: webpack.Configuration = {
     devtool: isProd ? false : 'source-map',

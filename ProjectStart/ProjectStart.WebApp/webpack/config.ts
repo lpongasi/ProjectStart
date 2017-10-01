@@ -12,22 +12,22 @@ export const entry = {
         'redux-thunk',
         'react-router-dom',
         'jquery',
-        path.resolve(clientAppPath, 'assets', 'materialize', 'js', 'materialize.min.js'),
+        path.resolve(clientAppPath, 'assets', 'materialize', 'js', 'materialize.js'),
         path.resolve(clientAppPath, 'assets', 'fontawesome', 'scss', 'font-awesome.scss'),
         path.resolve(clientAppPath, 'assets', 'materialize', 'scss', 'materialize.scss'),
         path.resolve(clientAppPath, 'assets', 'pagestyle', 'main.scss'),
     ],
-    main: path.resolve(clientAppPath, 'main.tsx')
+    main: path.resolve(clientAppPath, 'index.tsx')
 }
 
 export const output = {
-    publicPath: '/',
+    publicPath: '/assets/',
     filename: '[name].bundle.js',
     chunkFilename: '[id].bundle.js',
     path: outputPath,
 }
 export const devServer = {
-    publicPath: '/assets/',
+    publicPath: output.publicPath,
     headers: { 'Access-Control-Allow-Origin': '*' },
     contentBase: assetPath,
     port: 9000,
@@ -42,10 +42,10 @@ export const devServer = {
     },
     proxy: {
         "**": {
-            target: "http://localhost:49992",
+            target: "http://localhost:49993",
             secure: false
             //pathRewrite: { "^/assets": "" },
-            //target: "https://localhost:44390",
+            //target: "https://localhost:44391",
         }
     }
 }
@@ -115,6 +115,7 @@ export const plugins = [
     ]
     : [
         new webpack.HotModuleReplacementPlugin(),
+        //new webpack.NamedModulesPlugin(),
     ]);
 
 const cssLoaders = [
@@ -158,7 +159,7 @@ const cssConfig = isProd ? cssProd : cssDev;
 export const webpackModule = {
     rules: [
         {
-            test: /\.tsx?$/,
+            test: /\.(ts|tsx|js|jsx)?$/,
             exclude: /node_modules/,
             use: {
                 loader: 'ts-loader',
@@ -169,7 +170,7 @@ export const webpackModule = {
         },
         {
             test: /\.(scss|css)$/,
-            exclude: /node_modules/,
+            //exclude: /node_modules/,
             use: cssConfig
         },
         {
@@ -194,10 +195,10 @@ export const webpackModule = {
             test: require.resolve('jquery'),
             use: [{
                 loader: 'expose-loader',
-                options: '$'
+                options: 'jQuery'
             }, {
                 loader: 'expose-loader',
-                options: 'jQuery'
+                options: '$'
             }]
         }
     ]
