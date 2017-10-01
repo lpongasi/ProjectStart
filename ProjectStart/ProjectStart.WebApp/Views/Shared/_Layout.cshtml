@@ -12,13 +12,6 @@
 <body>
     @RenderBody()
     <script src="~/assets/common.bundle.js"></script>
-
-    @*<environment exclude="Development">
-        <script src="~/assets/common.bundle.js"></script>
-    </environment>
-    <environment include="Development">
-        <script src="http://localhost:9000/assets/common.bundle.js"></script>
-    </environment>*@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
