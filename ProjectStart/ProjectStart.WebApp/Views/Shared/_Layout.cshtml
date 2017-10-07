@@ -1,17 +1,15 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>WebApp</title>
     <base href="~/" />
-    <environment exclude="Development">
-        <link href="~/assets/common.bundle.css" rel="stylesheet" />
-    </environment>
+    <link href="~/assets/vendor.bundle.css" rel="stylesheet" />
 </head>
 <body>
     @RenderBody()
-    <script src="~/assets/common.bundle.js"></script>
+    <script src="~/assets/vendor.bundle.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

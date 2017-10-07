@@ -2,9 +2,22 @@
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { outputPath, clientAppPath, isProd, assetPath } from './global';
+const bootstrapJsLibs = [
+    'util.js',
+    'alert.js',
+    'button.js',
+    'carousel.js',
+    'collapse.js',
+    'dropdown.js',
+    'modal.js',
+    'scrollspy.js',
+    'tab.js',
+    'tooltip.js',
+    'popover.js'
+];
 
 export const entry = {
-    common: [
+    vendor: [
         'react',
         'redux',
         'react-dom',
@@ -12,11 +25,13 @@ export const entry = {
         'redux-thunk',
         'react-router-dom',
         'jquery',
-        path.resolve(clientAppPath, 'assets', 'materialize', 'js', 'materialize.js'),
-        path.resolve(clientAppPath, 'assets', 'fontawesome', 'scss', 'font-awesome.scss'),
-        path.resolve(clientAppPath, 'assets', 'materialize', 'scss', 'materialize.scss'),
-        path.resolve(clientAppPath, 'assets', 'pagestyle', 'main.scss'),
-    ],
+        'tether',
+        path.resolve(clientAppPath, 'bower_components', 'bootstrap', 'scss', 'bootstrap.scss'),
+        path.resolve(clientAppPath, 'bower_components', 'font-awesome', 'scss', 'font-awesome.scss'),
+        path.resolve(clientAppPath, 'style', 'normalize.css'),
+        path.resolve(clientAppPath, 'style', 'main.scss'),
+    ]
+        .concat(bootstrapJsLibs.map(m => path.resolve(clientAppPath, 'bower_components', 'bootstrap', 'js', 'src', m))),
     main: path.resolve(clientAppPath, 'index.tsx')
 }
 
@@ -85,13 +100,21 @@ export const plugins = [
             "NODE_ENV": JSON.stringify(process.env['NODE_ENV'])
         }
     }),
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        'window.$': 'jquery',
+        Tether: 'tether',
+        "window.Tether": 'tether',
+    }),
     new ExtractTextPlugin({
         filename: '[name].bundle.css',
         disable: !isProd,
         allChunks: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
+        name: 'vendor',
         filename: '[name].bundle.js'
     }),
     new webpack.LoaderOptionsPlugin({
@@ -191,15 +214,15 @@ export const webpackModule = {
                 }
             }]
         },
-        {
-            test: require.resolve('jquery'),
-            use: [{
-                loader: 'expose-loader',
-                options: 'jQuery'
-            }, {
-                loader: 'expose-loader',
-                options: '$'
-            }]
-        }
+        //{
+        //    test: require.resolve('jquery'),
+        //    use: [{
+        //        loader: 'expose-loader',
+        //        options: 'jQuery'
+        //    }, {
+        //        loader: 'expose-loader',
+        //        options: '$'
+        //    }]
+        //}
     ]
 }
