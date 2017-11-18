@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="tsconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="ClientApp\bower_components\bootstrap\.bower.json" />
     <Content Include="ClientApp\bower_components\bootstrap\bower.json" />
     <Content Include="ClientApp\bower_components\bootstrap\dist\css\bootstrap-grid.css" />
@@ -84,11 +80,11 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -445,11 +441,6 @@
     <None Include="wwwroot\assets\common.bundle.js.map" />
     <None Include="wwwroot\assets\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\assets\fonts\fontawesome-webfont.woff2" />
-    <None Include="wwwroot\assets\fonts\Roboto-Bold.woff2" />
-    <None Include="wwwroot\assets\fonts\Roboto-Light.woff2" />
-    <None Include="wwwroot\assets\fonts\Roboto-Medium.woff2" />
-    <None Include="wwwroot\assets\fonts\Roboto-Regular.woff2" />
-    <None Include="wwwroot\assets\fonts\Roboto-Thin.woff2" />
     <None Include="wwwroot\assets\main.bundle.js" />
     <None Include="wwwroot\assets\main.bundle.js.map" />
   </ItemGroup>

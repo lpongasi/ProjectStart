@@ -17,7 +17,7 @@ const bootstrapJsLibs = [
 ];
 
 export const entry = {
-    vendor: [
+    common: [
         'react',
         'redux',
         'react-dom',
@@ -41,6 +41,7 @@ export const output = {
     chunkFilename: '[id].bundle.js',
     path: outputPath,
 }
+
 export const devServer = {
     publicPath: output.publicPath,
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -114,7 +115,7 @@ export const plugins = [
         allChunks: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
+        names: ['common'],
         filename: '[name].bundle.js'
     }),
     new webpack.LoaderOptionsPlugin({
@@ -201,7 +202,7 @@ export const webpackModule = {
             use: [{
                 loader: 'file-loader',
                 options: {
-                    name: '../assets/fonts/[name].[ext]?[hash]'
+                    name: 'fonts/[name].[ext]?[hash]'
                 }
             }]
         },
@@ -210,19 +211,19 @@ export const webpackModule = {
             use: [{
                 loader: 'file-loader',
                 options: {
-                    name: '../assets/images/[name].[ext]?[hash]'
+                    name: 'images/[name].[ext]?[hash]'
                 }
             }]
         },
-        //{
-        //    test: require.resolve('jquery'),
-        //    use: [{
-        //        loader: 'expose-loader',
-        //        options: 'jQuery'
-        //    }, {
-        //        loader: 'expose-loader',
-        //        options: '$'
-        //    }]
-        //}
+        {
+            test: require.resolve('jquery'),
+            use: [{
+                loader: 'expose-loader',
+                options: 'jQuery'
+            }, {
+                loader: 'expose-loader',
+                options: '$'
+            }]
+        }
     ]
 }

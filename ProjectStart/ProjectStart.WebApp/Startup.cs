@@ -9,6 +9,8 @@ using ProjectStart.WebApp.Data;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
 using ProjectStart.Commerce;
+using Newtonsoft.Json.Serialization;
+//using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace ProjectStart.WebApp
 {
@@ -31,7 +33,6 @@ namespace ProjectStart.WebApp
                 options.UseSqlServer(Configuration.GetConnectionString("CommerceConnection"),
                 b => b.MigrationsAssembly("ProjectStart.WebApp")));
 
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -40,12 +41,14 @@ namespace ProjectStart.WebApp
             services.AddTransient<IEmailSender, EmailSender>();
             /* these are the default values */
    
-            services.AddMvc()
+            services
+                .AddMvc()
             .AddJsonOptions(
                 options =>
                 {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;  
                 }
             );
         }
@@ -58,6 +61,12 @@ namespace ProjectStart.WebApp
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
+
+                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                //{
+                //    HotModuleReplacement = true,
+                //    ReactHotModuleReplacement = true
+                //});
             }
             else
             {

@@ -50,7 +50,7 @@
     "tether": "^1.4.0",
     "ts-loader": "^2.3.2",
     "ts-node": "^3.3.0",
-    "typescript": "^2.4.2",
+    "typescript": "^2.6.1",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
   },
@@ -69,5 +69,8 @@
     "mc": "npm run mc-c&&npm run mc-a"
   },
   "author": "loucris",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "aspnet-webpack": "^2.0.1"
+  }
 }

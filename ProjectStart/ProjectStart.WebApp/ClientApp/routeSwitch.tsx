@@ -7,8 +7,8 @@ import Home from './containers/home';
 import ManageItem from './containers/manage-item';
 
 export default () => (
-            <Switch>
-                <Route exact path='/' component={Home} />
-                <Route path='/Manage/Item' component={ManageItem} />
-            </Switch>
+    <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/Manage/Item' component={ManageItem} />
+    </Switch>
 );
