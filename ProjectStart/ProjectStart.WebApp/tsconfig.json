@@ -25,6 +25,10 @@
     "noUnusedLocals": true,
     "lib": [ "es5", "es6", "es2017.object", "dom" ]
   },
+  "paths": {
+    "shared/*": [ "./ClientApp/Shared/*" ],
+    "component/*": [ "./ClientApp/component/*" ]
+  },
   "exclude": [
     "bin",
     "node_modules"

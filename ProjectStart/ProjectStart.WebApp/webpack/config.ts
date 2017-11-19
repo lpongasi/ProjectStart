@@ -1,20 +1,7 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { outputPath, clientAppPath, isProd, assetPath } from './global';
-const bootstrapJsLibs = [
-    'util.js',
-    'alert.js',
-    'button.js',
-    'carousel.js',
-    'collapse.js',
-    'dropdown.js',
-    'modal.js',
-    'scrollspy.js',
-    'tab.js',
-    'tooltip.js',
-    'popover.js'
-];
+import { outputPath, isProd, assetPath, root } from './global';
 
 export const entry = {
     common: [
@@ -26,13 +13,13 @@ export const entry = {
         'react-router-dom',
         'jquery',
         'tether',
-        path.resolve(clientAppPath, 'bower_components', 'bootstrap', 'scss', 'bootstrap.scss'),
-        path.resolve(clientAppPath, 'bower_components', 'font-awesome', 'scss', 'font-awesome.scss'),
-        path.resolve(clientAppPath, 'style', 'normalize.css'),
-        path.resolve(clientAppPath, 'style', 'main.scss'),
-    ]
-        .concat(bootstrapJsLibs.map(m => path.resolve(clientAppPath, 'bower_components', 'bootstrap', 'js', 'src', m))),
-    main: path.resolve(clientAppPath, 'index.tsx')
+        'popper.js',
+        'tooltip.js',
+        path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'js', 'index.js'),
+        path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'scss', 'bootstrap.scss'),
+        path.resolve(root, 'ClientApp', 'Lib', 'icon', 'css', 'open-iconic-bootstrap.scss'),
+    ],
+    main: path.resolve(root, 'ClientApp', 'index.tsx')
 }
 
 export const output = {
@@ -60,8 +47,6 @@ export const devServer = {
         "**": {
             target: "http://localhost:49993",
             secure: false
-            //pathRewrite: { "^/assets": "" },
-            //target: "https://localhost:44391",
         }
     }
 }
@@ -87,11 +72,12 @@ export const resolve = {
         '.ts', '.tsx',
         '.js', '.jsx',
         '.css', '.scss',
+        '.png', '.jpg', '.jpeg', '.gif',
         '.otf', '.eot', '.svg', '.ttf', '.woff', '.woff2',
-        '.png', '.jpg', '.jpeg', '.gif'
     ],
     alias: {
-        common: clientAppPath
+        shared: path.resolve(root, 'ClientApp', 'Shared'),
+        container: path.resolve(root, 'ClientApp','Container'),
     }
 }
 
@@ -101,21 +87,13 @@ export const plugins = [
             "NODE_ENV": JSON.stringify(process.env['NODE_ENV'])
         }
     }),
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        'window.$': 'jquery',
-        Tether: 'tether',
-        "window.Tether": 'tether',
-    }),
     new ExtractTextPlugin({
         filename: '[name].bundle.css',
         disable: !isProd,
         allChunks: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        names: ['common'],
+        name: 'common',
         filename: '[name].bundle.js'
     }),
     new webpack.LoaderOptionsPlugin({
@@ -139,7 +117,7 @@ export const plugins = [
     ]
     : [
         new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NamedModulesPlugin(),
+        new webpack.NamedModulesPlugin(),
     ]);
 
 const cssLoaders = [
@@ -194,7 +172,7 @@ export const webpackModule = {
         },
         {
             test: /\.(scss|css)$/,
-            //exclude: /node_modules/,
+            exclude: /node_modules/,
             use: cssConfig
         },
         {
@@ -215,7 +193,7 @@ export const webpackModule = {
                 }
             }]
         },
-        {
+        /*{
             test: require.resolve('jquery'),
             use: [{
                 loader: 'expose-loader',
@@ -224,6 +202,6 @@ export const webpackModule = {
                 loader: 'expose-loader',
                 options: '$'
             }]
-        }
+        },*/
     ]
 }
