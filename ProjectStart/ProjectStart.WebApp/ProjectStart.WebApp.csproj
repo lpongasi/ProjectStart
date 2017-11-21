@@ -283,13 +283,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectStart.Commerce\ProjectStart.Commerce.csproj" />
     <ProjectReference Include="..\ProjectStart.Common\ProjectStart.Common.csproj" />
+    <ProjectReference Include="..\ProjectStart.Entity\ProjectStart.Entity.csproj" />
+    <ProjectReference Include="..\ProjectStart.Repository\ProjectStart.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\Lib\icon\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Controllers\Node\" />
   </ItemGroup>
 
   <ItemGroup>

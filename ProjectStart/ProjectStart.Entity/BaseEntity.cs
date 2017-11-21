@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProjectStart.Commerce.Common
+namespace ProjectStart.Entity
 {
-    public class Audit
+    public class BaseEntity
     {
         public void SetCreatedBy(string createdBy)
         {

@@ -67,7 +67,7 @@
     "build-dev": "npm run clean && SET NODE_ENV=development&& webpack",
     "ma-c": "MigrationScripts\\migration-application-create.bat",
     "ma-a": "MigrationScripts\\migration-application-apply.bat",
-    "ma": "npm run ma-ce&&npm run ma-a",
+    "ma": "npm run ma-c&&npm run ma-a",
     "mc-c": "MigrationScripts\\migration-commerce-create.bat",
     "mc-a": "MigrationScripts\\migration-commerce-apply.bat",
     "mc": "npm run mc-c&&npm run mc-a"

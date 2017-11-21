@@ -8,8 +8,8 @@ using Newtonsoft.Json;
 using ProjectStart.WebApp.Data;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
-using ProjectStart.Commerce;
 using Newtonsoft.Json.Serialization;
+using ProjectStart.Entity;
 //using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace ProjectStart.WebApp
@@ -26,12 +26,12 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<CommerceDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CommerceDb"),
+                    b => b.MigrationsAssembly("ProjectStart.WebApp")));
 
-            services.AddDbContextPool<CommerceContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("CommerceConnection"),
-                b => b.MigrationsAssembly("ProjectStart.WebApp")));
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ApplicationDb")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -39,8 +39,9 @@ namespace ProjectStart.WebApp
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            Repository.Service.Inject(services);
             /* these are the default values */
-   
+            
             services
                 .AddMvc()
             .AddJsonOptions(
