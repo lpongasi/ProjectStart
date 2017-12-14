@@ -4,7 +4,7 @@
     "webpack/config.ts",
     "webpack.config.ts"
   ],
-  "compileOnSave": true,
+  "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
     "module": "commonjs",
@@ -23,11 +23,12 @@
     "noEmitOnError": false,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "lib": [ "es5", "es6", "es2017.object", "dom" ]
-  },
-  "paths": {
-    "shared/*": [ "./ClientApp/Shared/*" ],
-    "component/*": [ "./ClientApp/component/*" ]
+    "lib": [ "es5", "es6", "es2017.object", "dom" ],
+    "paths": {
+      "shared/*": [ "./ClientApp/Shared/*" ],
+      "component/*": [ "./ClientApp/Component/*" ],
+      "container/*": [ "./ClientApp/Container/*" ]
+    }
   },
   "exclude": [
     "bin",

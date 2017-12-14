@@ -290,7 +290,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\Lib\icon\" />
-    <Folder Include="Controllers\Node\" />
   </ItemGroup>
 
   <ItemGroup>

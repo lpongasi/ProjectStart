@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 
 import ErrorPage from 'shared/errorPage';
-import NavBar from 'container/Navbar';
 import Navigation from 'container/Navbar';
 
 export default () => (

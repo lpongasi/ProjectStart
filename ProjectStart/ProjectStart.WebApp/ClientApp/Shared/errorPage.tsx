@@ -5,6 +5,6 @@ import {
 
 export default () => (
     <div>
-        <h1><span className="oi oi-check"></span>Page Not Found!</h1>   
+        <h1><span className="fas fa-times"> </span> Page Not Found!</h1>   
     </div>
 );

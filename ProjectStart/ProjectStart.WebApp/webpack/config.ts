@@ -17,7 +17,7 @@ export const entry = {
         'tooltip.js',
         path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'js', 'index.js'),
         path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'scss', 'bootstrap.scss'),
-        path.resolve(root, 'ClientApp', 'Lib', 'icon', 'css', 'open-iconic-bootstrap.scss'),
+        path.resolve(root, 'ClientApp', 'Lib', 'icon', 'scss', 'fontawesome.scss'),
     ],
     main: path.resolve(root, 'ClientApp', 'index.tsx')
 }
