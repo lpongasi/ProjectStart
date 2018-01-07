@@ -15,3 +15,7 @@ export const scssInputPath = path.resolve(assetPath, 'scss');
 export const nodePath = path.resolve(root, 'node_modules');
 
 export const clientAppPath = path.resolve(root, 'ClientApp');
+
+export const libPath = path.resolve(clientAppPath, 'Lib', );
+
+export const devApplicationUrl = 'http://localhost:2373/';

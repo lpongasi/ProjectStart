@@ -1,7 +1,7 @@
 ﻿import * as webpack from 'webpack';
 import * as path from 'path';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
-import { outputPath, isProd, assetPath, root } from './global';
+import { outputPath, isProd, assetPath, clientAppPath, libPath, devApplicationUrl  } from './global';
 
 export const entry = {
     common: [
@@ -15,11 +15,11 @@ export const entry = {
         'tether',
         'popper.js',
         'tooltip.js',
-        path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'js', 'index.js'),
-        path.resolve(root, 'ClientApp', 'Lib', 'bootstrap', 'scss', 'bootstrap.scss'),
-        path.resolve(root, 'ClientApp', 'Lib', 'icon', 'scss', 'fontawesome.scss'),
+        path.resolve(libPath, 'bootstrap', 'js', 'index.js'),
+        path.resolve(libPath, 'bootstrap', 'scss', 'bootstrap.scss'),
+        path.resolve(libPath, 'icon', 'scss', 'fontawesome.scss'),
     ],
-    main: path.resolve(root, 'ClientApp', 'index.tsx')
+    main: path.resolve(clientAppPath, 'index.tsx')
 }
 
 export const output = {
@@ -44,8 +44,8 @@ export const devServer = {
         errors: true
     },
     proxy: {
-        "**": {
-            target: "http://localhost:49993",
+        '**': {
+            target: devApplicationUrl,
             secure: false
         }
     }
@@ -76,15 +76,16 @@ export const resolve = {
         '.otf', '.eot', '.svg', '.ttf', '.woff', '.woff2',
     ],
     alias: {
-        shared: path.resolve(root, 'ClientApp', 'Shared'),
-        container: path.resolve(root, 'ClientApp','Container'),
+        shared: path.resolve(clientAppPath, 'Shared'),
+        container: path.resolve(clientAppPath,'Container'),
     }
 }
 
 export const plugins = [
     new webpack.DefinePlugin({
-        "process.env": {
-            "NODE_ENV": JSON.stringify(process.env['NODE_ENV'])
+        'isProd': isProd,
+        'process.env': {
+            'NODE_ENV': JSON.stringify(process.env['NODE_ENV'])
         }
     }),
     new ExtractTextPlugin({

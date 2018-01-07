@@ -10,7 +10,6 @@ using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
 using Newtonsoft.Json.Serialization;
 using ProjectStart.Entity;
-//using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace ProjectStart.WebApp
 {
@@ -62,12 +61,6 @@ namespace ProjectStart.WebApp
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
-
-                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                //{
-                //    HotModuleReplacement = true,
-                //    ReactHotModuleReplacement = true
-                //});
             }
             else
             {
