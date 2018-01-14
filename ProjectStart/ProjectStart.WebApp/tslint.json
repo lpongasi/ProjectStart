@@ -1,6 +1,14 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "ban": [
+      true,
+      "eval",
+      {
+        "name": [ "window", "module", "isProd", "process" ],
+        "message": "This is a global method!"
+      }
+    ],
     "max-line-length": {
       "options": [ 250 ]
     },
@@ -19,8 +27,9 @@
     "space-before-function-paren": false,
     "object-literal-sort-keys": false,
     "no-bitwise": true,
-    "no-conditional-assignment": true,
+    "no-conditional-assignment": false,
     "no-consecutive-blank-lines": false,
+   
     "no-console": {
       "options": [ "debug", "info", "log", "time", "timeEnd", "trace" ]
     }

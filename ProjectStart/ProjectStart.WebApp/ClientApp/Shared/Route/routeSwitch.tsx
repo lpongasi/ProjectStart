@@ -4,8 +4,8 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import ErrorPage from 'shared/errorPage';
 import Navigation from 'container/Navbar';
+import ErrorPage from 'shared/errorPage';
 
 export default () => (
 <div>

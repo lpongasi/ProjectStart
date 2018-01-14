@@ -1,9 +1,4 @@
 {
-  "files": [
-    "webpack/global.ts",
-    "webpack/config.ts",
-    "webpack.config.ts"
-  ],
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
@@ -17,7 +12,6 @@
     "noEmit": true,
     "allowJs": true,
     "experimentalDecorators": true,
-    "skipDefaultLibCheck": true,
     "sourceMap": false,
     "strict": false,
     "noEmitOnError": false,
@@ -28,10 +22,12 @@
       "shared/*": [ "./ClientApp/Shared/*" ],
       "component/*": [ "./ClientApp/Component/*" ],
       "container/*": [ "./ClientApp/Container/*" ]
-    }
+    },
+    "outDir": "./wwwroot/clientapp"
   },
   "exclude": [
     "bin",
     "node_modules"
-  ]
+  ],
+  "include": ["./ClientApp/**/*"]
 }
