@@ -18,6 +18,8 @@ export const entry = {
         'react-redux',
         'redux-thunk',
         'react-router-dom',
+    ],
+    materialize:[
         path.resolve(clientAppPath, 'Library', 'Materialize', 'js', `materialize${isProd ? '.min' : ''}.js`),
         path.resolve(clientAppPath, 'Library', 'Materialize', 'sass', 'materialize.scss'),
     ],
@@ -27,7 +29,7 @@ export const entry = {
 export const output = {
     publicPath: '/assets/',
     filename: '[name].bundle.js',
-    chunkFilename: '[name].[id].bundle.js',
+    chunkFilename: '[id].bundle.js',
     path: outputPath,
 };
 
@@ -97,13 +99,8 @@ export const plugins = [
         allChunks: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        children: true,
-        async: true,
-        minChunks: 3,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
         name: 'common',
+        // filename: '[name].bundle.js',
         children: true,
         async: true,
         minChunks: 3,
