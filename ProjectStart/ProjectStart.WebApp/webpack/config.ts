@@ -18,8 +18,6 @@ export const entry = {
         'react-redux',
         'redux-thunk',
         'react-router-dom',
-    ],
-    materialize:[
         path.resolve(clientAppPath, 'Library', 'Materialize', 'js', `materialize${isProd ? '.min' : ''}.js`),
         path.resolve(clientAppPath, 'Library', 'Materialize', 'sass', 'materialize.scss'),
     ],
