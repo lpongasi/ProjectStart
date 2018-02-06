@@ -45,7 +45,7 @@ namespace ProjectStart.WebApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string namessss)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)

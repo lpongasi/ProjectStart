@@ -10,7 +10,6 @@ namespace ProjectStart.Common
             Message = message;
             Errors = errors;
         }
-
         public bool Success => Errors == null || Errors.Any();
         public IDictionary<string, string> Errors { get; set; }
         public string Message { get; set; }

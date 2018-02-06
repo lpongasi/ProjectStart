@@ -1,4 +1,15 @@
-﻿//import { ActionTypes, dispatcher, StateLifeCycle } from 'shared/Component/common';
+﻿import axios, { AxiosPromise } from 'axios';
+
+export const Api = (method: string, url: string, requestData: any): AxiosPromise<any> => {
+    switch (method) {
+        case 'post':
+            return axios.post(url, requestData);
+        case 'get':
+            return axios.get(url, requestData);
+    }
+}
+
+//import { ActionTypes, dispatcher, StateLifeCycle } from 'shared/Component/common';
 
 //export const api = (
 //    actionType: ActionTypes,

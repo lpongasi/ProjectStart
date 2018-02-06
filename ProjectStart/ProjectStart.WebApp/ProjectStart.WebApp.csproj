@@ -47,6 +47,73 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\Library\Materialize\" />
+    <Folder Include="Scripts\Templates\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ClientApp\Shared\ModelTypes\AccountController.ts">
+      <CustomToolNamespace>Controllers\AccountController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\AppResponse.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\AppResponse.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ChangePasswordViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\ChangePasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\EnableAuthenticatorViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\EnableAuthenticatorViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ErrorViewModel.ts">
+      <CustomToolNamespace>Models\ErrorViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ExternalLoginsViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\ExternalLoginsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ExternalLoginViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\ExternalLoginViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ForgotPasswordViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\ForgotPasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\GenerateRecoveryCodesViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\HomeController.ts">
+      <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\IndexViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\LoginViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\LoginViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\LoginWith2faViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\LoginWith2faViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\LoginWithRecoveryCodeViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\LOLEnum.ts">
+      <CustomToolNamespace>..\ProjectStart.Entity\LOLEnum.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ManageController.ts">
+      <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\RegisterViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\RegisterViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\RemoveLoginViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\RemoveLoginViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\ResetPasswordViewModel.ts">
+      <CustomToolNamespace>Models\AccountViewModels\ResetPasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\SetPasswordViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\SetPasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\ModelTypes\TwoFactorAuthenticationViewModel.ts">
+      <CustomToolNamespace>Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs</CustomToolNamespace>
+    </None>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
