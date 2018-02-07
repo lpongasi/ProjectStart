@@ -13,7 +13,4 @@ export class LoginViewModel  implements ILoginViewModel {
     email: string;
     password: string;
     rememberMe: boolean;
-    constructor() {
-    // nothing
-    }
 }

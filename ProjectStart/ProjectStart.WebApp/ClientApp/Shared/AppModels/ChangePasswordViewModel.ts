@@ -15,7 +15,4 @@ export class ChangePasswordViewModel  implements IChangePasswordViewModel {
     newPassword: string;
     confirmPassword: string;
     statusMessage: string;
-    constructor() {
-    // nothing
-    }
 }

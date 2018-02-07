@@ -15,7 +15,4 @@ export class ResetPasswordViewModel  implements IResetPasswordViewModel {
     password: string;
     confirmPassword: string;
     code: string;
-    constructor() {
-    // nothing
-    }
 }

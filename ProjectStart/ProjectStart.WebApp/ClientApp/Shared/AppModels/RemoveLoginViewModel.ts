@@ -11,7 +11,4 @@ export interface IRemoveLoginViewModel  {
 export class RemoveLoginViewModel  implements IRemoveLoginViewModel {
     loginProvider: string;
     providerKey: string;
-    constructor() {
-    // nothing
-    }
 }

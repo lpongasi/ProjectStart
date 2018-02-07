@@ -16,17 +16,17 @@ namespace ProjectStart.Common
         public static Response Create(string message = null, IDictionary<string, string> errors = null)
             => new Response(message, errors);
     }
-    public class Response<T> : Response
+    public class PayloadResponse<T> : Response
     {
-        public Response(T data, string message = null, IDictionary<string, string> errors = null) : base(message, errors)
+        public PayloadResponse(T payload, string message = null, IDictionary<string, string> errors = null) : base(message, errors)
         {
-            Data = data;
+            Payload = payload;
         }
-        public T Data { get; set; }
+        public T Payload { get; set; }
     }
     public static class ResponseExtension
     {
-        public static Response<T> ToResponse<T>(this T data, bool success = true, string message = null, IDictionary<string, string> errors = null)
-            => new Response<T>(data, message, errors);
+        public static PayloadResponse<T> ToResponse<T>(this T payload, bool success = true, string message = null, IDictionary<string, string> errors = null)
+            => new PayloadResponse<T>(payload, message, errors);
     }
 }

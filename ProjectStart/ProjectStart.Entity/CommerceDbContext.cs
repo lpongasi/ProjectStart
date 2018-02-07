@@ -6,6 +6,6 @@ namespace ProjectStart.Entity
     {
         public CommerceDbContext(DbContextOptions<CommerceDbContext> options) : base(options)
         { }
-        public DbSet<Node> Node { get; set; }
+        public DbSet<NodeEntity> Node { get; set; }
     }
 }

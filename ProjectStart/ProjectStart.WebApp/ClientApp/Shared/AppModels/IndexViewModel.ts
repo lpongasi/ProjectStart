@@ -17,7 +17,4 @@ export class IndexViewModel  implements IIndexViewModel {
     email: string;
     phoneNumber: string;
     statusMessage: string;
-    constructor() {
-    // nothing
-    }
 }

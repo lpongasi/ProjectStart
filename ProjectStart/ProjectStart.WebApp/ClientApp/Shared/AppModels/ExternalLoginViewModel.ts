@@ -9,7 +9,4 @@ export interface IExternalLoginViewModel  {
  */
 export class ExternalLoginViewModel  implements IExternalLoginViewModel {
     email: string;
-    constructor() {
-    // nothing
-    }
 }

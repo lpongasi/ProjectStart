@@ -9,7 +9,4 @@ export interface ILoginWithRecoveryCodeViewModel  {
  */
 export class LoginWithRecoveryCodeViewModel  implements ILoginWithRecoveryCodeViewModel {
     recoveryCode: string;
-    constructor() {
-    // nothing
-    }
 }

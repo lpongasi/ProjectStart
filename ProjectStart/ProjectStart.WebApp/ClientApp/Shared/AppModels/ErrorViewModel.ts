@@ -11,7 +11,4 @@ export interface IErrorViewModel  {
 export class ErrorViewModel  implements IErrorViewModel {
     requestId: string;
     showRequestId: boolean;
-    constructor() {
-    // nothing
-    }
 }

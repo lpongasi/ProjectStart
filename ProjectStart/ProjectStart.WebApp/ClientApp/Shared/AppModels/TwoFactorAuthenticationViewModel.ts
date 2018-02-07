@@ -13,7 +13,4 @@ export class TwoFactorAuthenticationViewModel  implements ITwoFactorAuthenticati
     hasAuthenticator: boolean;
     recoveryCodesLeft: number;
     is2faEnabled: boolean;
-    constructor() {
-    // nothing
-    }
 }

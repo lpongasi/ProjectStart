@@ -9,7 +9,4 @@ export interface IGenerateRecoveryCodesViewModel  {
  */
 export class GenerateRecoveryCodesViewModel  implements IGenerateRecoveryCodesViewModel {
     recoveryCodes: string[];
-    constructor() {
-    // nothing
-    }
 }

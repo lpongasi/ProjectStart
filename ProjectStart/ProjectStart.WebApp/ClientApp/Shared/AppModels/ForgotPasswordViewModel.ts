@@ -9,7 +9,4 @@ export interface IForgotPasswordViewModel  {
  */
 export class ForgotPasswordViewModel  implements IForgotPasswordViewModel {
     email: string;
-    constructor() {
-    // nothing
-    }
 }

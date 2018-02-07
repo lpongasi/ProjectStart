@@ -11,7 +11,7 @@ namespace ProjectStart.Repository
             DbContext = entityDbContext;
         }
 
-        private IBaseRepository<Node> _nodeRepository;
+        private IBaseRepository<NodeEntity> _nodeRepository;
 
         private static IBaseRepository<T> Initialize<T>(ref IBaseRepository<T> repository, CommerceDbContext entityDbContext) where T : class
           => repository ?? (repository = new BaseRepository<T>(entityDbContext));
@@ -19,7 +19,7 @@ namespace ProjectStart.Repository
         private IBaseRepository<T> Initialize<T>(ref IBaseRepository<T> repository) where T : class
             => Initialize(ref repository, DbContext);
 
-        public IBaseRepository<Node> NodeRepository
+        public IBaseRepository<NodeEntity> NodeRepository
             => Initialize(ref _nodeRepository);
 
         public void Dispose()

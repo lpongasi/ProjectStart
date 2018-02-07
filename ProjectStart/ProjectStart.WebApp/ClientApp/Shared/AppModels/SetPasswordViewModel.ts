@@ -13,7 +13,4 @@ export class SetPasswordViewModel  implements ISetPasswordViewModel {
     newPassword: string;
     confirmPassword: string;
     statusMessage: string;
-    constructor() {
-    // nothing
-    }
 }

@@ -13,7 +13,4 @@ export class EnableAuthenticatorViewModel  implements IEnableAuthenticatorViewMo
     code: string;
     sharedKey: string;
     authenticatorUri: string;
-    constructor() {
-    // nothing
-    }
 }

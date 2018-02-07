@@ -2,8 +2,8 @@
  * Interface for: ProjectStart.WebApp.Models.ManageViewModels.ExternalLoginsViewModel
  */
 export interface IExternalLoginsViewModel  {
-    currentLogins: UserLoginInfo[];
-    otherLogins: AuthenticationScheme[];
+    currentLogins: any[];
+    otherLogins: any[];
     showRemoveButton: boolean;
     statusMessage: string;
 }
@@ -11,11 +11,8 @@ export interface IExternalLoginsViewModel  {
  * Base view model for ProjectStart.WebApp.Models.ManageViewModels.ExternalLoginsViewModel
  */
 export class ExternalLoginsViewModel  implements IExternalLoginsViewModel {
-    currentLogins: UserLoginInfo[];
-    otherLogins: AuthenticationScheme[];
+    currentLogins: any[];
+    otherLogins: any[];
     showRemoveButton: boolean;
     statusMessage: string;
-    constructor() {
-    // nothing
-    }
 }
