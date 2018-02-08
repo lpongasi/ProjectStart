@@ -1,11 +1,17 @@
 ﻿import axios, { AxiosPromise } from 'axios';
-
 export const Api = (method: string, url: string, requestData: any): AxiosPromise<any> => {
+    const xsrfToken = (document.querySelector('input[name="__RequestVerificationToken"]') as HTMLInputElement).value;
+    const init = axios.create({
+        headers: {
+            'Content-Type': 'application/json',
+            'X-XSRF-Token': xsrfToken,
+        },
+    });
     switch (method) {
         case 'post':
-            return axios.post(url, requestData);
+            return init.post(url, { ...requestData });
         case 'get':
-            return axios.get(url, requestData);
+            return init.get(url, { ...requestData });
     }
 }
 

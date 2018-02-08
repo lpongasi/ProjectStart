@@ -18,7 +18,7 @@ export const clientAppPath = path.resolve(root, 'ClientApp');
 
 export const libPath = path.resolve(clientAppPath, 'Lib');
 
-export const devApplicationUrl = 'http://localhost:2382/';
+export const devApplicationUrl = 'http://localhost:2373/';
 
 export const materializeJsFiles = [
     'js/cash.js',

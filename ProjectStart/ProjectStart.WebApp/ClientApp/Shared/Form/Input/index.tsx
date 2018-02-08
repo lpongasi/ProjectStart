@@ -19,10 +19,13 @@ interface Props {
     pattern?: string;
     required?: boolean;
     success?: any;
+    type?: string;
+    clientValidate?: boolean;
 }
 
 type State = {
     generatedId: string,
+    isFirstLoad: boolean,
 };
 
 const patterns: object = {
@@ -45,6 +48,7 @@ export default class Input extends React.Component<Props, State> {
         super(props);
         this.state = {
             generatedId: props.id ? props.id : Uuid(),
+            isFirstLoad: true,
         };
     }
     public onChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -111,14 +115,16 @@ export default class Input extends React.Component<Props, State> {
             success,
             helperText,
             pattern,
+            type,
+            clientValidate,
         } = this.props;
         const {
             generatedId,
         } = this.state;
         const value = this.getCurrentValue();
-        const generatedPattern = pattern
+        const generatedPattern = pattern && clientValidate
             ? pattern
-            : patterns[name]
+            : patterns[name] && clientValidate
                 ? patterns[name]
                 : null;
         const errorMessage = generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
@@ -129,7 +135,7 @@ export default class Input extends React.Component<Props, State> {
                     id={generatedId}
                     name={name}
                     value={value}
-                    type="text"
+                    type={type ? type : 'text'}
                     className={classnames('validate', {
                         invalid: errorMessage,
                         valid: successMessage,

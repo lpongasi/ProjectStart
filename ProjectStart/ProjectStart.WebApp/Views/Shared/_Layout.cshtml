@@ -9,6 +9,7 @@
 </head>
 <body>
     <main id="main-app">Loading...</main>
+    @Html.AntiForgeryToken()
     @RenderBody()
     <script src="~/assets/common.bundle.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

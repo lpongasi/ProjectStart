@@ -35,4 +35,7 @@
 export interface I$Name$TypeParameters $BaseClass[extends I$Name$TypeArguments] {$Properties[
     $name: $TypeGenerator;]
 }
+export class $Name$TypeParameters $BaseClass[extends $Name$TypeArguments] implements I$Name$TypeArguments {$Properties[
+    $name: $TypeGenerator;]
+}
 ]

@@ -31,7 +31,6 @@ namespace ProjectStart.Repository
 
         public void Delete(T entity)
         {
-            Entity.Remove(entity);
             _entityDbContext.SaveChanges();
         }
 

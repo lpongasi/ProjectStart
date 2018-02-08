@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
-
-import Input from 'shared/Form/Input';
+import * as AccountController from 'shared/AppModels/AccountController';
+import { LoginViewModel } from 'shared/AppModels/LoginViewModel';
+import Login from 'shared/Form/Login';
 
 export default class ErrorPage extends React.Component<any, any> {
     constructor(props) {
@@ -9,6 +10,14 @@ export default class ErrorPage extends React.Component<any, any> {
     componentDidMount() {
         var elem = document.querySelector('.sidenav');
         (M as any).Sidenav.init(elem);
+        const login = new LoginViewModel();
+        login.email = "loucris.pongasi@gmail.com";
+        login.password = "P@ssw0rd12312312";
+        login.rememberMe = false;
+        //AccountController.loginpost(login, "LOLS")
+        //    .then(r => {
+        //        alert(r.data.message);
+        //    });
     }
 
     render() {
@@ -41,21 +50,7 @@ export default class ErrorPage extends React.Component<any, any> {
                 })}>
                     Refresh Error
                 </button>
-                <div className="row">
-                    <Input
-                        label="First Name"
-                        name="firstName"
-                        formName="Login"
-                        error={this.state}
-                        required
-                    />
-                    <Input
-                        formName="Login"
-                        label="Email"
-                        name="email"
-                        error={this.state}
-                    />
-                </div>
+                <Login />
             </div>
         );
     }

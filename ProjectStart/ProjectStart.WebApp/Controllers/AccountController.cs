@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjectStart.Common;
 using ProjectStart.WebApp.Extensions;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Models.AccountViewModels;
@@ -50,8 +51,9 @@ namespace ProjectStart.WebApp.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [Produces("application/json")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<Response> Login([FromBody]LoginViewModel model, [FromQuery]string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -62,26 +64,30 @@ namespace ProjectStart.WebApp.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    // RedirectToLocal(returnUrl)
+                    return new Response("LOGIN");
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                    //return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                    return new Response("RequiresTwoFactor");
                 }
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    return RedirectToAction(nameof(Lockout));
+                    //return RedirectToAction(nameof(Lockout));
+                    return new Response("LOCKOUT");
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    //return View(model);
+                    return new Response("ERROR LOGIN ATTEMP");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return new Response("Invalid input");
         }
 
         [HttpGet]

@@ -40,7 +40,7 @@ namespace ProjectStart.WebApp
             services.AddTransient<IEmailSender, EmailSender>();
             Repository.Service.Inject(services);
             /* these are the default values */
-            
+          
             services
                 .AddMvc()
             .AddJsonOptions(
@@ -51,6 +51,14 @@ namespace ProjectStart.WebApp
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;  
                 }
             );
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => {
+                        builder.WithOrigins("http://localhost:9000");
+                    });
+            });
+            services.AddAntiforgery(options => options.HeaderName = "X-XSRF-Token");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +78,9 @@ namespace ProjectStart.WebApp
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            // Shows UseCors with CorsPolicyBuilder.
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseMvc(routes =>
             {

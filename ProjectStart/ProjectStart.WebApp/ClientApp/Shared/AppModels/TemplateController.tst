@@ -3,7 +3,7 @@
     //using System.Linq;
     using Typewriter.Extensions.Types;
 	using Typewriter.Extensions.WebApi;
-	string ReturnType(Method m) => m.Type.Name == "IActionResult" ? "IResponse" : m.Type.Name;
+	string ReturnType(Method m) => m.Type.Name == "IActionResult" ? "IResponse" : m.Type.Name == "Response" ? "IResponse" : m.Type.Name;
     string ServiceName(Class c) => c.Name.Replace("ApiController", "Controller");
     string ParentServiceName(Method m) => ServiceName((Class)m.Parent);
    List<string> AnyProperties(){
@@ -38,7 +38,7 @@
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";
     }
 }$Classes(*Controller)[$Imports
-export default class $ServiceName {$Methods[
-    // $HttpMethod: $Url
-    public $name$HttpMethod = ($Parameters[$name: $Type][, ]): AxiosPromise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData);]
-}]
+$Methods[
+// $HttpMethod: $Url
+export const $name$HttpMethod = ($Parameters[$name: $Type][, ]): AxiosPromise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData);]]
+

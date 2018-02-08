@@ -103,6 +103,13 @@ export const plugins = [
         async: true,
         minChunks: 3,
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'main',
+        // filename: '[name].bundle.js',
+        children: true,
+        async: true,
+        minChunks: 2,
+    }),
     new webpack.LoaderOptionsPlugin({
         minimize: isProd,
         debug: !isProd,
