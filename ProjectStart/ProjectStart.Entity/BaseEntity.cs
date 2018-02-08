@@ -35,15 +35,12 @@ namespace ProjectStart.Entity
         public string Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        [Required]
         public string CreatedBy { get; set; }
-        [Required]
         public DateTime DateCreated { get; set; }
         public string ModifiedBy { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime? DateModified { get; set; }
+        public DateTime DateModified { get; set; }
         public bool IsRemoved { get; set; }
         public string RemovedBy { get; set; }
-        public DateTime? DateRemoved { get; set; }
+        public DateTime DateRemoved { get; set; }
     }
 }

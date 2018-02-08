@@ -10,15 +10,10 @@ namespace ProjectStart.Repository
         {
             DbContext = entityDbContext;
         }
+        private IBaseRepository<T> Initialize<T>(ref IBaseRepository<T> repository) where T : class
+            => repository ?? (repository = new BaseRepository<T>(DbContext));
 
         private IBaseRepository<NodeEntity> _nodeRepository;
-
-        private static IBaseRepository<T> Initialize<T>(ref IBaseRepository<T> repository, CommerceDbContext entityDbContext) where T : class
-          => repository ?? (repository = new BaseRepository<T>(entityDbContext));
-
-        private IBaseRepository<T> Initialize<T>(ref IBaseRepository<T> repository) where T : class
-            => Initialize(ref repository, DbContext);
-
         public IBaseRepository<NodeEntity> NodeRepository
             => Initialize(ref _nodeRepository);
 

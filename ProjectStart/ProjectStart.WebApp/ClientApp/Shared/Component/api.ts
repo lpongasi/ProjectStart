@@ -9,7 +9,7 @@ export const Api = (method: string, url: string, requestData: any): AxiosPromise
     });
     switch (method) {
         case 'post':
-            return init.post(url, { ...requestData });
+            return init.post(url, { ...requestData }).;
         case 'get':
             return init.get(url, { ...requestData });
     }

@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> where T : BaseEntity
     {
         DbSet<T> Entity { get; }
         TResult Get<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<T, bool>> where);
-        IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> transformResult, int? page = null, int? pageSize = null);
-        IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<TResult, bool>> where, int? page = null, int? pageSize = null);
+        IEnumerable<TResult> GetAll<TResult>(
+            Expression<Func<T, TResult>> output,
+            Expression<Func<TResult, bool>> predicate = null,
+            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null,
+            int? page = null,
+            int? pageSize = null);
         void Add(IEnumerable<T> entities);
         void Add(T entity);
         void Update(T entity);

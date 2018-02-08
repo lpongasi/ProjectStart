@@ -20,15 +20,14 @@ namespace ProjectStart.WebApp.Migrations.Commerce
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjectStart.Entity.Node", b =>
+            modelBuilder.Entity("ProjectStart.Entity.NodeEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Code");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired();
+                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("DateCreated");
 
@@ -54,9 +53,9 @@ namespace ProjectStart.WebApp.Migrations.Commerce
                     b.ToTable("Node");
                 });
 
-            modelBuilder.Entity("ProjectStart.Entity.Node", b =>
+            modelBuilder.Entity("ProjectStart.Entity.NodeEntity", b =>
                 {
-                    b.HasOne("ProjectStart.Entity.Node", "ParentNode")
+                    b.HasOne("ProjectStart.Entity.NodeEntity", "ParentNode")
                         .WithMany("SubNodes")
                         .HasForeignKey("ParentId");
                 });

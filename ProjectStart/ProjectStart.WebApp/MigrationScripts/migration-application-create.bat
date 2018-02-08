@@ -1,3 +1,10 @@
-echo '[Started] Create Application Migration'
-dotnet ef migrations add Application_%date:~10,4%%date:~4,2%%date:~7,2%%time:~0,2%%time:~3,2%%time:~6,2% --context ProjectStart.WebApp.Data.ApplicationDbContext -o Migrations/Application
-echo '[Done] Create Application Migration'
+@echo off
+for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
+set "YY=%dt:~2,2%" & set "YYYY=%dt:~0,4%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
+set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%" & set "Sec=%dt:~12,2%"
+
+set "fullstamp=%YYYY%%MM%%DD%_%HH%%Min%%Sec%"
+
+echo '[Started] Create Migration Application_%fullstamp%'
+dotnet ef migrations add Application_%fullstamp% --context ProjectStart.WebApp.Data.ApplicationDbContext -o Migrations/Application
+echo '[Done] Create Migration Application_%fullstamp%'

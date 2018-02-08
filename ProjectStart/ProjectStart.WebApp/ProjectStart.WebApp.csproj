@@ -47,14 +47,12 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\Library\Materialize\" />
+    <Folder Include="Migrations\Commerce\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Update="ClientApp\Shared\AppModels\AccountController.ts">
       <CustomToolNamespace>Controllers\AccountController.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\Shared\AppModels\AppResponse.ts">
-      <CustomToolNamespace>..\ProjectStart.Common\AppResponse.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\BaseEntity.ts">
       <CustomToolNamespace>..\ProjectStart.Entity\BaseEntity.cs</CustomToolNamespace>
@@ -80,6 +78,9 @@
     <None Update="ClientApp\Shared\AppModels\GenerateRecoveryCodesViewModel.ts">
       <CustomToolNamespace>Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\GenericResponse.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\GenericResponse.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
       <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
     </None>
@@ -98,6 +99,12 @@
     <None Update="ClientApp\Shared\AppModels\ManageController.ts">
       <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\NodeController.ts">
+      <CustomToolNamespace>Controllers\NodeController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\NodeEntitiesController.ts">
+      <CustomToolNamespace>Controllers\NodeEntitiesController.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\NodeEntity.ts">
       <CustomToolNamespace>..\ProjectStart.Entity\NodeEntity.cs</CustomToolNamespace>
     </None>
@@ -109,6 +116,9 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\ResetPasswordViewModel.ts">
       <CustomToolNamespace>Models\AccountViewModels\ResetPasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\Response.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\Response.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\SetPasswordViewModel.ts">
       <CustomToolNamespace>Models\ManageViewModels\SetPasswordViewModel.cs</CustomToolNamespace>

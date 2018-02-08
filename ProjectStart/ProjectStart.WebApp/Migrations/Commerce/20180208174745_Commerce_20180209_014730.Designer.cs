@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Commerce
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20171121091714_Commerce_20171121171649")]
-    partial class Commerce_20171121171649
+    [Migration("20180208174745_Commerce_20180209_014730")]
+    partial class Commerce_20180209_014730
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,15 +21,14 @@ namespace ProjectStart.WebApp.Migrations.Commerce
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjectStart.Entity.Node", b =>
+            modelBuilder.Entity("ProjectStart.Entity.NodeEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Code");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired();
+                    b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("DateCreated");
 
@@ -55,9 +54,9 @@ namespace ProjectStart.WebApp.Migrations.Commerce
                     b.ToTable("Node");
                 });
 
-            modelBuilder.Entity("ProjectStart.Entity.Node", b =>
+            modelBuilder.Entity("ProjectStart.Entity.NodeEntity", b =>
                 {
-                    b.HasOne("ProjectStart.Entity.Node", "ParentNode")
+                    b.HasOne("ProjectStart.Entity.NodeEntity", "ParentNode")
                         .WithMany("SubNodes")
                         .HasForeignKey("ParentId");
                 });

@@ -29,7 +29,7 @@ namespace ProjectStart.WebApp.Controllers
 
         public IActionResult Node(int? page, int? pageSize)
         {
-            return Json(_uow.NodeRepository.GetAll(s => new { s.ParentId, s.Name, s.Code }, page, pageSize));
+            return Json(_uow.NodeRepository.GetAll(s => new { s.ParentId, s.Name, s.Code }));
         }
         public IActionResult Contact()
         {

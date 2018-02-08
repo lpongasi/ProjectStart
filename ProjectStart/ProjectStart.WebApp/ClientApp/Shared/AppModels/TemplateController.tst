@@ -3,7 +3,8 @@
     //using System.Linq;
     using Typewriter.Extensions.Types;
 	using Typewriter.Extensions.WebApi;
-	string ReturnType(Method m) => m.Type.Name == "IActionResult" ? "IResponse" : m.Type.Name == "Response" ? "IResponse" : m.Type.Name;
+
+	string ReturnType(Method m) => m.Type.Name == "IActionResult" ? "any" : m.Type.Name;
     string ServiceName(Class c) => c.Name.Replace("ApiController", "Controller");
     string ParentServiceName(Method m) => ServiceName((Class)m.Parent);
    List<string> AnyProperties(){
@@ -20,7 +21,6 @@
       neededImports.AddRange(new []{
       "import { AxiosPromise } from 'axios';",
       "import { Api } from 'shared/Component/api';",
-      "import { IResponse } from 'shared/AppModels/AppResponse';"
       });
      neededImports.AddRange(c.Properties
 	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
@@ -28,6 +28,16 @@
 
       c.Methods.ToList().ForEach(e =>
       {
+        if(!e.Type.IsPrimitive && e.Type.Name != "IActionResult") {
+            if(!e.Type.IsGeneric || e.Type.IsEnumerable){
+                neededImports.Add("import { " +  e.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" +  e.Type.Name.TrimEnd('[',']') + "';");   
+            }else{               
+                neededImports.Add("import { " + e.Type.OriginalName +" } from 'shared/AppModels/" + e.Type.OriginalName + "';");  
+                e.Type.TypeArguments.Where(w=>!w.IsPrimitive).ToList().ForEach(tp=>{
+                    neededImports.Add("import { " + tp.Name +" } from 'shared/AppModels/" + tp.Name + "';");                
+                });   
+            }            
+        }
         e.Parameters.Where(p=>!p.Type.IsPrimitive).ToList().ForEach(pe=>{
             neededImports.Add("import { " + pe.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" + pe.Type.Name.TrimEnd('[',']') + "';");
         });

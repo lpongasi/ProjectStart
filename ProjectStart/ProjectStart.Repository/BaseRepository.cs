@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectStart.Repository
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : class
+    internal class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         public DbSet<T> Entity { get; }
         private readonly CommerceDbContext _entityDbContext;
@@ -45,17 +45,22 @@ namespace ProjectStart.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> transformResult, int? page = null, int? pageSize = null)
-        => page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
-          ? Entity.Select(transformResult).Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList()
-          : Entity.Select(transformResult).Take(100).ToList();
-
-
-        public IEnumerable<TResult> GetAll<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<TResult, bool>> where, int? page = null, int? pageSize = null)
-         => page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
-          ? Entity.Select(transformResult).Where(where).Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList()
-          : Entity.Select(transformResult).Where(where).Take(100).ToList();
-
+        public IEnumerable<TResult> GetAll<TResult>(
+            Expression<Func<T, TResult>> output,
+            Expression<Func<TResult, bool>> predicate = null,
+            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null,
+            int? page = null,
+            int? pageSize = null)
+        {
+            var result = Entity.Select(output);
+            if (predicate != null)
+                result = result.Where(predicate);
+            if (order != null)
+                result = order(result);
+            return page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
+              ? result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList()
+              : result.Take(100).ToList();
+        }
         public void Update(T entity)
         {
             Entity.Update(entity);

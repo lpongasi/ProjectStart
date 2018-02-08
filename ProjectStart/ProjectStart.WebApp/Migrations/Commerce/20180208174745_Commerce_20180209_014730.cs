@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ProjectStart.WebApp.Migrations.Commerce
 {
-    public partial class Commerce_20171121171649 : Migration
+    public partial class Commerce_20180209_014730 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace ProjectStart.WebApp.Migrations.Commerce
                 {
                     Id = table.Column<string>(nullable: false),
                     Code = table.Column<string>(nullable: true),
-                    CreatedBy = table.Column<string>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
                     DateCreated = table.Column<DateTime>(nullable: false),
                     DateModified = table.Column<DateTime>(nullable: true),
                     DateRemoved = table.Column<DateTime>(nullable: true),

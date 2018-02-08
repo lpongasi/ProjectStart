@@ -1,7 +1,6 @@
 ﻿${
     // Enable extension methods by adding using Typewriter.Extensions.*
     using Typewriter.Extensions.Types;
-    // Custom extension methods can be used in the template by adding a $ prefix e.g. $LoudName
     List<string> AnyProperties(){
      return new List<string>{
           "AuthenticationScheme",
