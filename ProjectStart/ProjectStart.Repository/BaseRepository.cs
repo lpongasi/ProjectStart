@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectStart.Repository
 {
-    internal class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    internal class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         public DbSet<T> Entity { get; }
         private readonly CommerceDbContext _entityDbContext;

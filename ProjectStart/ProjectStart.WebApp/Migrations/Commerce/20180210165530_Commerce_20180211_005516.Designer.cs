@@ -11,9 +11,10 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Commerce
 {
     [DbContext(typeof(CommerceDbContext))]
-    partial class CommerceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180210165530_Commerce_20180211_005516")]
+    partial class Commerce_20180211_005516
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

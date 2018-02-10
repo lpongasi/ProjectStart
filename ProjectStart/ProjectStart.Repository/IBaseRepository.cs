@@ -7,7 +7,7 @@ using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
 {
-    public interface IBaseRepository<T> where T : BaseEntity
+    public interface IBaseRepository<T> where T : class
     {
         DbSet<T> Entity { get; }
         TResult Get<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<T, bool>> where);

@@ -16,11 +16,18 @@
     string TypeGenerator(Property p){    
      return AnyProperties().Contains(p.Type.Name.TrimEnd('[',']'))? p.Type.Name.Contains("[")? "any[]":"any" : p.Type.Name;
     }
+    string Method(Method m){
+     var httpMethod = m.HttpMethod();
+     return m.name.Equals(httpMethod) || m.name.Contains(httpMethod) ? m.name : $"{httpMethod}{m.Name}";
+    }
+    string MethodAction(Method m){
+     return $"{Method(m)}Actions";
+    }
     string Imports(Class c){
       List<string> neededImports = new List<string>();
       neededImports.AddRange(new []{
-      "import { AxiosPromise } from 'axios';",
       "import { Api } from 'shared/Component/api';",
+      "import { ActionTypes, CreateStateAction } from 'shared/Component/common';"
       });
      neededImports.AddRange(c.Properties
 	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
@@ -32,9 +39,9 @@
             if(!e.Type.IsGeneric || e.Type.IsEnumerable){
                 neededImports.Add("import { " +  e.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" +  e.Type.Name.TrimEnd('[',']') + "';");   
             }else{               
-                neededImports.Add("import { " + e.Type.OriginalName +" } from 'shared/AppModels/" + e.Type.OriginalName + "';");  
+                neededImports.Add("import { " + e.Type.OriginalName.TrimEnd('[',']') +" } from 'shared/AppModels/" + e.Type.OriginalName.TrimEnd('[',']') + "';");  
                 e.Type.TypeArguments.Where(w=>!w.IsPrimitive).ToList().ForEach(tp=>{
-                    neededImports.Add("import { " + tp.Name +" } from 'shared/AppModels/" + tp.Name + "';");                
+                    neededImports.Add("import { " + tp.Name.TrimEnd('[',']') +" } from 'shared/AppModels/" + tp.Name.TrimEnd('[',']') + "';");                
                 });   
             }            
         }
@@ -49,6 +56,8 @@
     }
 }$Classes(*Controller)[$Imports
 $Methods[
+// State for $HttpMethod: $Url
+export const $MethodAction: ActionTypes = CreateStateAction('$FullName.$HttpMethod');
 // $HttpMethod: $Url
-export const $name$HttpMethod = ($Parameters[$name: $Type][, ]): AxiosPromise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData);]]
+export const $Method = ($Parameters[$name: $Type][, ]): Promise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData, $MethodAction);]]
 

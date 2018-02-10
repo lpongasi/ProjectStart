@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjectStart.Common;
 using ProjectStart.Entity;
 using ProjectStart.Repository;
 
@@ -23,7 +24,7 @@ namespace ProjectStart.WebApp.Controllers
 
         // GET: api/NodeEntities
         [HttpGet]
-        public IEnumerable<NodeEntity> GetNode()
+        public GenericResponse<IEnumerable<NodeEntity>> GetNode()
         {
             return _unitOfWork.NodeRepository.GetAll(
                 output: input => new NodeEntity { Id = input.Id, Name = input.Name },
@@ -31,7 +32,7 @@ namespace ProjectStart.WebApp.Controllers
                 order: input => input.OrderBy(o => o.Name),
                 page: 1,
                 pageSize: 10
-                );
+                ).ToResponse();
         }
 
         //// GET: api/NodeEntities/5

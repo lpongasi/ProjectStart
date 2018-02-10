@@ -99,9 +99,6 @@
     <None Update="ClientApp\Shared\AppModels\ManageController.ts">
       <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
     </None>
-    <None Update="ClientApp\Shared\AppModels\NodeController.ts">
-      <CustomToolNamespace>Controllers\NodeController.cs</CustomToolNamespace>
-    </None>
     <None Update="ClientApp\Shared\AppModels\NodeEntitiesController.ts">
       <CustomToolNamespace>Controllers\NodeEntitiesController.cs</CustomToolNamespace>
     </None>

@@ -18,6 +18,10 @@ const mute = [
     `LOADING_${StateLifeCycle.Started}`,
     `LOADING_${StateLifeCycle.Error}`,
     `LOADING_${StateLifeCycle.End}`,
+    'LOADING_START',
+    'UPLOAD_PROGRESS',
+    'DOWNLOAD_PROGRESS',
+    'LOADING_END',
     UPDATE_FORM_INPUT,
 ];
 
