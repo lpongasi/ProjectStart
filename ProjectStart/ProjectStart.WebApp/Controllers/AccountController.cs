@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -11,12 +12,12 @@ using ProjectStart.WebApp.Extensions;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Models.AccountViewModels;
 using ProjectStart.WebApp.Services;
-
+using AppResponse = ProjectStart.Common.Response;
 namespace ProjectStart.WebApp.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -53,7 +54,7 @@ namespace ProjectStart.WebApp.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [ValidateAntiForgeryToken]
-        public async Task<Response> Login([FromBody]LoginViewModel model, [FromQuery]string returnUrl = null)
+        public async Task<AppResponse> Login([FromBody]LoginViewModel model, [FromQuery]string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -65,29 +66,29 @@ namespace ProjectStart.WebApp.Controllers
                 {
                     _logger.LogInformation("User logged in.");
                     // RedirectToLocal(returnUrl)
-                    return new Response("LOGIN");
+                    return Success("User logged in.");
                 }
                 if (result.RequiresTwoFactor)
                 {
                     //return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                    return new Response("RequiresTwoFactor");
+                    return CreateError("RequiresTwoFactor");
                 }
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
                     //return RedirectToAction(nameof(Lockout));
-                    return new Response("LOCKOUT");
+                    return CreateError("User account locked out.");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    //ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     //return View(model);
-                    return new Response("ERROR LOGIN ATTEMP");
+                    return CreateError("Invalid login attempt.");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return new Response("Invalid input");
+            return CreateErrorPayload(ModelState, "Invalid Input.");
         }
 
         [HttpGet]

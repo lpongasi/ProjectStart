@@ -1,12 +1,12 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
-import { postLogin } from 'shared/AppModels/AccountController';
+import { postLogin, postLoginActions } from 'shared/AppModels/AccountController';
 import { LoginViewModel } from 'shared/AppModels/LoginViewModel';
 import Input from 'shared/Form/Input';
 
 
 @connect(state => ({
-    login: state.form.login,
+    login: state.form[postLoginActions.id],
 }))
 export default class LoginForm extends React.PureComponent<any, any> {
     constructor(props) {
@@ -23,7 +23,7 @@ export default class LoginForm extends React.PureComponent<any, any> {
             <div>
                 <div className="row">
                     <Input
-                        formName="login"
+                        formName={postLoginActions.id}
                         label="Email"
                         name="email"
                         type="email"
@@ -32,7 +32,7 @@ export default class LoginForm extends React.PureComponent<any, any> {
                         required
                     />
                     <Input
-                        formName="login"
+                        formName={postLoginActions.id}
                         label="Password"
                         name="password"
                         type="password"

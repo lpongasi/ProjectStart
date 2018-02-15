@@ -10,7 +10,8 @@
    List<string> AnyProperties(){
      return new List<string>{
           "AuthenticationScheme",
-          "UserLoginInfo"
+          "UserLoginInfo",
+          "BaseController",
       };
     }
     string TypeGenerator(Property p){    
@@ -49,7 +50,7 @@
             neededImports.Add("import { " + pe.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" + pe.Type.Name.TrimEnd('[',']') + "';");
         });
       });
-     if (c.BaseClass != null && c.BaseClass.Name != "Controller") { 
+     if (c.BaseClass != null && c.BaseClass.Name != "Controller" && c.BaseClass.Name != "BaseController") { 
 	   neededImports.Add("import { " + c.BaseClass.Name +", I" + c.BaseClass.Name +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
      }
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";

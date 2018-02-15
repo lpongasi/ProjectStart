@@ -1,5 +1,5 @@
 ﻿import { createLogger } from 'redux-logger';
-import { UPDATE_FORM_INPUT } from 'shared/Component/action';
+import { UPDATE_FORM, UPDATE_FORM_INIT, UPDATE_FORM_INPUT } from 'shared/Component/action';
 import { StateLifeCycle } from 'shared/Component/common';
 
 const actionTransformer = action => {
@@ -22,7 +22,11 @@ const mute = [
     'UPLOAD_PROGRESS',
     'DOWNLOAD_PROGRESS',
     'LOADING_END',
+    UPDATE_FORM.started,
+    UPDATE_FORM.success,
+    UPDATE_FORM.error,
     UPDATE_FORM_INPUT,
+    UPDATE_FORM_INIT,
 ];
 
 for (const method in console) {

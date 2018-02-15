@@ -54,6 +54,9 @@
     <None Update="ClientApp\Shared\AppModels\AccountController.ts">
       <CustomToolNamespace>Controllers\AccountController.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\BaseController.ts">
+      <CustomToolNamespace>Controllers\BaseController.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\BaseEntity.ts">
       <CustomToolNamespace>..\ProjectStart.Entity\BaseEntity.cs</CustomToolNamespace>
     </None>
