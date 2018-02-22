@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProjectStart.Entity;
 
@@ -23,5 +24,7 @@ namespace ProjectStart.Repository
         void Update(IEnumerable<T> entities);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
+        void SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

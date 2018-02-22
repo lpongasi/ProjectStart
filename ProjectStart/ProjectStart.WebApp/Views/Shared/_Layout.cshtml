@@ -7,11 +7,19 @@
     <base href="~/" />
     <link href="~/assets/common.bundle.css" rel="stylesheet" asp-append-version="true" />
 </head>
-<body>
-    <main id="main-app">Loading...</main>
+<body>    
+    <main id="main-app">
+        <environment include="Development">
+            <h4>Use `npm run dev` command</h4>
+        </environment>
+        <environment exclude="Development">
+            Loading...
+        </environment>
+    </main>
     @Html.AntiForgeryToken()
     @RenderBody()
     <script src="~/assets/common.bundle.js" asp-append-version="true"></script>
+    <script src="~/assets/main.bundle.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

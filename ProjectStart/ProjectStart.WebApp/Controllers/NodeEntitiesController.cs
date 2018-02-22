@@ -15,6 +15,7 @@ namespace ProjectStart.WebApp.Controllers
     [Route("api/NodeEntities")]
     public class NodeEntitiesController : Controller
     {
+        public CommerceDbContext DbContext;
         private readonly IUnitOfWork _unitOfWork;
 
         public NodeEntitiesController(IUnitOfWork unitOfWork)
@@ -24,17 +25,31 @@ namespace ProjectStart.WebApp.Controllers
 
         // GET: api/NodeEntities
         [HttpGet]
-        public GenericResponse<IEnumerable<NodeEntity>> GetNode()
+        public GenericResponse<IEnumerable<NodeEntity>> List()
         {
             return _unitOfWork.NodeRepository.GetAll(
                 output: input => new NodeEntity { Id = input.Id, Name = input.Name },
-                predicate : model => string.IsNullOrEmpty(model.Name),
-                order: input => input.OrderBy(o => o.Name),
+                predicate: model => !string.IsNullOrEmpty(model.Name),
+                order: input => input.OrderBy(o => o.Name).ThenBy(t => t.DateCreated),
                 page: 1,
-                pageSize: 10
+                pageSize: 100
                 ).ToResponse();
         }
+        // POST: api/NodeEntities
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public GenericResponse<NodeEntity> PostNodeEntity([FromBody] NodeEntity nodeEntity)
+        {
+            if (!ModelState.IsValid)
+            {
 
+                return new GenericResponse<NodeEntity>(null, errors: new Dictionary<string, string> { { "dasdawd", "awdasd" } });
+            }
+            nodeEntity.DateCreated = DateTime.Now;
+            _unitOfWork.NodeRepository.Add(nodeEntity);
+            _unitOfWork.NodeRepository.SaveChanges();
+            return nodeEntity.ToResponse();
+        }
         //// GET: api/NodeEntities/5
         //[HttpGet("{id}")]
         //public async Task<IActionResult> GetNodeEntity([FromRoute] string id)

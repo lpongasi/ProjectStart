@@ -31,7 +31,6 @@ export const CreateStateAction = (id: string): ActionTypes => {
         end: `${id}_${StateLifeCycle.End}`,
     });
 };
-
 export const dispatcher = (type: string, payload: any = null) =>
     Store.dispatch({
         type,
@@ -40,3 +39,8 @@ export const dispatcher = (type: string, payload: any = null) =>
 
 let generatedIdNumber = 0;
 export const generateId = () => generatedIdNumber++;
+
+export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+
+export const getFormData = (form: any, errorReturn:any = null) =>
+    form && form.payload && form.payload.data ? form.payload.data : errorReturn;

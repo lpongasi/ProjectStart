@@ -3,9 +3,9 @@
  * Interface for: ProjectStart.Common.GenericResponse<T>
  */
 export interface IGenericResponse<T> extends IResponse {
-    payload: T;
+    data: T;
 }
 export class GenericResponse<T> extends Response implements IGenericResponse<T> {
-    payload: T;
+    data: T;
 }
 

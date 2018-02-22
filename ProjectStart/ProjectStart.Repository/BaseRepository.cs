@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace ProjectStart.Repository
 {
@@ -20,13 +21,11 @@ namespace ProjectStart.Repository
         public void Add(IEnumerable<T> entities)
         {
             Entity.AddRange(entities);
-            _entityDbContext.SaveChanges();
         }
 
         public void Add(T entity)
         {
             Entity.Add(entity);
-            _entityDbContext.SaveChanges();
         }
 
         public void Delete(T entity)
@@ -37,7 +36,6 @@ namespace ProjectStart.Repository
         public void Delete(Expression<Func<T, bool>> where)
         {
             Entity.RemoveRange(Entity.Where(where));
-            _entityDbContext.SaveChanges();
         }
 
         public TResult Get<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<T, bool>> where)
@@ -64,13 +62,21 @@ namespace ProjectStart.Repository
         public void Update(T entity)
         {
             Entity.Update(entity);
-            _entityDbContext.SaveChanges();
         }
 
         public void Update(IEnumerable<T> entities)
         {
             Entity.UpdateRange(entities);
+        }
+
+        public void SaveChanges()
+        {
             _entityDbContext.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _entityDbContext.SaveChangesAsync();
         }
     }
 }

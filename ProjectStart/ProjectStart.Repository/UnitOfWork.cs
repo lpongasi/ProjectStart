@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
@@ -20,6 +21,16 @@ namespace ProjectStart.Repository
         public void Dispose()
         {
             DbContext?.Dispose();
+        }
+
+        public void SaveChanges()
+        {
+            DbContext.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await DbContext.SaveChangesAsync();
         }
     }
 }

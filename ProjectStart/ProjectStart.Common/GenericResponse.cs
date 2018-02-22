@@ -5,15 +5,15 @@ namespace ProjectStart.Common
 {
     public class GenericResponse<T> : Response
     {
-        public GenericResponse(T payload, string message = null, IDictionary<string, string> errors = null) : base(message, errors)
+        public GenericResponse(T data, string message = null, IDictionary<string, string> errors = null) : base(message, errors)
         {
-            Payload = payload;
+            Data = data;
         }
-        public T Payload { get; set; }
+        public T Data { get; set; }
     }
     public static class ResponseExtension
     {
-        public static GenericResponse<T> ToResponse<T>(this T payload, bool success = true, string message = null, IDictionary<string, string> errors = null)
-            => new GenericResponse<T>(payload, message, errors);
+        public static GenericResponse<T> ToResponse<T>(this T data, bool success = true, string message = null, IDictionary<string, string> errors = null)
+            => new GenericResponse<T>(data, message, errors);
     }
 }
