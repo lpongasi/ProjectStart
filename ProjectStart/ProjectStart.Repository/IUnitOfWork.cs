@@ -1,4 +1,5 @@
-﻿using ProjectStart.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjectStart.Entity;
 using System.Threading.Tasks;
 
 namespace ProjectStart.Repository
@@ -7,7 +8,5 @@ namespace ProjectStart.Repository
     {
         CommerceDbContext DbContext { get; }
         IBaseRepository<NodeEntity> NodeRepository { get; }
-        void SaveChanges();
-        Task<int> SaveChangesAsync();
     }
 }

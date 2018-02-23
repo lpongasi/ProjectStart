@@ -12,7 +12,6 @@ using ProjectStart.WebApp.Extensions;
 using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Models.AccountViewModels;
 using ProjectStart.WebApp.Services;
-using AppResponse = ProjectStart.Common.Response;
 namespace ProjectStart.WebApp.Controllers
 {
     [Authorize]
@@ -54,7 +53,7 @@ namespace ProjectStart.WebApp.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [ValidateAntiForgeryToken]
-        public async Task<AppResponse> Login([FromBody]LoginViewModel model, [FromQuery]string returnUrl = null)
+        public async Task<Response<string>> Login([FromBody]LoginViewModel model, [FromQuery]string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -71,24 +70,24 @@ namespace ProjectStart.WebApp.Controllers
                 if (result.RequiresTwoFactor)
                 {
                     //return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                    return CreateError("RequiresTwoFactor");
+                    return Error("RequiresTwoFactor");
                 }
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
                     //return RedirectToAction(nameof(Lockout));
-                    return CreateError("User account locked out.");
+                    return Error("User account locked out.");
                 }
                 else
                 {
                     //ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     //return View(model);
-                    return CreateError("Invalid login attempt.");
+                    return Error("Invalid login attempt.");
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return CreateErrorPayload(ModelState, "Invalid Input.");
+            return Error("Invalid Input.");
         }
 
         [HttpGet]

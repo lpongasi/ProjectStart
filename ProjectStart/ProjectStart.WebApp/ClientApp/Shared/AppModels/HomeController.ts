@@ -10,10 +10,6 @@ export const postIndex = (): Promise<any> => Api('post', `/api/Home/`, null, pos
 export const postAboutActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.HomeController.About.post');
 // post: api/Home/
 export const postAbout = (): Promise<any> => Api('post', `/api/Home/`, null, postAboutActions);
-// State for post: api/Home/?page=${page}&pageSize=${pageSize}
-export const postNodeActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.HomeController.Node.post');
-// post: api/Home/?page=${page}&pageSize=${pageSize}
-export const postNode = (page: number, pageSize: number): Promise<any> => Api('post', `/api/Home/?page=${page}&pageSize=${pageSize}`, null, postNodeActions);
 // State for post: api/Home/
 export const postContactActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.HomeController.Contact.post');
 // post: api/Home/

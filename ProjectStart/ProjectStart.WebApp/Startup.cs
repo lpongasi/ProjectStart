@@ -10,6 +10,7 @@ using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
 using Newtonsoft.Json.Serialization;
 using ProjectStart.Entity;
+using ProjectStart.Repository;
 
 namespace ProjectStart.WebApp
 {
@@ -29,7 +30,7 @@ namespace ProjectStart.WebApp
                 options.UseSqlServer(Configuration.GetConnectionString("CommerceDb"),
                     b => b.MigrationsAssembly("ProjectStart.WebApp")));
 
-            services.AddDbContextPool<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>((service, options) =>
                 options.UseSqlServer(Configuration.GetConnectionString("ApplicationDb")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -38,9 +39,11 @@ namespace ProjectStart.WebApp
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            Repository.Service.Inject(services);
+            Service.Inject(services);
+
+
             /* these are the default values */
-          
+
             services
                 .AddMvc()
             .AddJsonOptions(

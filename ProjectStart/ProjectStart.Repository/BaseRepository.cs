@@ -21,27 +21,29 @@ namespace ProjectStart.Repository
         public void Add(IEnumerable<T> entities)
         {
             Entity.AddRange(entities);
+            SaveChanges();
         }
 
         public void Add(T entity)
         {
             Entity.Add(entity);
+            SaveChanges();
         }
 
         public void Delete(T entity)
         {
-            _entityDbContext.SaveChanges();
+            Entity.Remove(entity);
+            SaveChanges();
         }
 
         public void Delete(Expression<Func<T, bool>> where)
         {
             Entity.RemoveRange(Entity.Where(where));
+            SaveChanges();
         }
 
-        public TResult Get<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<T, bool>> where)
-        {
-            throw new NotImplementedException();
-        }
+        public TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate)
+        => Entity.Select(output).FirstOrDefault(predicate);
 
         public IEnumerable<TResult> GetAll<TResult>(
             Expression<Func<T, TResult>> output,
@@ -62,11 +64,13 @@ namespace ProjectStart.Repository
         public void Update(T entity)
         {
             Entity.Update(entity);
+            SaveChanges();
         }
 
         public void Update(IEnumerable<T> entities)
         {
             Entity.UpdateRange(entities);
+            SaveChanges();
         }
 
         public void SaveChanges()

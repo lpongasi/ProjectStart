@@ -8,17 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProjectStart.Entity;
 using ProjectStart.Repository;
+using ProjectStart.WebApp.Data;
 using ProjectStart.WebApp.Models;
 
 namespace ProjectStart.WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IUnitOfWork _uow;
-        public HomeController(IUnitOfWork uow)
-        {
-            _uow = uow;
-        }
         public IActionResult Index()
         {
             return View();
@@ -30,11 +26,7 @@ namespace ProjectStart.WebApp.Controllers
 
             return View();
         }
-
-        public IActionResult Node(int? page, int? pageSize)
-        {
-            return Json(_uow.NodeRepository.GetAll(s => new { s.ParentId, s.Name, s.Code }));
-        }
+        
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

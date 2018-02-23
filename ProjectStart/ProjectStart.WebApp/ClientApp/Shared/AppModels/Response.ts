@@ -1,16 +1,18 @@
 ﻿/**
- * Interface for: ProjectStart.Common.Response
+ * Interface for: ProjectStart.Common.Response<T>
  */
-export interface IResponse  {
+export interface IResponse<T>  {
     success: boolean;
     error: boolean;
-    errors: { [key: string]: string; };
     message: string;
+    errors: { [key: string]: string; };
+    data: T;
 }
-export class Response  implements IResponse {
+export class Response<T>  implements IResponse<T> {
     success: boolean;
     error: boolean;
-    errors: { [key: string]: string; };
     message: string;
+    errors: { [key: string]: string; };
+    data: T;
 }
 

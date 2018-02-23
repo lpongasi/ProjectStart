@@ -31,9 +31,9 @@ namespace ProjectStart.WebApp.Migrations.Commerce
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<DateTime>("DateModified");
+                    b.Property<DateTime?>("DateModified");
 
-                    b.Property<DateTime>("DateRemoved");
+                    b.Property<DateTime?>("DateRemoved");
 
                     b.Property<bool>("IsRemoved");
 

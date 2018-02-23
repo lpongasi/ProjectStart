@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\Library\Materialize\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Migrations\Commerce\" />
   </ItemGroup>
 
@@ -80,9 +81,6 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\GenerateRecoveryCodesViewModel.ts">
       <CustomToolNamespace>Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\Shared\AppModels\GenericResponse.ts">
-      <CustomToolNamespace>..\ProjectStart.Common\GenericResponse.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
       <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>

@@ -9,7 +9,7 @@
       };
     }
     string TypeGenerator(Property p){    
-     return AnyProperties().Contains(p.Type.Name.TrimEnd('[',']'))? p.Type.Name.Contains("[")? "any[]":"any" : p.Type.Name;
+     return $"{p.name}{(p.Type.IsNullable?"?":string.Empty)}: {(AnyProperties().Contains(p.Type.Name.TrimEnd('[',']'))? p.Type.Name.Contains("[")? "any[]":"any" : p.Type.Name)}";
     }
     string Imports(Class c){
       List<string> neededImports = new List<string>();
@@ -25,7 +25,8 @@
         });
       });
      if (c.BaseClass != null && c.BaseClass.Name != "Controller") { 
-	   neededImports.Add("import { " + c.BaseClass.Name +", I" + c.BaseClass.Name +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
+      var baseImports = string.Join(", ",new List<string>{c.BaseClass.Name, $"I{c.BaseClass.Name}"}.OrderBy(o=>o));
+	   neededImports.Add("import { " + baseImports +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
      }
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";
     }
@@ -33,11 +34,11 @@
  * Interface for: $FullName
  */
 export interface I$Name$TypeParameters $BaseClass[extends I$Name$TypeArguments] {$Properties[
-    $name: $Type;]
+    $TypeGenerator;]
 }
 /**
  * Base view model for $FullName
  */
 export class $Name$TypeParameters $BaseClass[extends $Name$TypeArguments] implements I$Name$TypeArguments {$Properties[
-    $name: $Type;]
+    $TypeGenerator;]
 }]

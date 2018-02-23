@@ -14,15 +14,15 @@
           "BaseController",
       };
     }
-    string TypeGenerator(Property p){    
-     return AnyProperties().Contains(p.Type.Name.TrimEnd('[',']'))? p.Type.Name.Contains("[")? "any[]":"any" : p.Type.Name;
-    }
     string Method(Method m){
      var httpMethod = m.HttpMethod();
      return m.name.Equals(httpMethod) || m.name.Contains(httpMethod) ? m.name : $"{httpMethod}{m.Name}";
     }
     string MethodAction(Method m){
      return $"{Method(m)}Actions";
+    }
+    string Property(Parameter p){
+       return $"{p.name}{(p.Type.IsNullable && !p.HasDefaultValue?"?":string.Empty)}: {p.Type}{(p.HasDefaultValue?$" = {p.DefaultValue}":string.Empty)}";
     }
     string Imports(Class c){
       List<string> neededImports = new List<string>();
@@ -51,7 +51,8 @@
         });
       });
      if (c.BaseClass != null && c.BaseClass.Name != "Controller" && c.BaseClass.Name != "BaseController") { 
-	   neededImports.Add("import { " + c.BaseClass.Name +", I" + c.BaseClass.Name +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
+      var baseImports = string.Join(", ",new List<string>{c.BaseClass.Name, $"I{c.BaseClass.Name}"}.OrderBy(o=>o));
+	   neededImports.Add("import { " + baseImports +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
      }
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";
     }
@@ -60,5 +61,5 @@ $Methods[
 // State for $HttpMethod: $Url
 export const $MethodAction: ActionTypes = CreateStateAction('$FullName.$HttpMethod');
 // $HttpMethod: $Url
-export const $Method = ($Parameters[$name: $Type][, ]): Promise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData, $MethodAction);]]
+export const $Method = ($Parameters[$Property][, ]): Promise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData, $MethodAction);]]
 

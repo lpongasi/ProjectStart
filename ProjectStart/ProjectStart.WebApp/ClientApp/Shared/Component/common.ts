@@ -42,5 +42,5 @@ export const generateId = () => generatedIdNumber++;
 
 export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 
-export const getFormData = (form: any, errorReturn:any = null) =>
+export const getFormData = <T = any>(form: any, errorReturn: T = null): T =>
     form && form.payload && form.payload.data ? form.payload.data : errorReturn;

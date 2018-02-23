@@ -1,6 +1,6 @@
 ﻿import { UPDATE_FORM, UPDATE_FORM_INIT, UPDATE_FORM_INPUT } from 'shared/Component/action';
 import { StateLifeCycle } from 'shared/Component/common';
-import { GenericResponse } from 'shared/AppModels/GenericResponse';
+import { Response } from 'shared/AppModels/Response';
 
 export default function (state = {}, action) {
     let newState = { ...state };
@@ -29,7 +29,7 @@ export default function (state = {}, action) {
                 [action.payload.formName]: {
                     ...state[action.payload.formName],
                     status: StateLifeCycle.End,
-                    payload: new GenericResponse<string>(),
+                    payload: new Response<string>(),
                 },
             };
             break;
@@ -39,7 +39,7 @@ export default function (state = {}, action) {
             newState = {
                 ...state,
                 [action.payload.formName]: {
-                    ...state[action.payload.formName],
+                    // ...state[action.payload.formName], to empty the form
                     payload,
                     status: StateLifeCycle.Success,
                 },

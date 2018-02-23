@@ -8,10 +8,10 @@ export interface IBaseEntity  {
     createdBy: string;
     dateCreated: Date;
     modifiedBy: string;
-    dateModified: Date;
+    dateModified?: Date;
     isRemoved: boolean;
     removedBy: string;
-    dateRemoved: Date;
+    dateRemoved?: Date;
 }
 /**
  * Base view model for ProjectStart.Entity.BaseEntity
@@ -23,8 +23,8 @@ export class BaseEntity  implements IBaseEntity {
     createdBy: string;
     dateCreated: Date;
     modifiedBy: string;
-    dateModified: Date;
+    dateModified?: Date;
     isRemoved: boolean;
     removedBy: string;
-    dateRemoved: Date;
+    dateRemoved?: Date;
 }

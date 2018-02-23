@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProjectStart.WebApp.Migrations.Application
 {
-    public partial class Application_20171121171356 : Migration
+    public partial class Application_20180223_152702 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

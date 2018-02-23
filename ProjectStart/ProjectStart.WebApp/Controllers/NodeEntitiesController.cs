@@ -8,16 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using ProjectStart.Common;
 using ProjectStart.Entity;
 using ProjectStart.Repository;
+using ProjectStart.WebApp.Data;
 
 namespace ProjectStart.WebApp.Controllers
 {
     [Produces("application/json")]
     [Route("api/NodeEntities")]
-    public class NodeEntitiesController : Controller
+    public class NodeEntitiesController : BaseController
     {
-        public CommerceDbContext DbContext;
         private readonly IUnitOfWork _unitOfWork;
-
         public NodeEntitiesController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
@@ -25,30 +24,29 @@ namespace ProjectStart.WebApp.Controllers
 
         // GET: api/NodeEntities
         [HttpGet]
-        public GenericResponse<IEnumerable<NodeEntity>> List()
+        public Response<IEnumerable<NodeEntity>> List(int? page = 1, int? pageSize = 20)
         {
-            return _unitOfWork.NodeRepository.GetAll(
-                output: input => new NodeEntity { Id = input.Id, Name = input.Name },
+            return Success(_unitOfWork.NodeRepository.GetAll(
+                output: input => new NodeEntity { Id = input.Id, Code = input.Code, Name = input.Name },
                 predicate: model => !string.IsNullOrEmpty(model.Name),
                 order: input => input.OrderBy(o => o.Name).ThenBy(t => t.DateCreated),
-                page: 1,
-                pageSize: 100
-                ).ToResponse();
+                page: page,
+                pageSize: pageSize
+                ));
         }
         // POST: api/NodeEntities
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public GenericResponse<NodeEntity> PostNodeEntity([FromBody] NodeEntity nodeEntity)
+        public Response<NodeEntity> PostNodeEntity([FromBody] NodeEntity nodeEntity)
         {
             if (!ModelState.IsValid)
             {
 
-                return new GenericResponse<NodeEntity>(null, errors: new Dictionary<string, string> { { "dasdawd", "awdasd" } });
+                return Error<NodeEntity>(null, "Incorrect");
             }
             nodeEntity.DateCreated = DateTime.Now;
             _unitOfWork.NodeRepository.Add(nodeEntity);
-            _unitOfWork.NodeRepository.SaveChanges();
-            return nodeEntity.ToResponse();
+            return Success(nodeEntity);
         }
         //// GET: api/NodeEntities/5
         //[HttpGet("{id}")]
@@ -119,26 +117,23 @@ namespace ProjectStart.WebApp.Controllers
         //    return CreatedAtAction("GetNodeEntity", new { id = nodeEntity.Id }, nodeEntity);
         //}
 
-        //// DELETE: api/NodeEntities/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteNodeEntity([FromRoute] string id)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        // DELETE: api/NodeEntities/5
+        [HttpDelete("{id}")]
+        public Response<string> DeleteNodeEntity([FromRoute] string id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Error<string>(null, "Error");
+            }
 
-        //    var nodeEntity = await _context.Node.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (nodeEntity == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Node.Remove(nodeEntity);
-        //    await _context.SaveChangesAsync();
-
-        //    return Ok(nodeEntity);
-        //}
+            var nodeEntity = _unitOfWork.NodeRepository.Get(input => new NodeEntity { Id = input.Id, Code = input.Code, Name = input.Name }, node => node.Id == id);
+            if (nodeEntity == null)
+            {
+                return Error<string>(null, "Not Found");
+            }
+            _unitOfWork.NodeRepository.Delete(nodeEntity);
+            return Success<string>(null, "Success!");
+        }
 
         //private bool NodeEntityExists(string id)
         //{

@@ -6,7 +6,7 @@ namespace ProjectStart.Repository
     {
         public static void Inject(IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }
 }

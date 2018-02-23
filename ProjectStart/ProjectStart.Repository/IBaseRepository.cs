@@ -11,7 +11,7 @@ namespace ProjectStart.Repository
     public interface IBaseRepository<T> where T : class
     {
         DbSet<T> Entity { get; }
-        TResult Get<TResult>(Expression<Func<T, TResult>> transformResult, Expression<Func<T, bool>> where);
+        TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate);
         IEnumerable<TResult> GetAll<TResult>(
             Expression<Func<T, TResult>> output,
             Expression<Func<TResult, bool>> predicate = null,
@@ -24,7 +24,5 @@ namespace ProjectStart.Repository
         void Update(IEnumerable<T> entities);
         void Delete(T entity);
         void Delete(Expression<Func<T, bool>> where);
-        void SaveChanges();
-        Task<int> SaveChangesAsync();
     }
 }

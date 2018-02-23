@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Commerce
 {
     [DbContext(typeof(CommerceDbContext))]
-    [Migration("20180208174745_Commerce_20180209_014730")]
-    partial class Commerce_20180209_014730
+    [Migration("20180223082246_Commerce_20180223_162228")]
+    partial class Commerce_20180223_162228
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,8 +32,7 @@ namespace ProjectStart.WebApp.Migrations.Commerce
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<DateTime?>("DateModified")
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<DateTime?>("DateModified");
 
                     b.Property<DateTime?>("DateRemoved");
 

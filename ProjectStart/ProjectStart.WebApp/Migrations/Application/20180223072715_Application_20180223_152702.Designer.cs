@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Application
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171121091418_Application_20171121171356")]
-    partial class Application_20171121171356
+    [Migration("20180223072715_Application_20180223_152702")]
+    partial class Application_20180223_152702
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
