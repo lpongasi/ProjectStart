@@ -8,7 +8,7 @@ import {
     postNodeEntityActions,
 } from 'shared/AppModels/NodeEntitiesController';
 import { NodeEntity } from 'shared/AppModels/NodeEntity';
-import { getFormData } from 'shared/Component/common';
+import { getFormData, getFormError } from 'shared/Component/common';
 import Input from 'shared/Form/Input';
 
 type State = {
@@ -16,10 +16,13 @@ type State = {
 };
 type Props = State & {
     nodeForm: NodeEntity,
+    list: NodeEntity[],
+    errors: any,
 };
 
 @connect(state => ({
     nodeForm: state.form[postNodeEntityActions.id],
+    errors: getFormError(state.form[getListActions.id]),
     list: getFormData<NodeEntity[]>(state.form[getListActions.id], []),
 }))
 export default class LoginForm extends React.PureComponent<Props, State> {
@@ -45,14 +48,15 @@ export default class LoginForm extends React.PureComponent<Props, State> {
         });
     }
     public componentWillMount() {
-        getList().then(t => this.setState({ list: t.data }));
+        getList().then(t => this.setState({ list: getFormData<NodeEntity[]>(t, []) }));
     }
     public render() {
         const { list } = this.state;
-
+        const { errors } = this.props;
         return (
             <div>
                 <h1>Parent Nodes</h1>
+                <div>{errors}</div>
                 <table className="table striped">
                     <thead>
                         <tr>

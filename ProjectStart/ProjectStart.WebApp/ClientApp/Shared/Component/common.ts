@@ -44,3 +44,15 @@ export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('hr
 
 export const getFormData = <T = any>(form: any, errorReturn: T = null): T =>
     form && form.payload && form.payload.data ? form.payload.data : errorReturn;
+export const getFormError = (form: any): any => {
+
+    const hasPayload = form && form.payload ? true: false;
+    console.log('hasPayload', hasPayload)
+    const hasError = hasPayload && form.status === StateLifeCycle.Error ? true : false;
+    console.log('hasError', hasError)
+    const hasErrors = hasError && form.payload.errors ? true : false;
+    console.log('hasErrors', hasErrors)
+    console.log('The form',form)
+    return hasErrors ? form.payload.errors : hasError ? 'System Error Found! Please contact the system administrator!' : '';
+
+}

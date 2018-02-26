@@ -4,8 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-ProjectStart.WebApp-284F66ED-6869-492B-B9C0-CD4E0B2BD123</UserSecretsId>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.7</TypeScriptToolsVersion>
     <StartupObject>ProjectStart.WebApp.Program</StartupObject>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,17 @@
     <Content Remove="ClientApp\bower_components\**" />
     <EmbeddedResource Remove="ClientApp\bower_components\**" />
     <None Remove="ClientApp\bower_components\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="rimraf" />
+    <None Remove="rimraf.cmd" />
+    <None Remove="tsc" />
+    <None Remove="tsc.cmd" />
+    <None Remove="tsserver" />
+    <None Remove="tsserver.cmd" />
+    <None Remove="webpack-dev-server" />
+    <None Remove="webpack-dev-server.cmd" />
   </ItemGroup>
 
 
