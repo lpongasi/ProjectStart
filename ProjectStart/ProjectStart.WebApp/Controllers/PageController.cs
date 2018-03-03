@@ -9,20 +9,24 @@ using ProjectStart.Common.ViewModel;
 using ProjectStart.Entity;
 using ProjectStart.WebApp.Extensions;
 using ProjectStart.Common;
+using System.Data;
+using Dapper;
+using ProjectStart.Entity.Resource;
 
 namespace ProjectStart.WebApp.Controllers
 {
     public class PageController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IDbConnection _dbConnection;
 
-        public PageController(ApplicationDbContext context)
+        public PageController(IDbConnection dbConnection)
         {
-            _context = context;
+            _dbConnection = dbConnection;
         }
         public IActionResult Index(string url, [FromQuery]bool isJson = false)
         {
-            var page = _context.PageData.Select(s => new PageDataViewModel { Name = s.Name, Description = s.Description, Title = s.Title, NameUrl = s.ParentUrl }).FirstOrDefault(w => w.NameUrl.Equals(url));
+            var page = _dbConnection.QueryFirstOrDefault<PageDataViewModel>(SqlResource.GetPageData, new { parentUrl = url });
+
             return isJson
                 ? (IActionResult)Json(new Response<PageDataViewModel>(page))
                 : View("MainBody", page);

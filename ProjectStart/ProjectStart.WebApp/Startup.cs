@@ -11,6 +11,8 @@ using ProjectStart.Repository;
 using ProjectStart.Entity;
 using Swashbuckle.AspNetCore.Swagger;
 using ProjectStart.WebApp.Extensions;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace ProjectStart.WebApp
 {
@@ -26,9 +28,10 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appConnectionString = Configuration.GetConnectionString("ProjectStart.Application");
 
             services.AddDbContextPool<ApplicationDbContext>((service, options) =>
-                options.UseSqlServer(Configuration.GetConnectionString("ProjectStart.Application"),
+                options.UseSqlServer(appConnectionString,
                 sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
                 ));
 
@@ -38,6 +41,7 @@ namespace ProjectStart.WebApp
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IDbConnection>(connection => new SqlConnection(appConnectionString));
             Service.Inject(services);
 
 
