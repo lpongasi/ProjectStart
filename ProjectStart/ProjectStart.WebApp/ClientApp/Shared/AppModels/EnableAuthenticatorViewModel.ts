@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.ManageViewModels.EnableAuthenticatorViewModel
+ * Interface for: ProjectStart.ViewModel.ManageViewModels.EnableAuthenticatorViewModel
  */
 export interface IEnableAuthenticatorViewModel  {
     code: string;
@@ -7,7 +7,7 @@ export interface IEnableAuthenticatorViewModel  {
     authenticatorUri: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.ManageViewModels.EnableAuthenticatorViewModel
+ * Base view model for ProjectStart.ViewModel.ManageViewModels.EnableAuthenticatorViewModel
  */
 export class EnableAuthenticatorViewModel  implements IEnableAuthenticatorViewModel {
     code: string;

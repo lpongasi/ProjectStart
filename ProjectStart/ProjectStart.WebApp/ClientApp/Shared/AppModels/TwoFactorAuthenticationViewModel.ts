@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.ManageViewModels.TwoFactorAuthenticationViewModel
+ * Interface for: ProjectStart.ViewModel.ManageViewModels.TwoFactorAuthenticationViewModel
  */
 export interface ITwoFactorAuthenticationViewModel  {
     hasAuthenticator: boolean;
@@ -7,7 +7,7 @@ export interface ITwoFactorAuthenticationViewModel  {
     is2faEnabled: boolean;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.ManageViewModels.TwoFactorAuthenticationViewModel
+ * Base view model for ProjectStart.ViewModel.ManageViewModels.TwoFactorAuthenticationViewModel
  */
 export class TwoFactorAuthenticationViewModel  implements ITwoFactorAuthenticationViewModel {
     hasAuthenticator: boolean;

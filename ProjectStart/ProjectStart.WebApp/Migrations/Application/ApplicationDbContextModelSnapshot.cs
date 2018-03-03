@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using ProjectStart.WebApp.Data;
+using ProjectStart.Entity;
 using System;
 
 namespace ProjectStart.WebApp.Migrations.Application
@@ -128,7 +128,7 @@ namespace ProjectStart.WebApp.Migrations.Application
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProjectStart.WebApp.Models.ApplicationUser", b =>
+            modelBuilder.Entity("ProjectStart.Entity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -179,6 +179,52 @@ namespace ProjectStart.WebApp.Migrations.Application
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ProjectStart.Entity.Cms.PageDataEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
+                    b.Property<DateTime?>("DateRemoved");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<bool>("IsRemoved");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired();
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("NameUrl")
+                        .IsRequired();
+
+                    b.Property<string>("ParentId");
+
+                    b.Property<string>("ParentUrl")
+                        .IsRequired();
+
+                    b.Property<string>("RemovedBy");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("PageData","Cms");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -189,7 +235,7 @@ namespace ProjectStart.WebApp.Migrations.Application
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ProjectStart.WebApp.Models.ApplicationUser")
+                    b.HasOne("ProjectStart.Entity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -197,7 +243,7 @@ namespace ProjectStart.WebApp.Migrations.Application
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ProjectStart.WebApp.Models.ApplicationUser")
+                    b.HasOne("ProjectStart.Entity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -210,7 +256,7 @@ namespace ProjectStart.WebApp.Migrations.Application
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ProjectStart.WebApp.Models.ApplicationUser")
+                    b.HasOne("ProjectStart.Entity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -218,10 +264,17 @@ namespace ProjectStart.WebApp.Migrations.Application
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ProjectStart.WebApp.Models.ApplicationUser")
+                    b.HasOne("ProjectStart.Entity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectStart.Entity.Cms.PageDataEntity", b =>
+                {
+                    b.HasOne("ProjectStart.Entity.Cms.PageDataEntity", "ParentNode")
+                        .WithMany("SubNodes")
+                        .HasForeignKey("ParentId");
                 });
 #pragma warning restore 612, 618
         }

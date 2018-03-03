@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
@@ -9,9 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectStart.Common;
 using ProjectStart.WebApp.Extensions;
-using ProjectStart.WebApp.Models;
-using ProjectStart.WebApp.Models.AccountViewModels;
+using ProjectStart.ViewModel.AccountViewModels;
 using ProjectStart.WebApp.Services;
+using ProjectStart.Entity;
+
 namespace ProjectStart.WebApp.Controllers
 {
     [Authorize]

@@ -1,9 +1,8 @@
 ﻿/**
- * Interface for: ProjectStart.Entity.BaseEntity
+ * Interface for: ProjectStart.Entity.Common.BaseEntity
  */
 export interface IBaseEntity  {
     id: string;
-    code: string;
     name: string;
     createdBy: string;
     dateCreated: Date;
@@ -14,11 +13,10 @@ export interface IBaseEntity  {
     dateRemoved?: Date;
 }
 /**
- * Base view model for ProjectStart.Entity.BaseEntity
+ * Base view model for ProjectStart.Entity.Common.BaseEntity
  */
 export class BaseEntity  implements IBaseEntity {
     id: string;
-    code: string;
     name: string;
     createdBy: string;
     dateCreated: Date;

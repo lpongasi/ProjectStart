@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.ManageViewModels.ExternalLoginsViewModel
+ * Interface for: ProjectStart.ViewModel.ManageViewModels.ExternalLoginsViewModel
  */
 export interface IExternalLoginsViewModel  {
     currentLogins: any[];
@@ -8,7 +8,7 @@ export interface IExternalLoginsViewModel  {
     statusMessage: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.ManageViewModels.ExternalLoginsViewModel
+ * Base view model for ProjectStart.ViewModel.ManageViewModels.ExternalLoginsViewModel
  */
 export class ExternalLoginsViewModel  implements IExternalLoginsViewModel {
     currentLogins: any[];

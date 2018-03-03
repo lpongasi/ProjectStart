@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.AccountViewModels.RegisterViewModel
+ * Interface for: ProjectStart.ViewModel.AccountViewModels.RegisterViewModel
  */
 export interface IRegisterViewModel  {
     email: string;
@@ -7,7 +7,7 @@ export interface IRegisterViewModel  {
     confirmPassword: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.AccountViewModels.RegisterViewModel
+ * Base view model for ProjectStart.ViewModel.AccountViewModels.RegisterViewModel
  */
 export class RegisterViewModel  implements IRegisterViewModel {
     email: string;

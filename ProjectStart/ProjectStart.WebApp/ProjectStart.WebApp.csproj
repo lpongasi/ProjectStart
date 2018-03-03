@@ -33,7 +33,8 @@
     <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,7 @@
     <ProjectReference Include="..\ProjectStart.Common\ProjectStart.Common.csproj" />
     <ProjectReference Include="..\ProjectStart.Entity\ProjectStart.Entity.csproj" />
     <ProjectReference Include="..\ProjectStart.Repository\ProjectStart.Repository.csproj" />
+    <ProjectReference Include="..\ProjectStart.ViewModel\ProjectStart.ViewModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,7 +62,6 @@
   <ItemGroup>
     <Folder Include="ClientApp\Library\Materialize\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Migrations\Commerce\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -71,70 +72,82 @@
       <CustomToolNamespace>Controllers\BaseController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\BaseEntity.ts">
-      <CustomToolNamespace>..\ProjectStart.Entity\BaseEntity.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.Entity\Common\BaseEntity.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\BaseViewModel.ts">
+      <CustomToolNamespace>..\ProjectStart.ViewModel\BaseViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ChangePasswordViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\ChangePasswordViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\ChangePasswordViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\EnableAuthenticatorViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\EnableAuthenticatorViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\EnableAuthenticatorViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ErrorViewModel.ts">
-      <CustomToolNamespace>Models\ErrorViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ErrorViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ExternalLoginsViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\ExternalLoginsViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\ExternalLoginsViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ExternalLoginViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\ExternalLoginViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ExternalLoginViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ForgotPasswordViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\ForgotPasswordViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ForgotPasswordViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\GenerateRecoveryCodesViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
       <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\IndexViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\LoginViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\LoginViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\LoginViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\LoginWith2faViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\LoginWith2faViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\LoginWith2faViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\LoginWithRecoveryCodeViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\LoginWithRecoveryCodeViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\LoginWithRecoveryCodeViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ManageController.ts">
       <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
     </None>
-    <None Update="ClientApp\Shared\AppModels\NodeEntitiesController.ts">
-      <CustomToolNamespace>Controllers\NodeEntitiesController.cs</CustomToolNamespace>
-    </None>
     <None Update="ClientApp\Shared\AppModels\NodeEntity.ts">
-      <CustomToolNamespace>..\ProjectStart.Entity\NodeEntity.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\PageController.ts">
+      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
+      <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\PageDataEntity.ts">
+      <CustomToolNamespace>..\ProjectStart.Entity\Cms\PageDataEntity.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\PageDataViewModel.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\ViewModel\PageDataViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\RegisterViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\RegisterViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\RegisterViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\RemoveLoginViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\RemoveLoginViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\RemoveLoginViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ResetPasswordViewModel.ts">
-      <CustomToolNamespace>Models\AccountViewModels\ResetPasswordViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ResetPasswordViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\Response.ts">
       <CustomToolNamespace>..\ProjectStart.Common\Response.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\SetPasswordViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\SetPasswordViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\SetPasswordViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\TwoFactorAuthenticationViewModel.ts">
-      <CustomToolNamespace>Models\ManageViewModels\TwoFactorAuthenticationViewModel.cs</CustomToolNamespace>
+      <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\TwoFactorAuthenticationViewModel.cs</CustomToolNamespace>
     </None>
   </ItemGroup>
 

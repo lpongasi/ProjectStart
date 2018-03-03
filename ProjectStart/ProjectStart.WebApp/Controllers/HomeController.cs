@@ -1,15 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using ProjectStart.Entity;
-using ProjectStart.Repository;
-using ProjectStart.WebApp.Data;
-using ProjectStart.WebApp.Models;
+using ProjectStart.ViewModel;
+using ProjectStart.Common.ViewModel;
 
 namespace ProjectStart.WebApp.Controllers
 {
@@ -17,7 +9,7 @@ namespace ProjectStart.WebApp.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View("MainBody", new PageDataViewModel { });
         }
 
         public IActionResult About()

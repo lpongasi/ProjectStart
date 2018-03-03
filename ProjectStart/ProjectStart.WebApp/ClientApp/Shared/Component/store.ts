@@ -6,4 +6,4 @@ import logger from './logger';
 
 const Enhancer = isProd ? applyMiddleware(thunk) : composeWithDevTools(applyMiddleware(thunk, logger));
 
-export default createStore(allReducers, Enhancer);
+export default createStore(allReducers, { page: window.currentPage || {} }, Enhancer);

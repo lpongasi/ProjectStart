@@ -6,7 +6,7 @@ namespace ProjectStart.Repository
 {
     public interface IUnitOfWork
     {
-        CommerceDbContext DbContext { get; }
-        IBaseRepository<NodeEntity> NodeRepository { get; }
+        //CommerceDbContext DbContext { get; }
+        //IBaseRepository<NodeEntity> NodeRepository { get; }
     }
 }

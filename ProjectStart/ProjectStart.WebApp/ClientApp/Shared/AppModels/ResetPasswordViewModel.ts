@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.AccountViewModels.ResetPasswordViewModel
+ * Interface for: ProjectStart.ViewModel.AccountViewModels.ResetPasswordViewModel
  */
 export interface IResetPasswordViewModel  {
     email: string;
@@ -8,7 +8,7 @@ export interface IResetPasswordViewModel  {
     code: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.AccountViewModels.ResetPasswordViewModel
+ * Base view model for ProjectStart.ViewModel.AccountViewModels.ResetPasswordViewModel
  */
 export class ResetPasswordViewModel  implements IResetPasswordViewModel {
     email: string;

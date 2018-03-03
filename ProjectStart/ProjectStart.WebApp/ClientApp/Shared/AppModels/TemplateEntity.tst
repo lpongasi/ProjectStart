@@ -15,7 +15,7 @@
       List<string> neededImports = new List<string>();
 
      neededImports.AddRange(c.Properties
-	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
+	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')) &&  p.Type.Name.TrimEnd('[',']') != "T")
 	    .Select(p => "import { " + p.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" + p.Type.Name.TrimEnd('[',']') + "';").ToList());
 
       c.Methods.ToList().ForEach(e =>

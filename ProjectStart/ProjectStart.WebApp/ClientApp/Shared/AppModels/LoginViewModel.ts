@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.AccountViewModels.LoginViewModel
+ * Interface for: ProjectStart.ViewModel.AccountViewModels.LoginViewModel
  */
 export interface ILoginViewModel  {
     email: string;
@@ -7,7 +7,7 @@ export interface ILoginViewModel  {
     rememberMe: boolean;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.AccountViewModels.LoginViewModel
+ * Base view model for ProjectStart.ViewModel.AccountViewModels.LoginViewModel
  */
 export class LoginViewModel  implements ILoginViewModel {
     email: string;

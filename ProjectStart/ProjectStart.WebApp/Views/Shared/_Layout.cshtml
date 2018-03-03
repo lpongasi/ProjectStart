@@ -7,7 +7,7 @@
     <base href="~/" />
     <link href="~/assets/common.bundle.css" rel="stylesheet" asp-append-version="true" />
 </head>
-<body>    
+<body>
     <main id="main-app">
         <environment include="Development">
             <h4>Use `npm run dev` command</h4>
@@ -18,6 +18,7 @@
     </main>
     @Html.AntiForgeryToken()
     @RenderBody()
+    @RenderSection("DataScripts", required: false)
     <script src="~/assets/common.bundle.js" asp-append-version="true"></script>
     <script src="~/assets/main.bundle.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

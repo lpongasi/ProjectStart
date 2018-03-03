@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.ManageViewModels.ChangePasswordViewModel
+ * Interface for: ProjectStart.ViewModel.ManageViewModels.ChangePasswordViewModel
  */
 export interface IChangePasswordViewModel  {
     oldPassword: string;
@@ -8,7 +8,7 @@ export interface IChangePasswordViewModel  {
     statusMessage: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.ManageViewModels.ChangePasswordViewModel
+ * Base view model for ProjectStart.ViewModel.ManageViewModels.ChangePasswordViewModel
  */
 export class ChangePasswordViewModel  implements IChangePasswordViewModel {
     oldPassword: string;

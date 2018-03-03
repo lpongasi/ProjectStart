@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using ProjectStart.WebApp.Data;
-using ProjectStart.WebApp.Models;
 using ProjectStart.WebApp.Services;
 using Newtonsoft.Json.Serialization;
-using ProjectStart.Entity;
 using ProjectStart.Repository;
+using ProjectStart.Entity;
+using Swashbuckle.AspNetCore.Swagger;
+using ProjectStart.WebApp.Extensions;
 
 namespace ProjectStart.WebApp
 {
@@ -26,12 +26,11 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CommerceDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("CommerceDb"),
-                    b => b.MigrationsAssembly("ProjectStart.WebApp")));
 
             services.AddDbContextPool<ApplicationDbContext>((service, options) =>
-                options.UseSqlServer(Configuration.GetConnectionString("ApplicationDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("ProjectStart.Application"),
+                sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
+                ));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -49,19 +48,26 @@ namespace ProjectStart.WebApp
             .AddJsonOptions(
                 options =>
                 {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;  
+                    options.SerializerSettings.ContractResolver = AppHelper.JsonSerializerSettings.ContractResolver;
+                    options.SerializerSettings.Formatting = AppHelper.JsonSerializerSettings.Formatting;
+                    options.SerializerSettings.ReferenceLoopHandling = AppHelper.JsonSerializerSettings.ReferenceLoopHandling;
+                    options.SerializerSettings.NullValueHandling = AppHelper.JsonSerializerSettings.NullValueHandling;
                 }
             );
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => {
+                    builder =>
+                    {
                         builder.WithOrigins("http://localhost:9000");
                     });
             });
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-Token");
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,6 +78,11 @@ namespace ProjectStart.WebApp
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
             }
             else
             {
@@ -87,13 +98,19 @@ namespace ProjectStart.WebApp
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{controller=Home}/{action=Index}/{id?}"
+                //    );
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
+                    name: "page",
+                    template: "page/{*url}",
+                    defaults: new { controller = "Page", action = "Index" }
+                    );
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                    defaults: new { controller = "Home", action = "Index" }
+                    );
             });
         }
     }

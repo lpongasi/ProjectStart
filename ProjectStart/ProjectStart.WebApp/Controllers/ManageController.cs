@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectStart.WebApp.Extensions;
-using ProjectStart.WebApp.Models;
-using ProjectStart.WebApp.Models.ManageViewModels;
+using ProjectStart.ViewModel.ManageViewModels;
 using ProjectStart.WebApp.Services;
+using ProjectStart.Entity;
 
 namespace ProjectStart.WebApp.Controllers
 {

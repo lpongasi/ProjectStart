@@ -22,6 +22,12 @@ export type ActionTypes = {
     end: string,
 };
 
+
+export type RootState = {
+    form?: any;
+    page?: any;
+};
+
 export const CreateStateAction = (id: string): ActionTypes => {
     return ({
         id,

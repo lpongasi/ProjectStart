@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.ManageViewModels.IndexViewModel
+ * Interface for: ProjectStart.ViewModel.ManageViewModels.IndexViewModel
  */
 export interface IIndexViewModel  {
     username: string;
@@ -9,7 +9,7 @@ export interface IIndexViewModel  {
     statusMessage: string;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.ManageViewModels.IndexViewModel
+ * Base view model for ProjectStart.ViewModel.ManageViewModels.IndexViewModel
  */
 export class IndexViewModel  implements IIndexViewModel {
     username: string;

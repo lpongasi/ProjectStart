@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectStart.WebApp", "ProjectStart.WebApp\ProjectStart.WebApp.csproj", "{C9DD59F1-5EE5-4A47-9862-503F2F258493}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectStart.Entity", "ProjectStart.Entity\ProjectStart.Entity.csproj", "{C48062BE-B81E-4B89-BC0D-FBF7DDBCE7D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectStart.Repository", "ProjectStart.Repository\ProjectStart.Repository.csproj", "{29A6BF1A-70B3-4E87-AB2B-0B58BE20D09C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectStart.ViewModel", "ProjectStart.ViewModel\ProjectStart.ViewModel.csproj", "{1D378B58-7D49-492D-AC80-4D2C07EEC0A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{29A6BF1A-70B3-4E87-AB2B-0B58BE20D09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A6BF1A-70B3-4E87-AB2B-0B58BE20D09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29A6BF1A-70B3-4E87-AB2B-0B58BE20D09C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D378B58-7D49-492D-AC80-4D2C07EEC0A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D378B58-7D49-492D-AC80-4D2C07EEC0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D378B58-7D49-492D-AC80-4D2C07EEC0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D378B58-7D49-492D-AC80-4D2C07EEC0A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

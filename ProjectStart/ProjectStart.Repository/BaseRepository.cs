@@ -11,8 +11,8 @@ namespace ProjectStart.Repository
     internal class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         public DbSet<T> Entity { get; }
-        private readonly CommerceDbContext _entityDbContext;
-        public BaseRepository(CommerceDbContext entityDbContext)
+        private readonly DbContext _entityDbContext;
+        public BaseRepository(DbContext entityDbContext)
         {
             _entityDbContext = entityDbContext;
             Entity = entityDbContext.Set<T>();

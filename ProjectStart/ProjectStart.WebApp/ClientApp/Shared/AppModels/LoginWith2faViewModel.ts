@@ -1,5 +1,5 @@
 ﻿/**
- * Interface for: ProjectStart.WebApp.Models.AccountViewModels.LoginWith2faViewModel
+ * Interface for: ProjectStart.ViewModel.AccountViewModels.LoginWith2faViewModel
  */
 export interface ILoginWith2faViewModel  {
     twoFactorCode: string;
@@ -7,7 +7,7 @@ export interface ILoginWith2faViewModel  {
     rememberMe: boolean;
 }
 /**
- * Base view model for ProjectStart.WebApp.Models.AccountViewModels.LoginWith2faViewModel
+ * Base view model for ProjectStart.ViewModel.AccountViewModels.LoginWith2faViewModel
  */
 export class LoginWith2faViewModel  implements ILoginWith2faViewModel {
     twoFactorCode: string;

@@ -1,17 +1,17 @@
 ﻿import { BaseEntity, IBaseEntity} from 'shared/AppModels/BaseEntity';
 /**
- * Interface for: ProjectStart.Entity.NodeEntity
+ * Interface for: ProjectStart.Entity.Common.NodeEntity<T>
  */
-export interface INodeEntity extends IBaseEntity {
+export interface INodeEntity<T> extends IBaseEntity {
     parentId: string;
-    parentNode: NodeEntity;
-    subNodes: NodeEntity[];
+    parentNode: T;
+    subNodes: T[];
 }
 /**
- * Base view model for ProjectStart.Entity.NodeEntity
+ * Base view model for ProjectStart.Entity.Common.NodeEntity<T>
  */
-export class NodeEntity extends BaseEntity implements INodeEntity {
+export class NodeEntity<T> extends BaseEntity implements INodeEntity<T> {
     parentId: string;
-    parentNode: NodeEntity;
-    subNodes: NodeEntity[];
+    parentNode: T;
+    subNodes: T[];
 }
