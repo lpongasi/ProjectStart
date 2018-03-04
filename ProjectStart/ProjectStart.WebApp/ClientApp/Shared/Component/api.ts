@@ -1,11 +1,16 @@
 ﻿import axios, { AxiosResponse } from 'axios';
+import * as local from 'localforage';
 import { IResponse } from 'shared/AppModels/Response';
 import { UPDATE_FORM } from 'shared/Component/action';
 import { ActionTypes, dispatcher } from 'shared/Component/common';
 
+const getLocalId = (id, url, method) => `${id}.${url}.${method}`;
 
-const appResponse = (actionTypes: ActionTypes, value: AxiosResponse<IResponse<any>>): IResponse<any> => {
+const appResponse = (url: string, method: string, actionTypes: ActionTypes, value: AxiosResponse<IResponse<any>>, isCache: boolean): IResponse<any> => {
     if (value.data.success) {
+        if (isCache) {
+            local.setItem(getLocalId(actionTypes.id, url, method), { ...value.data });
+        }
         dispatcher(actionTypes.success, { ...value.data });
         dispatcher(UPDATE_FORM.success, { ...value.data, formName: actionTypes.id });
     } else {
@@ -15,21 +20,28 @@ const appResponse = (actionTypes: ActionTypes, value: AxiosResponse<IResponse<an
     dispatcher('LOADING_END', {});
     return value.data;
 };
-
 const errorResponse = (actionTypes: ActionTypes, error: any) => {
     const transformError = error && error.response && error.response.data ? error.response.data : error;
-    dispatcher(actionTypes.error, { errors: transformError});
+    dispatcher(actionTypes.error, { errors: transformError });
     dispatcher(UPDATE_FORM.error, { errors: transformError, formName: actionTypes.id });
     dispatcher('LOADING_END', {});
     return error;
 };
 
-export const Api = <T = any>(
+export const Api = async <T = any>(
     method: string,
     url: string,
     requestData: any,
     actionTypes: ActionTypes,
+    isCache: boolean = true,
 ): Promise<IResponse<T>> => {
+    if (isCache) {
+        const localValue = await local.getItem(getLocalId(actionTypes.id, url, method));
+        if (localValue) {
+            dispatcher(actionTypes.success, { ...localValue });
+            dispatcher(UPDATE_FORM.success, { ...localValue, formName: actionTypes.id });
+        }
+    }
     dispatcher('LOADING_START', {});
     dispatcher(actionTypes.started, { ...requestData });
     dispatcher(UPDATE_FORM.started, { ...requestData, formName: actionTypes.id });
@@ -50,6 +62,6 @@ export const Api = <T = any>(
         onDownloadProgress: (progressEvent: ProgressEvent) => {
             dispatcher('DOWNLOAD_PROGRESS', { percent: Math.floor((progressEvent.loaded * 100) / progressEvent.total) });
         },
-    }).then(value => appResponse(actionTypes, value)).catch(() => errorResponse(actionTypes, 'System Error Found! Please contact the system administrator!'));
+    }).then(value => appResponse(url, method, actionTypes, value, isCache)).catch(() => errorResponse(actionTypes, 'System Error Found! Please contact the system administrator!'));
 };
 

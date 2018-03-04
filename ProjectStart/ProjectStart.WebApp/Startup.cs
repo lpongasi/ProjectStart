@@ -28,10 +28,8 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var appConnectionString = Configuration.GetConnectionString("ProjectStart.Application");
-
             services.AddDbContextPool<ApplicationDbContext>((service, options) =>
-                options.UseSqlServer(appConnectionString,
+                options.UseSqlServer(Configuration.GetConnectionString("ProjectStart.Application"),
                 sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
                 ));
 
@@ -41,7 +39,6 @@ namespace ProjectStart.WebApp
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<IDbConnection>(connection => new SqlConnection(appConnectionString));
             Service.Inject(services);
 
 

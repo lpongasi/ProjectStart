@@ -17,15 +17,16 @@ namespace ProjectStart.WebApp.Controllers
 {
     public class PageController : Controller
     {
-        private readonly IDbConnection _dbConnection;
+        private readonly ApplicationDbContext _context;
 
-        public PageController(IDbConnection dbConnection)
+        public PageController(ApplicationDbContext context)
         {
-            _dbConnection = dbConnection;
+            _context = context;
         }
+        
         public IActionResult Index(string url, [FromQuery]bool isJson = false)
         {
-            var page = _dbConnection.QueryFirstOrDefault<PageDataViewModel>(SqlResource.GetPageData, new { parentUrl = url });
+            var page = _context.DbConnection.QueryFirstOrDefault<PageDataViewModel>(SqlResource.GetPageData, new { parentUrl = url });
 
             return isJson
                 ? (IActionResult)Json(new Response<PageDataViewModel>(page))
