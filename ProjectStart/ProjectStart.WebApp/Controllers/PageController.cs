@@ -17,9 +17,9 @@ namespace ProjectStart.WebApp.Controllers
 {
     public class PageController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CmsDbContext _context;
 
-        public PageController(ApplicationDbContext context)
+        public PageController(CmsDbContext context)
         {
             _context = context;
         }

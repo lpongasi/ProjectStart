@@ -179,52 +179,6 @@ namespace ProjectStart.WebApp.Migrations.Application
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ProjectStart.Entity.Cms.PageDataEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime?>("DateModified");
-
-                    b.Property<DateTime?>("DateRemoved");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<bool>("IsRemoved");
-
-                    b.Property<string>("Keywords")
-                        .IsRequired();
-
-                    b.Property<string>("ModifiedBy");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("NameUrl")
-                        .IsRequired();
-
-                    b.Property<string>("ParentId");
-
-                    b.Property<string>("ParentUrl")
-                        .IsRequired();
-
-                    b.Property<string>("RemovedBy");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("PageData","Cms");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -268,13 +222,6 @@ namespace ProjectStart.WebApp.Migrations.Application
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ProjectStart.Entity.Cms.PageDataEntity", b =>
-                {
-                    b.HasOne("ProjectStart.Entity.Cms.PageDataEntity", "ParentNode")
-                        .WithMany("SubNodes")
-                        .HasForeignKey("ParentId");
                 });
 #pragma warning restore 612, 618
         }

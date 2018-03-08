@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectStart.Entity.Cms
 {
-    [Table("PageData", Schema = "Cms")]
+    [Table("PageData")]
     public class PageDataEntity : NodeEntity<PageDataEntity>, IPageContent
     {
         [Required]

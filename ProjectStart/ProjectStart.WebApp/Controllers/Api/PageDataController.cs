@@ -14,9 +14,9 @@ namespace ProjectStart.WebApp.Controllers.Api
     [Route("api/PageData")]
     public class PageDataController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly CmsDbContext _context;
 
-        public PageDataController(ApplicationDbContext context)
+        public PageDataController(CmsDbContext context)
         {
             _context = context;
         }

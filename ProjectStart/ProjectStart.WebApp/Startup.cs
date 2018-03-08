@@ -28,6 +28,11 @@ namespace ProjectStart.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CmsDbContext>((service, options) =>
+                options.UseSqlServer(Configuration.GetConnectionString("ProjectStart.Cms"),
+                sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
+                ));
+
             services.AddDbContextPool<ApplicationDbContext>((service, options) =>
                 options.UseSqlServer(Configuration.GetConnectionString("ProjectStart.Application"),
                 sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
@@ -35,7 +40,7 @@ namespace ProjectStart.WebApp
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders();            
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -84,6 +89,9 @@ namespace ProjectStart.WebApp
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 });
+
+                // Shows UseCors with CorsPolicyBuilder.
+                app.UseCors("AllowSpecificOrigin");
             }
             else
             {
@@ -94,8 +102,6 @@ namespace ProjectStart.WebApp
 
             app.UseAuthentication();
 
-            // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors("AllowSpecificOrigin");
 
             app.UseMvc(routes =>
             {

@@ -5,13 +5,10 @@ using System.Collections.Generic;
 
 namespace ProjectStart.WebApp.Migrations.Application
 {
-    public partial class Application_20180303_183119 : Migration
+    public partial class Application_20180308_182230 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "Cms");
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -49,39 +46,6 @@ namespace ProjectStart.WebApp.Migrations.Application
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PageData",
-                schema: "Cms",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: true),
-                    DateRemoved = table.Column<DateTime>(nullable: true),
-                    Description = table.Column<string>(nullable: false),
-                    FullNameUrl = table.Column<string>(nullable: false),
-                    IsRemoved = table.Column<bool>(nullable: false),
-                    ModifiedBy = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
-                    NameUrl = table.Column<string>(nullable: false),
-                    ParentId = table.Column<string>(nullable: true),
-                    RemovedBy = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: false),
-                    keywords = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PageData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PageData_PageData_ParentId",
-                        column: x => x.ParentId,
-                        principalSchema: "Cms",
-                        principalTable: "PageData",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,12 +192,6 @@ namespace ProjectStart.WebApp.Migrations.Application
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PageData_ParentId",
-                schema: "Cms",
-                table: "PageData",
-                column: "ParentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -252,10 +210,6 @@ namespace ProjectStart.WebApp.Migrations.Application
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "PageData",
-                schema: "Cms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

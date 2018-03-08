@@ -61,7 +61,7 @@ namespace ProjectStart.Entity.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SELECT TOP 1 [Id]  ,[Description]  ,[ParentUrl],[Name] ,[NameUrl] ,[ParentId] ,[Title] ,[Keywords]  FROM [Cms].[PageData] WHERE [ParentUrl] LIKE @ParentUrl.
+        ///   Looks up a localized string similar to SELECT TOP 1 [Id]  ,[Description]  ,[ParentUrl],[Name] ,[NameUrl] ,[ParentId] ,[Title] ,[Keywords]  FROM [PageData] WHERE [ParentUrl] LIKE @ParentUrl.
         /// </summary>
         public static string GetPageData {
             get {
