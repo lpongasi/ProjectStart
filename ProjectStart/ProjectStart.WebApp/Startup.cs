@@ -13,6 +13,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using ProjectStart.WebApp.Extensions;
 using System.Data;
 using System.Data.SqlClient;
+using System;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ProjectStart.WebApp
 {
@@ -38,16 +40,55 @@ namespace ProjectStart.WebApp
                 sqlOption => sqlOption.MigrationsAssembly("ProjectStart.WebApp")
                 ));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 2;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                // Lockout settings
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                // Signin settings
+                options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+                // User settings
+                options.User.RequireUniqueEmail = true;
+
+
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();            
+                .AddDefaultTokenProviders();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("WebAdmins", policy =>
+                policy.RequireRole("Admin", "Administrator", "WebAdmin", "CmsAdmin", "PowerUser", "BackupAdministrator"));
+            });
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.Cookie.Name = "ProjectStart";
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+            //    options.LoginPath = "/Account/Login";
+            //    options.LogoutPath = "/Account/Logout";
+            //    options.AccessDeniedPath = "/Account/AccessDenied";
+            //    // ReturnUrlParameter requires `using Microsoft.AspNetCore.Authentication.Cookies;`
+            //    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            //    options.SlidingExpiration = true;
+            //});
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             Service.Inject(services);
 
 
-            /* these are the default values */
+
+
 
             services
                 .AddMvc()
@@ -60,6 +101,9 @@ namespace ProjectStart.WebApp
                     options.SerializerSettings.NullValueHandling = AppHelper.JsonSerializerSettings.NullValueHandling;
                 }
             );
+
+
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
