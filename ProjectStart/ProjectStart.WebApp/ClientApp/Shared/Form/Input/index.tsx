@@ -1,6 +1,7 @@
 ﻿import * as classnames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { getFormError } from 'shared/Component/common';
 import { updateFormInput } from 'shared/Component/action';
 import * as Uuid from 'uuid/v4';
 
@@ -117,6 +118,7 @@ export default class Input extends React.Component<Props, State> {
             pattern,
             type,
             clientValidate,
+            formName
         } = this.props;
         const {
             generatedId,
@@ -127,7 +129,8 @@ export default class Input extends React.Component<Props, State> {
             : patterns[name] && clientValidate
                 ? patterns[name]
                 : null;
-        const errorMessage = generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
+        const formError = formName ? getFormError(this.props.form[formName])[name] : '';
+        const errorMessage = formError ? formError : generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
         const successMessage = this.format(this.ConvertToString(success, name), label, value);
         return (
             <div className="input-field col s6">

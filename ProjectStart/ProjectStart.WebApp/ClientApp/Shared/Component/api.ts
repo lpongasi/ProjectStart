@@ -62,6 +62,6 @@ export const Api = async <T = any>(
         onDownloadProgress: (progressEvent: ProgressEvent) => {
             dispatcher('DOWNLOAD_PROGRESS', { percent: Math.floor((progressEvent.loaded * 100) / progressEvent.total) });
         },
-    }).then(value => appResponse(url, method, actionTypes, value, isCache)).catch(() => errorResponse(actionTypes, 'System Error Found! Please contact the system administrator!'));
+    }).then(value => appResponse(url, method, actionTypes, value, isCache)).catch(error => errorResponse(actionTypes, error));
 };
 
