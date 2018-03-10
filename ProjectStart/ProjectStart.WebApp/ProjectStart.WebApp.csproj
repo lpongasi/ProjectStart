@@ -100,7 +100,7 @@
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
-      <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Admin\HomeController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\IndexViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
@@ -121,7 +121,7 @@
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>

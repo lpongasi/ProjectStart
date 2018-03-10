@@ -21,7 +21,8 @@
     "paths": {
       "shared/*": [ "./ClientApp/Shared/*" ],
       "component/*": [ "./ClientApp/Component/*" ],
-      "container/*": [ "./ClientApp/Container/*" ]
+      "container/*": [ "./ClientApp/Container/*" ],
+      "admincontainer/*": [ "./ClientApp/AdminContainer/*" ]
     },
     "outDir": "./wwwroot/clientapp"
   },

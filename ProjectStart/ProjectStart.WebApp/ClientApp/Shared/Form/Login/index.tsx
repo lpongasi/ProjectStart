@@ -5,9 +5,9 @@ import { LoginViewModel } from 'shared/AppModels/LoginViewModel';
 import Input from 'shared/Form/Input';
 
 
-@connect(state => ({
-    login: state.form[postLoginActions.id],
-}))
+//@connect(state => ({
+//    login: state.form[postLoginActions.id],
+//}))
 export default class LoginForm extends React.PureComponent<any, any> {
     constructor(props) {
         super(props);

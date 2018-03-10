@@ -2,8 +2,8 @@
 import { ActionTypes, CreateStateAction } from 'shared/Component/common';
 
 
-// State for post: api/Page/?url=${encodeURIComponent(url)}&isJson=${isJson}
-export const postIndexActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.PageController.Index.post');
-// post: api/Page/?url=${encodeURIComponent(url)}&isJson=${isJson}
-export const postIndex = (url: string, isJson: boolean = false): Promise<any> => Api('post', `/api/Page/?url=${encodeURIComponent(url)}&isJson=${isJson}`, null, postIndexActions);
+// State for post: api/Page/
+export const postIndexActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Admin.PageController.Index.post');
+// post: api/Page/
+export const postIndex = (): Promise<any> => Api('post', `/api/Page/`, null, postIndexActions);
 

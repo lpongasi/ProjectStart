@@ -15,6 +15,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc.Razor;
+using ProjectStart.WebApp.Configuration;
 
 namespace ProjectStart.WebApp
 {
@@ -102,7 +104,9 @@ namespace ProjectStart.WebApp
                 }
             );
 
-
+            services.Configure<RazorViewEngineOptions>(options => {
+                options.ViewLocationExpanders.Add(new ViewLocationExpander());
+            });
 
             services.AddCors(options =>
             {
@@ -149,20 +153,35 @@ namespace ProjectStart.WebApp
 
             app.UseMvc(routes =>
             {
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller=Home}/{action=Index}/{id?}"
-                //    );
                 routes.MapRoute(
-                    name: "page",
+                    name: "Page",
                     template: "page/{*url}",
                     defaults: new { controller = "Page", action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "Product",
+                    template: "product/{*url}",
+                    defaults: new { controller = "Product", action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "Category",
+                    template: "category/{*url}",
+                    defaults: new { controller = "Category", action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "defaultArea",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    );
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
                     );
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" }
                     );
             });
+
         }
     }
 }
