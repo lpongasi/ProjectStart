@@ -4,18 +4,16 @@
  */
 export interface IPageDataEntity extends INodeEntity<PageDataEntity> {
     title: string;
-    parentUrl: string;
-    nameUrl: string;
     description: string;
     keywords: string;
+    url: string;
 }
 /**
  * Base view model for ProjectStart.Entity.Cms.PageDataEntity
  */
 export class PageDataEntity extends NodeEntity<PageDataEntity> implements IPageDataEntity {
     title: string;
-    parentUrl: string;
-    nameUrl: string;
     description: string;
     keywords: string;
+    url: string;
 }

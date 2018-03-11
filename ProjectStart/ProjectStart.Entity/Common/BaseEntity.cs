@@ -6,16 +6,10 @@ namespace ProjectStart.Entity.Common
 {
     public abstract class BaseEntity
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), ForeignKey("History")]
         public string Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime DateCreated { get; set; }
-        public string ModifiedBy { get; set; }
-        public DateTime? DateModified { get; set; }
-        public bool IsRemoved { get; set; }
-        public string RemovedBy { get; set; }
-        public DateTime? DateRemoved { get; set; }
+        public HistoryEntity History { get; set; } = new HistoryEntity();
     }
 }

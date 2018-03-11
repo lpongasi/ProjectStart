@@ -19,16 +19,20 @@
      return m.name.Equals(httpMethod) || m.name.Contains(httpMethod) ? m.name : $"{httpMethod}{m.Name}";
     }
     string MethodAction(Method m){
-     return $"{Method(m)}Actions";
+     return $"{Method(m)}ActionId";
     }
     string Property(Parameter p){
        return $"{p.name}{(p.Type.IsNullable && !p.HasDefaultValue?"?":string.Empty)}: {p.Type}{(p.HasDefaultValue?$" = {p.DefaultValue}":string.Empty)}";
     }
+    string CustomParameters(Method param){
+      var parameters = new List<string>();
+      parameters.AddRange(param.Parameters.Select(s=>Property(s)));
+      return string.Join(", ",parameters);
+    }
     string Imports(Class c){
       List<string> neededImports = new List<string>();
       neededImports.AddRange(new []{
-      "import { Api } from 'shared/Component/api';",
-      "import { ActionTypes, CreateStateAction } from 'shared/Component/common';"
+      "import { Api } from 'shared/Component/api';"
       });
      neededImports.AddRange(c.Properties
 	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
@@ -59,7 +63,7 @@
 }$Classes(*Controller)[$Imports
 $Methods[
 // State for $HttpMethod: $Url
-export const $MethodAction: ActionTypes = CreateStateAction('$FullName.$HttpMethod');
 // $HttpMethod: $Url
-export const $Method = ($Parameters[$Property][, ]): Promise<$ReturnType> => Api('$HttpMethod', `/$Url`, $RequestData, $MethodAction);]]
+export const $MethodAction = '$FullName.$HttpMethod';
+export const $Method = ($CustomParameters): Promise<$ReturnType> => Api(`$MethodAction`, '$HttpMethod', `/$Url`, $RequestData);]]
 

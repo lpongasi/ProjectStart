@@ -22,6 +22,7 @@ interface Props {
     success?: any;
     type?: string;
     clientValidate?: boolean;
+    classNames?: classnames;
 }
 
 type State = {
@@ -118,7 +119,8 @@ export default class Input extends React.Component<Props, State> {
             pattern,
             type,
             clientValidate,
-            formName
+            formName,
+            classNames
         } = this.props;
         const {
             generatedId,
@@ -132,28 +134,43 @@ export default class Input extends React.Component<Props, State> {
         const formError = formName ? getFormError(this.props.form[formName])[name] : '';
         const errorMessage = formError ? formError : generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
         const successMessage = this.format(this.ConvertToString(success, name), label, value);
-        return (
-            <div className="input-field col s6">
-                <input
-                    id={generatedId}
-                    name={name}
-                    value={value}
-                    type={type ? type : 'text'}
-                    className={classnames('validate', {
-                        invalid: errorMessage,
-                        valid: successMessage,
-                    })}
-                    required={required}
-                    pattern={generatedPattern ? generatedPattern.value : null}
-                    onChange={e => this.onChange(e)}
-                    onBlur={e => this.onBlur(e)}
-                />
-                <label htmlFor={generatedId}>{label}</label>
-                <span className="helper-text"
-                    data-error={errorMessage}
-                    data-success={successMessage}>{helperText}</span>
-                {children}
-            </div>
-        );
+        return type === 'hidden'
+            ? (<input
+                id={generatedId}
+                name={name}
+                value={value}
+                type={type ? type : 'text'}
+                className={classnames('validate', {
+                    invalid: errorMessage,
+                    valid: successMessage,
+                })}
+                required={required}
+                pattern={generatedPattern ? generatedPattern.value : null}
+                onChange={e => this.onChange(e)}
+                onBlur={e => this.onBlur(e)}
+            />)
+            : (
+                <div className={classnames("input-field col", { "s12": !classNames }, classNames)}>
+                    <input
+                        id={generatedId}
+                        name={name}
+                        value={value}
+                        type={type ? type : 'text'}
+                        className={classnames('validate', {
+                            invalid: errorMessage,
+                            valid: successMessage,
+                        })}
+                        required={required}
+                        pattern={generatedPattern ? generatedPattern.value : null}
+                        onChange={e => this.onChange(e)}
+                        onBlur={e => this.onBlur(e)}
+                    />
+                    <label htmlFor={generatedId}>{label}</label>
+                    <span className="helper-text"
+                        data-error={errorMessage}
+                        data-success={successMessage}>{helperText}</span>
+                    {children}
+                </div>
+            );
     }
 }

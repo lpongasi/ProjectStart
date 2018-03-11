@@ -2,70 +2,76 @@
 import { connect } from 'react-redux';
 import Modal from 'shared/modal';
 import Input from 'shared/Form/Input';
-import { getFormData } from 'shared/Component/common';
-import { postPageData, postPageDataActions } from 'shared/AppModels/PageDataController';
+import { Form } from 'shared/Form/Common';
+import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataController';
+
 
 class CreatePage extends React.Component {
+    public form: Form;
     constructor(props) {
         super(props);
+        this.form =
+            Form
+                .createFrom(postPageDataActionId)
+                .addInputs([
+                    {
+                        name: 'name',
+                        label: 'Name',
+                    },
+                    {
+                        name: 'title',
+                        label: 'Title',
+                    },
+                    {
+                        name: 'description',
+                        label: 'Description',
+                    },
+                    {
+                        name: 'keywords',
+                        label: 'Keywords',
+                    },
+                    {
+                        type: 'hidden',
+                        name: 'parentId',
+                    },
+                ]);
         this.formSubmit = this.formSubmit.bind(this);
+
     }
     public formSubmit(e) {
         e.preventDefault();
-        postPageData(this.props.createPageForm);
+        postPageData(this.props.createPageForm).then(response => {
+            if (response.success) {
+                var elem = document.getElementById('create-page-modal');
+                var instance = M.Modal.getInstance(elem);
+                instance.close();
+            }
+        });
     }
     public render() {
+        const form = this.form;
         return (
-            <form method="post" onSubmit={this.formSubmit}>
+            <form method="post" id={form.id} onSubmit={this.formSubmit}>
                 <Modal
                     id="create-page-modal"
                     header="Create - New Page"
                     footerCloseText="Cancel"
                     options={{ dismissible: false }}
-                    footer={(<button type="submit" className="btn waves-effect waves-green">Submit</button>)}
+                    footer={(<button type="submit" className="btn waves-effect waves-green">Create</button>)}
                 >
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Name"
-                        name="name"
-                        type="text"
-                        clientValidate={false}
-                    />
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Title"
-                        name="title"
-                        type="text"
-                        clientValidate={false}
-                    />
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Description"
-                        name="description"
-                        type="text"
-                        clientValidate={false}
-                    />
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Keywords"
-                        name="keywords"
-                        type="text"
-                        clientValidate={false}
-                    />
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Name Url"
-                        name="nameUrl"
-                        type="text"
-                        clientValidate={false}
-                    />
-                    <Input
-                        formName={postPageDataActions.id}
-                        label="Parent Url"
-                        name="parentUrl"
-                        type="text"
-                        clientValidate={false}
-                    />
+                    <div className="row">
+                        {form.inputs.map(item => (
+                            <Input
+                                key={item.id}
+                                formName={form.id}
+                                label={item.label}
+                                name={item.name}
+                                type={item.type}
+                                defaultValue={item.value}
+                                classNames={item.classNames}
+                            />
+                        ))}
+                    </div>
                 </Modal>
             </form>
         );
@@ -73,5 +79,5 @@ class CreatePage extends React.Component {
 }
 
 export default connect(state => ({
-    createPageForm: state.form[postPageDataActions.id],
+    createPageForm: state.form[postPageDataActionId],
 }))(CreatePage);

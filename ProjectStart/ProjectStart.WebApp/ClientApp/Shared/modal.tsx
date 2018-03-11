@@ -30,9 +30,8 @@ export default class Modal extends React.Component<Prop, Prop> {
         const { children, header, footer, footerCloseText } = this.props;
         return (
             <div id={this.state.id} className="modal modal-fixed-footer">
+                {header && (<h5 className="modal-header">{header}</h5>)}
                 <div className="modal-content">
-                    {header && (<h4>{header}</h4>)}
-                    <hr /><br />
                     {children}
                 </div>
                 {(footer || footerCloseText) && (<div className="modal-footer">

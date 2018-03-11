@@ -2,49 +2,46 @@
 import * as local from 'localforage';
 import { IResponse } from 'shared/AppModels/Response';
 import { UPDATE_FORM } from 'shared/Component/action';
-import { ActionTypes, dispatcher } from 'shared/Component/common';
+import { dispatcher } from 'shared/Component/common';
 
 const getLocalId = (id, url, method) => `${id}.${url}.${method}`;
 
-const appResponse = (url: string, method: string, actionTypes: ActionTypes, value: AxiosResponse<IResponse<any>>, isCache: boolean): IResponse<any> => {
+const appResponse = (url: string, method: string, id: string, value: AxiosResponse<IResponse<any>>, isCache: boolean): IResponse<any> => {
     if (value.data.success) {
         if (isCache) {
-            local.setItem(getLocalId(actionTypes.id, url, method), { ...value.data });
+            local.setItem(getLocalId(id, url, method), { ...value.data });
         }
-        dispatcher(actionTypes.success, { ...value.data });
-        dispatcher(UPDATE_FORM.success, { ...value.data, formName: actionTypes.id });
+        dispatcher(UPDATE_FORM.success, { ...value.data, formName: id });
     } else {
-        dispatcher(actionTypes.error, { ...value });
-        dispatcher(UPDATE_FORM.error, { ...value, formName: actionTypes.id });
+        dispatcher(UPDATE_FORM.error, { ...value, formName: id });
     }
     dispatcher('LOADING_END', {});
     return value.data;
 };
-const errorResponse = (actionTypes: ActionTypes, error: any) => {
+const errorResponse = (id: string, error: any) => {
     const transformError = error && error.response && error.response.data ? error.response.data : error;
-    dispatcher(actionTypes.error, { errors: transformError });
-    dispatcher(UPDATE_FORM.error, { errors: transformError, formName: actionTypes.id });
+    dispatcher(UPDATE_FORM.error, { ...transformError, formName: id });
     dispatcher('LOADING_END', {});
     return error;
 };
 
 export const Api = async <T = any>(
+    id: string,
     method: string,
     url: string,
     requestData: any,
-    actionTypes: ActionTypes,
     isCache: boolean = true,
 ): Promise<IResponse<T>> => {
+    dispatcher('LOADING_START', {});
     if (isCache) {
-        const localValue = await local.getItem(getLocalId(actionTypes.id, url, method));
+        const localValue = await local.getItem(getLocalId(id, url, method));
         if (localValue) {
-            dispatcher(actionTypes.success, { ...localValue });
-            dispatcher(UPDATE_FORM.success, { ...localValue, formName: actionTypes.id });
+            dispatcher(UPDATE_FORM.init, { ...localValue, ...requestData, formName: id });
         }
     }
-    dispatcher('LOADING_START', {});
-    dispatcher(actionTypes.started, { ...requestData });
-    dispatcher(UPDATE_FORM.started, { ...requestData, formName: actionTypes.id });
+    
+    dispatcher(UPDATE_FORM.started, { ...requestData, formName: id });
+
     const transformRequestData = { ...requestData };
     delete transformRequestData.payload;
     delete transformRequestData.status;
@@ -62,6 +59,6 @@ export const Api = async <T = any>(
         onDownloadProgress: (progressEvent: ProgressEvent) => {
             dispatcher('DOWNLOAD_PROGRESS', { percent: Math.floor((progressEvent.loaded * 100) / progressEvent.total) });
         },
-    }).then(value => appResponse(url, method, actionTypes, value, isCache)).catch(error => errorResponse(actionTypes, error));
+    }).then(value => appResponse(url, method, id, value, isCache)).catch(error => errorResponse(id, error));
 };
 

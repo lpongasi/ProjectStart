@@ -61,7 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\Library\Materialize\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
@@ -99,8 +98,11 @@
     <None Update="ClientApp\Shared\AppModels\GenerateRecoveryCodesViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\HistoryEntity.ts">
+      <CustomToolNamespace>..\ProjectStart.Entity\Common\HistoryEntity.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
-      <CustomToolNamespace>Controllers\Admin\HomeController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\IndexViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
@@ -121,7 +123,7 @@
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>

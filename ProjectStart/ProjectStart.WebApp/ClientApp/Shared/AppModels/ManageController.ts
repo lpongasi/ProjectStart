@@ -4,83 +4,82 @@ import { IndexViewModel } from 'shared/AppModels/IndexViewModel';
 import { RemoveLoginViewModel } from 'shared/AppModels/RemoveLoginViewModel';
 import { SetPasswordViewModel } from 'shared/AppModels/SetPasswordViewModel';
 import { Api } from 'shared/Component/api';
-import { ActionTypes, CreateStateAction } from 'shared/Component/common';
 
 
 // State for get: Manage/index?namessss=${encodeURIComponent(namessss)}
-export const getIndexActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.Index.get');
 // get: Manage/index?namessss=${encodeURIComponent(namessss)}
-export const getIndex = (namessss: string): Promise<any> => Api('get', `/Manage/index?namessss=${encodeURIComponent(namessss)}`, null, getIndexActions);
+export const getIndexActionId = 'ProjectStart.WebApp.Controllers.ManageController.Index.get';
+export const getIndex = (namessss: string): Promise<any> => Api(`getIndexActionId`, 'get', `/Manage/index?namessss=${encodeURIComponent(namessss)}`, null);
 // State for post: Manage/index
-export const postIndexActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.Index.post');
 // post: Manage/index
-export const postIndex = (model: IndexViewModel): Promise<any> => Api('post', `/Manage/index`, model, postIndexActions);
+export const postIndexActionId = 'ProjectStart.WebApp.Controllers.ManageController.Index.post';
+export const postIndex = (model: IndexViewModel): Promise<any> => Api(`postIndexActionId`, 'post', `/Manage/index`, model);
 // State for post: Manage/sendVerificationEmail
-export const postSendVerificationEmailActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.SendVerificationEmail.post');
 // post: Manage/sendVerificationEmail
-export const postSendVerificationEmail = (model: IndexViewModel): Promise<any> => Api('post', `/Manage/sendVerificationEmail`, model, postSendVerificationEmailActions);
+export const postSendVerificationEmailActionId = 'ProjectStart.WebApp.Controllers.ManageController.SendVerificationEmail.post';
+export const postSendVerificationEmail = (model: IndexViewModel): Promise<any> => Api(`postSendVerificationEmailActionId`, 'post', `/Manage/sendVerificationEmail`, model);
 // State for get: Manage/changePassword
-export const getChangePasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.ChangePassword.get');
 // get: Manage/changePassword
-export const getChangePassword = (): Promise<any> => Api('get', `/Manage/changePassword`, null, getChangePasswordActions);
+export const getChangePasswordActionId = 'ProjectStart.WebApp.Controllers.ManageController.ChangePassword.get';
+export const getChangePassword = (): Promise<any> => Api(`getChangePasswordActionId`, 'get', `/Manage/changePassword`, null);
 // State for post: Manage/changePassword
-export const postChangePasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.ChangePassword.post');
 // post: Manage/changePassword
-export const postChangePassword = (model: ChangePasswordViewModel): Promise<any> => Api('post', `/Manage/changePassword`, model, postChangePasswordActions);
+export const postChangePasswordActionId = 'ProjectStart.WebApp.Controllers.ManageController.ChangePassword.post';
+export const postChangePassword = (model: ChangePasswordViewModel): Promise<any> => Api(`postChangePasswordActionId`, 'post', `/Manage/changePassword`, model);
 // State for get: Manage/setPassword
-export const getSetPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.SetPassword.get');
 // get: Manage/setPassword
-export const getSetPassword = (): Promise<any> => Api('get', `/Manage/setPassword`, null, getSetPasswordActions);
+export const getSetPasswordActionId = 'ProjectStart.WebApp.Controllers.ManageController.SetPassword.get';
+export const getSetPassword = (): Promise<any> => Api(`getSetPasswordActionId`, 'get', `/Manage/setPassword`, null);
 // State for post: Manage/setPassword
-export const postSetPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.SetPassword.post');
 // post: Manage/setPassword
-export const postSetPassword = (model: SetPasswordViewModel): Promise<any> => Api('post', `/Manage/setPassword`, model, postSetPasswordActions);
+export const postSetPasswordActionId = 'ProjectStart.WebApp.Controllers.ManageController.SetPassword.post';
+export const postSetPassword = (model: SetPasswordViewModel): Promise<any> => Api(`postSetPasswordActionId`, 'post', `/Manage/setPassword`, model);
 // State for get: Manage/externalLogins
-export const getExternalLoginsActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.ExternalLogins.get');
 // get: Manage/externalLogins
-export const getExternalLogins = (): Promise<any> => Api('get', `/Manage/externalLogins`, null, getExternalLoginsActions);
+export const getExternalLoginsActionId = 'ProjectStart.WebApp.Controllers.ManageController.ExternalLogins.get';
+export const getExternalLogins = (): Promise<any> => Api(`getExternalLoginsActionId`, 'get', `/Manage/externalLogins`, null);
 // State for post: Manage/linkLogin?provider=${encodeURIComponent(provider)}
-export const postLinkLoginActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.LinkLogin.post');
 // post: Manage/linkLogin?provider=${encodeURIComponent(provider)}
-export const postLinkLogin = (provider: string): Promise<any> => Api('post', `/Manage/linkLogin?provider=${encodeURIComponent(provider)}`, null, postLinkLoginActions);
+export const postLinkLoginActionId = 'ProjectStart.WebApp.Controllers.ManageController.LinkLogin.post';
+export const postLinkLogin = (provider: string): Promise<any> => Api(`postLinkLoginActionId`, 'post', `/Manage/linkLogin?provider=${encodeURIComponent(provider)}`, null);
 // State for get: Manage/linkLoginCallback
-export const getLinkLoginCallbackActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.LinkLoginCallback.get');
 // get: Manage/linkLoginCallback
-export const getLinkLoginCallback = (): Promise<any> => Api('get', `/Manage/linkLoginCallback`, null, getLinkLoginCallbackActions);
+export const getLinkLoginCallbackActionId = 'ProjectStart.WebApp.Controllers.ManageController.LinkLoginCallback.get';
+export const getLinkLoginCallback = (): Promise<any> => Api(`getLinkLoginCallbackActionId`, 'get', `/Manage/linkLoginCallback`, null);
 // State for post: Manage/removeLogin
-export const postRemoveLoginActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.RemoveLogin.post');
 // post: Manage/removeLogin
-export const postRemoveLogin = (model: RemoveLoginViewModel): Promise<any> => Api('post', `/Manage/removeLogin`, model, postRemoveLoginActions);
+export const postRemoveLoginActionId = 'ProjectStart.WebApp.Controllers.ManageController.RemoveLogin.post';
+export const postRemoveLogin = (model: RemoveLoginViewModel): Promise<any> => Api(`postRemoveLoginActionId`, 'post', `/Manage/removeLogin`, model);
 // State for get: Manage/twoFactorAuthentication
-export const getTwoFactorAuthenticationActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.TwoFactorAuthentication.get');
 // get: Manage/twoFactorAuthentication
-export const getTwoFactorAuthentication = (): Promise<any> => Api('get', `/Manage/twoFactorAuthentication`, null, getTwoFactorAuthenticationActions);
+export const getTwoFactorAuthenticationActionId = 'ProjectStart.WebApp.Controllers.ManageController.TwoFactorAuthentication.get';
+export const getTwoFactorAuthentication = (): Promise<any> => Api(`getTwoFactorAuthenticationActionId`, 'get', `/Manage/twoFactorAuthentication`, null);
 // State for get: Manage/disable2faWarning
-export const getDisable2faWarningActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.Disable2faWarning.get');
 // get: Manage/disable2faWarning
-export const getDisable2faWarning = (): Promise<any> => Api('get', `/Manage/disable2faWarning`, null, getDisable2faWarningActions);
+export const getDisable2faWarningActionId = 'ProjectStart.WebApp.Controllers.ManageController.Disable2faWarning.get';
+export const getDisable2faWarning = (): Promise<any> => Api(`getDisable2faWarningActionId`, 'get', `/Manage/disable2faWarning`, null);
 // State for post: Manage/disable2fa
-export const postDisable2faActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.Disable2fa.post');
 // post: Manage/disable2fa
-export const postDisable2fa = (): Promise<any> => Api('post', `/Manage/disable2fa`, null, postDisable2faActions);
+export const postDisable2faActionId = 'ProjectStart.WebApp.Controllers.ManageController.Disable2fa.post';
+export const postDisable2fa = (): Promise<any> => Api(`postDisable2faActionId`, 'post', `/Manage/disable2fa`, null);
 // State for get: Manage/enableAuthenticator
-export const getEnableAuthenticatorActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.EnableAuthenticator.get');
 // get: Manage/enableAuthenticator
-export const getEnableAuthenticator = (): Promise<any> => Api('get', `/Manage/enableAuthenticator`, null, getEnableAuthenticatorActions);
+export const getEnableAuthenticatorActionId = 'ProjectStart.WebApp.Controllers.ManageController.EnableAuthenticator.get';
+export const getEnableAuthenticator = (): Promise<any> => Api(`getEnableAuthenticatorActionId`, 'get', `/Manage/enableAuthenticator`, null);
 // State for post: Manage/enableAuthenticator
-export const postEnableAuthenticatorActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.EnableAuthenticator.post');
 // post: Manage/enableAuthenticator
-export const postEnableAuthenticator = (model: EnableAuthenticatorViewModel): Promise<any> => Api('post', `/Manage/enableAuthenticator`, model, postEnableAuthenticatorActions);
+export const postEnableAuthenticatorActionId = 'ProjectStart.WebApp.Controllers.ManageController.EnableAuthenticator.post';
+export const postEnableAuthenticator = (model: EnableAuthenticatorViewModel): Promise<any> => Api(`postEnableAuthenticatorActionId`, 'post', `/Manage/enableAuthenticator`, model);
 // State for get: Manage/resetAuthenticatorWarning
-export const getResetAuthenticatorWarningActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.ResetAuthenticatorWarning.get');
 // get: Manage/resetAuthenticatorWarning
-export const getResetAuthenticatorWarning = (): Promise<any> => Api('get', `/Manage/resetAuthenticatorWarning`, null, getResetAuthenticatorWarningActions);
+export const getResetAuthenticatorWarningActionId = 'ProjectStart.WebApp.Controllers.ManageController.ResetAuthenticatorWarning.get';
+export const getResetAuthenticatorWarning = (): Promise<any> => Api(`getResetAuthenticatorWarningActionId`, 'get', `/Manage/resetAuthenticatorWarning`, null);
 // State for post: Manage/resetAuthenticator
-export const postResetAuthenticatorActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.ResetAuthenticator.post');
 // post: Manage/resetAuthenticator
-export const postResetAuthenticator = (): Promise<any> => Api('post', `/Manage/resetAuthenticator`, null, postResetAuthenticatorActions);
+export const postResetAuthenticatorActionId = 'ProjectStart.WebApp.Controllers.ManageController.ResetAuthenticator.post';
+export const postResetAuthenticator = (): Promise<any> => Api(`postResetAuthenticatorActionId`, 'post', `/Manage/resetAuthenticator`, null);
 // State for get: Manage/generateRecoveryCodes
-export const getGenerateRecoveryCodesActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.ManageController.GenerateRecoveryCodes.get');
 // get: Manage/generateRecoveryCodes
-export const getGenerateRecoveryCodes = (): Promise<any> => Api('get', `/Manage/generateRecoveryCodes`, null, getGenerateRecoveryCodesActions);
+export const getGenerateRecoveryCodesActionId = 'ProjectStart.WebApp.Controllers.ManageController.GenerateRecoveryCodes.get';
+export const getGenerateRecoveryCodes = (): Promise<any> => Api(`getGenerateRecoveryCodesActionId`, 'get', `/Manage/generateRecoveryCodes`, null);
 

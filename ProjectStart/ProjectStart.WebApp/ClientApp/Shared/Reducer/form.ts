@@ -33,6 +33,18 @@ export default function (state = {}, action) {
                 },
             };
             break;
+        case UPDATE_FORM.init:
+            const initPayload = { ...action.payload };
+            delete initPayload.formName;
+            newState = {
+                ...state,
+                [action.payload.formName]: {
+                     ...state[action.payload.formName],
+                    payload: initPayload,
+                    status: StateLifeCycle.Init,
+                },
+            };
+            break;
         case UPDATE_FORM.success:
             const payload = { ...action.payload };
             delete payload.formName;

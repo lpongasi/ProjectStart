@@ -1,0 +1,17 @@
+﻿.page-list {
+    .row {
+        margin-bottom: 0px;
+
+        a {
+            padding: 5px 5px;
+
+            &:hover {
+                background-color: $secondary-color;
+            }
+        }
+    }
+
+    .page-list {
+        margin-left: 15px;
+    }
+}

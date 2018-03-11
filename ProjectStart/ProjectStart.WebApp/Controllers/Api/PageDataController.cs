@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjectStart.Entity;
 using ProjectStart.Entity.Cms;
+using System.Net;
+using ProjectStart.Common;
 
 namespace ProjectStart.WebApp.Controllers.Api
 {
     [Produces("application/json")]
     [Route("api/PageData")]
-    public class PageDataController : Controller
+    public class PageDataController : BaseController
     {
         private readonly CmsDbContext _context;
 
@@ -26,6 +28,17 @@ namespace ProjectStart.WebApp.Controllers.Api
         public IEnumerable<PageDataEntity> GetPageData()
         {
             return _context.PageData;
+        }
+
+
+        // GET: api/PageData
+        [HttpGet]
+        [Route("GetPages")]
+        public Response<List<PageDataEntity>> GetPages(string id)
+        {
+            var pages = _context.PageData.Where(w => w.ParentId == id).ToList();
+
+            return Success(pages);
         }
 
         // GET: api/PageData/5
@@ -84,17 +97,21 @@ namespace ProjectStart.WebApp.Controllers.Api
 
         // POST: api/PageData
         [HttpPost]
-        public async Task<IActionResult> PostPageData([FromBody] PageDataEntity pageData)
+        public async Task<Response<PageDataEntity>> PostPageData([FromBody] PageDataEntity pageData)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return ErrorState(pageData, errors: ModelState);
             }
+            var parent = await _context.PageData.FirstOrDefaultAsync(w => !string.IsNullOrEmpty(w.ParentId) && w.ParentId == pageData.ParentId);
 
+            var urlEncoded = WebUtility.UrlEncode(pageData.Name);
+            pageData.Url = parent != null ? $"{parent.Url}/{urlEncoded}" : $"/{urlEncoded}";
             _context.PageData.Add(pageData);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPageData", new { id = pageData.Id }, pageData);
+            return Success(pageData, null);
         }
 
         // DELETE: api/PageData/5

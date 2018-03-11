@@ -7,91 +7,90 @@ import { RegisterViewModel } from 'shared/AppModels/RegisterViewModel';
 import { ResetPasswordViewModel } from 'shared/AppModels/ResetPasswordViewModel';
 import { Response } from 'shared/AppModels/Response';
 import { Api } from 'shared/Component/api';
-import { ActionTypes, CreateStateAction } from 'shared/Component/common';
 
 
 // State for get: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Login.get');
 // get: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-export const getLogin = (returnUrl: string = null): Promise<any> => Api('get', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, null, getLoginActions);
+export const getLoginActionId = 'ProjectStart.WebApp.Controllers.AccountController.Login.get';
+export const getLogin = (returnUrl: string = null): Promise<any> => Api(`getLoginActionId`, 'get', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, null);
 // State for post: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-export const postLoginActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Login.post');
 // post: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-export const postLogin = (model: LoginViewModel, returnUrl: string = null): Promise<Response<string>> => Api('post', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, model, postLoginActions);
+export const postLoginActionId = 'ProjectStart.WebApp.Controllers.AccountController.Login.post';
+export const postLogin = (model: LoginViewModel, returnUrl: string = null): Promise<Response<string>> => Api(`postLoginActionId`, 'post', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, model);
 // State for get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginWith2faActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.LoginWith2fa.get');
 // get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginWith2fa = (rememberMe: boolean, returnUrl: string = null): Promise<any> => Api('get', `/Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}`, null, getLoginWith2faActions);
+export const getLoginWith2faActionId = 'ProjectStart.WebApp.Controllers.AccountController.LoginWith2fa.get';
+export const getLoginWith2fa = (rememberMe: boolean, returnUrl: string = null): Promise<any> => Api(`getLoginWith2faActionId`, 'get', `/Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}`, null);
 // State for post: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
-export const postLoginWith2faActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.LoginWith2fa.post');
 // post: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
-export const postLoginWith2fa = (model: LoginWith2faViewModel, rememberMe: boolean, returnUrl: string = null): Promise<any> => Api('post', `/Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}`, model, postLoginWith2faActions);
+export const postLoginWith2faActionId = 'ProjectStart.WebApp.Controllers.AccountController.LoginWith2fa.post';
+export const postLoginWith2fa = (model: LoginWith2faViewModel, rememberMe: boolean, returnUrl: string = null): Promise<any> => Api(`postLoginWith2faActionId`, 'post', `/Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}`, model);
 // State for get: Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginWithRecoveryCodeActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.LoginWithRecoveryCode.get');
 // get: Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginWithRecoveryCode = (returnUrl: string = null): Promise<any> => Api('get', `/Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}`, null, getLoginWithRecoveryCodeActions);
+export const getLoginWithRecoveryCodeActionId = 'ProjectStart.WebApp.Controllers.AccountController.LoginWithRecoveryCode.get';
+export const getLoginWithRecoveryCode = (returnUrl: string = null): Promise<any> => Api(`getLoginWithRecoveryCodeActionId`, 'get', `/Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}`, null);
 // State for post: Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}
-export const postLoginWithRecoveryCodeActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.LoginWithRecoveryCode.post');
 // post: Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}
-export const postLoginWithRecoveryCode = (model: LoginWithRecoveryCodeViewModel, returnUrl: string = null): Promise<any> => Api('post', `/Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}`, model, postLoginWithRecoveryCodeActions);
+export const postLoginWithRecoveryCodeActionId = 'ProjectStart.WebApp.Controllers.AccountController.LoginWithRecoveryCode.post';
+export const postLoginWithRecoveryCode = (model: LoginWithRecoveryCodeViewModel, returnUrl: string = null): Promise<any> => Api(`postLoginWithRecoveryCodeActionId`, 'post', `/Account/loginWithRecoveryCode?returnUrl=${encodeURIComponent(returnUrl)}`, model);
 // State for get: Account/lockout
-export const getLockoutActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Lockout.get');
 // get: Account/lockout
-export const getLockout = (): Promise<any> => Api('get', `/Account/lockout`, null, getLockoutActions);
+export const getLockoutActionId = 'ProjectStart.WebApp.Controllers.AccountController.Lockout.get';
+export const getLockout = (): Promise<any> => Api(`getLockoutActionId`, 'get', `/Account/lockout`, null);
 // State for get: Account/register?returnUrl=${encodeURIComponent(returnUrl)}
-export const getRegisterActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Register.get');
 // get: Account/register?returnUrl=${encodeURIComponent(returnUrl)}
-export const getRegister = (returnUrl: string = null): Promise<any> => Api('get', `/Account/register?returnUrl=${encodeURIComponent(returnUrl)}`, null, getRegisterActions);
+export const getRegisterActionId = 'ProjectStart.WebApp.Controllers.AccountController.Register.get';
+export const getRegister = (returnUrl: string = null): Promise<any> => Api(`getRegisterActionId`, 'get', `/Account/register?returnUrl=${encodeURIComponent(returnUrl)}`, null);
 // State for post: Account/register?returnUrl=${encodeURIComponent(returnUrl)}
-export const postRegisterActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Register.post');
 // post: Account/register?returnUrl=${encodeURIComponent(returnUrl)}
-export const postRegister = (model: RegisterViewModel, returnUrl: string = null): Promise<any> => Api('post', `/Account/register?returnUrl=${encodeURIComponent(returnUrl)}`, model, postRegisterActions);
+export const postRegisterActionId = 'ProjectStart.WebApp.Controllers.AccountController.Register.post';
+export const postRegister = (model: RegisterViewModel, returnUrl: string = null): Promise<any> => Api(`postRegisterActionId`, 'post', `/Account/register?returnUrl=${encodeURIComponent(returnUrl)}`, model);
 // State for post: Account/logout
-export const postLogoutActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.Logout.post');
 // post: Account/logout
-export const postLogout = (): Promise<any> => Api('post', `/Account/logout`, null, postLogoutActions);
+export const postLogoutActionId = 'ProjectStart.WebApp.Controllers.AccountController.Logout.post';
+export const postLogout = (): Promise<any> => Api(`postLogoutActionId`, 'post', `/Account/logout`, null);
 // State for post: Account/externalLogin?provider=${encodeURIComponent(provider)}&returnUrl=${encodeURIComponent(returnUrl)}
-export const postExternalLoginActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ExternalLogin.post');
 // post: Account/externalLogin?provider=${encodeURIComponent(provider)}&returnUrl=${encodeURIComponent(returnUrl)}
-export const postExternalLogin = (provider: string, returnUrl: string = null): Promise<any> => Api('post', `/Account/externalLogin?provider=${encodeURIComponent(provider)}&returnUrl=${encodeURIComponent(returnUrl)}`, null, postExternalLoginActions);
+export const postExternalLoginActionId = 'ProjectStart.WebApp.Controllers.AccountController.ExternalLogin.post';
+export const postExternalLogin = (provider: string, returnUrl: string = null): Promise<any> => Api(`postExternalLoginActionId`, 'post', `/Account/externalLogin?provider=${encodeURIComponent(provider)}&returnUrl=${encodeURIComponent(returnUrl)}`, null);
 // State for get: Account/externalLoginCallback?returnUrl=${encodeURIComponent(returnUrl)}&remoteError=${encodeURIComponent(remoteError)}
-export const getExternalLoginCallbackActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ExternalLoginCallback.get');
 // get: Account/externalLoginCallback?returnUrl=${encodeURIComponent(returnUrl)}&remoteError=${encodeURIComponent(remoteError)}
-export const getExternalLoginCallback = (returnUrl: string = null, remoteError: string = null): Promise<any> => Api('get', `/Account/externalLoginCallback?returnUrl=${encodeURIComponent(returnUrl)}&remoteError=${encodeURIComponent(remoteError)}`, null, getExternalLoginCallbackActions);
+export const getExternalLoginCallbackActionId = 'ProjectStart.WebApp.Controllers.AccountController.ExternalLoginCallback.get';
+export const getExternalLoginCallback = (returnUrl: string = null, remoteError: string = null): Promise<any> => Api(`getExternalLoginCallbackActionId`, 'get', `/Account/externalLoginCallback?returnUrl=${encodeURIComponent(returnUrl)}&remoteError=${encodeURIComponent(remoteError)}`, null);
 // State for post: Account/externalLoginConfirmation?returnUrl=${encodeURIComponent(returnUrl)}
-export const postExternalLoginConfirmationActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ExternalLoginConfirmation.post');
 // post: Account/externalLoginConfirmation?returnUrl=${encodeURIComponent(returnUrl)}
-export const postExternalLoginConfirmation = (model: ExternalLoginViewModel, returnUrl: string = null): Promise<any> => Api('post', `/Account/externalLoginConfirmation?returnUrl=${encodeURIComponent(returnUrl)}`, model, postExternalLoginConfirmationActions);
+export const postExternalLoginConfirmationActionId = 'ProjectStart.WebApp.Controllers.AccountController.ExternalLoginConfirmation.post';
+export const postExternalLoginConfirmation = (model: ExternalLoginViewModel, returnUrl: string = null): Promise<any> => Api(`postExternalLoginConfirmationActionId`, 'post', `/Account/externalLoginConfirmation?returnUrl=${encodeURIComponent(returnUrl)}`, model);
 // State for get: Account/confirmEmail?userId=${encodeURIComponent(userId)}&code=${encodeURIComponent(code)}
-export const getConfirmEmailActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ConfirmEmail.get');
 // get: Account/confirmEmail?userId=${encodeURIComponent(userId)}&code=${encodeURIComponent(code)}
-export const getConfirmEmail = (userId: string, code: string): Promise<any> => Api('get', `/Account/confirmEmail?userId=${encodeURIComponent(userId)}&code=${encodeURIComponent(code)}`, null, getConfirmEmailActions);
+export const getConfirmEmailActionId = 'ProjectStart.WebApp.Controllers.AccountController.ConfirmEmail.get';
+export const getConfirmEmail = (userId: string, code: string): Promise<any> => Api(`getConfirmEmailActionId`, 'get', `/Account/confirmEmail?userId=${encodeURIComponent(userId)}&code=${encodeURIComponent(code)}`, null);
 // State for get: Account/forgotPassword
-export const getForgotPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ForgotPassword.get');
 // get: Account/forgotPassword
-export const getForgotPassword = (): Promise<any> => Api('get', `/Account/forgotPassword`, null, getForgotPasswordActions);
+export const getForgotPasswordActionId = 'ProjectStart.WebApp.Controllers.AccountController.ForgotPassword.get';
+export const getForgotPassword = (): Promise<any> => Api(`getForgotPasswordActionId`, 'get', `/Account/forgotPassword`, null);
 // State for post: Account/forgotPassword
-export const postForgotPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ForgotPassword.post');
 // post: Account/forgotPassword
-export const postForgotPassword = (model: ForgotPasswordViewModel): Promise<any> => Api('post', `/Account/forgotPassword`, model, postForgotPasswordActions);
+export const postForgotPasswordActionId = 'ProjectStart.WebApp.Controllers.AccountController.ForgotPassword.post';
+export const postForgotPassword = (model: ForgotPasswordViewModel): Promise<any> => Api(`postForgotPasswordActionId`, 'post', `/Account/forgotPassword`, model);
 // State for get: Account/forgotPasswordConfirmation
-export const getForgotPasswordConfirmationActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ForgotPasswordConfirmation.get');
 // get: Account/forgotPasswordConfirmation
-export const getForgotPasswordConfirmation = (): Promise<any> => Api('get', `/Account/forgotPasswordConfirmation`, null, getForgotPasswordConfirmationActions);
+export const getForgotPasswordConfirmationActionId = 'ProjectStart.WebApp.Controllers.AccountController.ForgotPasswordConfirmation.get';
+export const getForgotPasswordConfirmation = (): Promise<any> => Api(`getForgotPasswordConfirmationActionId`, 'get', `/Account/forgotPasswordConfirmation`, null);
 // State for get: Account/resetPassword?code=${encodeURIComponent(code)}
-export const getResetPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ResetPassword.get');
 // get: Account/resetPassword?code=${encodeURIComponent(code)}
-export const getResetPassword = (code: string = null): Promise<any> => Api('get', `/Account/resetPassword?code=${encodeURIComponent(code)}`, null, getResetPasswordActions);
+export const getResetPasswordActionId = 'ProjectStart.WebApp.Controllers.AccountController.ResetPassword.get';
+export const getResetPassword = (code: string = null): Promise<any> => Api(`getResetPasswordActionId`, 'get', `/Account/resetPassword?code=${encodeURIComponent(code)}`, null);
 // State for post: Account/resetPassword
-export const postResetPasswordActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ResetPassword.post');
 // post: Account/resetPassword
-export const postResetPassword = (model: ResetPasswordViewModel): Promise<any> => Api('post', `/Account/resetPassword`, model, postResetPasswordActions);
+export const postResetPasswordActionId = 'ProjectStart.WebApp.Controllers.AccountController.ResetPassword.post';
+export const postResetPassword = (model: ResetPasswordViewModel): Promise<any> => Api(`postResetPasswordActionId`, 'post', `/Account/resetPassword`, model);
 // State for get: Account/resetPasswordConfirmation
-export const getResetPasswordConfirmationActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.ResetPasswordConfirmation.get');
 // get: Account/resetPasswordConfirmation
-export const getResetPasswordConfirmation = (): Promise<any> => Api('get', `/Account/resetPasswordConfirmation`, null, getResetPasswordConfirmationActions);
+export const getResetPasswordConfirmationActionId = 'ProjectStart.WebApp.Controllers.AccountController.ResetPasswordConfirmation.get';
+export const getResetPasswordConfirmation = (): Promise<any> => Api(`getResetPasswordConfirmationActionId`, 'get', `/Account/resetPasswordConfirmation`, null);
 // State for get: Account/accessDenied
-export const getAccessDeniedActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.AccountController.AccessDenied.get');
 // get: Account/accessDenied
-export const getAccessDenied = (): Promise<any> => Api('get', `/Account/accessDenied`, null, getAccessDeniedActions);
+export const getAccessDeniedActionId = 'ProjectStart.WebApp.Controllers.AccountController.AccessDenied.get';
+export const getAccessDenied = (): Promise<any> => Api(`getAccessDeniedActionId`, 'get', `/Account/accessDenied`, null);
 

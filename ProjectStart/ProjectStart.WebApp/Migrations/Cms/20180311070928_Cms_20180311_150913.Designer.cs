@@ -11,8 +11,8 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Cms
 {
     [DbContext(typeof(CmsDbContext))]
-    [Migration("20180308103253_Cms_20180308_183233")]
-    partial class Cms_20180308_183233
+    [Migration("20180311070928_Cms_20180311_150913")]
+    partial class Cms_20180311_150913
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,39 +26,21 @@ namespace ProjectStart.WebApp.Migrations.Cms
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime?>("DateModified");
-
-                    b.Property<DateTime?>("DateRemoved");
-
                     b.Property<string>("Description")
                         .IsRequired();
-
-                    b.Property<bool>("IsRemoved");
 
                     b.Property<string>("Keywords")
                         .IsRequired();
 
-                    b.Property<string>("ModifiedBy");
-
                     b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("NameUrl")
                         .IsRequired();
 
                     b.Property<string>("ParentId");
 
-                    b.Property<string>("ParentUrl")
-                        .IsRequired();
-
-                    b.Property<string>("RemovedBy");
-
                     b.Property<string>("Title")
                         .IsRequired();
+
+                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
@@ -67,8 +49,37 @@ namespace ProjectStart.WebApp.Migrations.Cms
                     b.ToTable("PageData");
                 });
 
+            modelBuilder.Entity("ProjectStart.Entity.Common.HistoryEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime?>("DateModified");
+
+                    b.Property<DateTime?>("DateRemoved");
+
+                    b.Property<bool>("IsRemoved");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<string>("RemovedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HistoryEntity");
+                });
+
             modelBuilder.Entity("ProjectStart.Entity.Cms.PageDataEntity", b =>
                 {
+                    b.HasOne("ProjectStart.Entity.Common.HistoryEntity", "History")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("ProjectStart.Entity.Cms.PageDataEntity", "ParentNode")
                         .WithMany("SubNodes")
                         .HasForeignKey("ParentId");

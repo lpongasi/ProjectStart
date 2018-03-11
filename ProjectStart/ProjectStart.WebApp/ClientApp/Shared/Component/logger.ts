@@ -22,6 +22,7 @@ const mute = [
     'UPLOAD_PROGRESS',
     'DOWNLOAD_PROGRESS',
     'LOADING_END',
+    UPDATE_FORM.init,
     UPDATE_FORM.started,
     UPDATE_FORM.success,
     UPDATE_FORM.error,

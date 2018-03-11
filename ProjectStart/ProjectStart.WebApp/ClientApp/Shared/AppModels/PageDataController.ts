@@ -1,26 +1,30 @@
 ﻿import { PageDataEntity } from 'shared/AppModels/PageDataEntity';
+import { Response } from 'shared/AppModels/Response';
 import { Api } from 'shared/Component/api';
-import { ActionTypes, CreateStateAction } from 'shared/Component/common';
 
 
 // State for get: api/PageData
-export const getPageDataActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get');
 // get: api/PageData
-export const getPageData = (): Promise<PageDataEntity[]> => Api('get', `/api/PageData`, null, getPageDataActions);
+export const getPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get';
+export const getPageData = (): Promise<PageDataEntity[]> => Api(`getPageDataActionId`, 'get', `/api/PageData`, null);
+// State for get: api/PageData/GetPages?id=${encodeURIComponent(id)}
+// get: api/PageData/GetPages?id=${encodeURIComponent(id)}
+export const getPagesActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPages.get';
+export const getPages = (id: string): Promise<Response<PageDataEntity[]>> => Api(`getPagesActionId`, 'get', `/api/PageData/GetPages?id=${encodeURIComponent(id)}`, null);
 // State for get: api/PageData/${encodeURIComponent(id)}
-export const getPageDataActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get');
 // get: api/PageData/${encodeURIComponent(id)}
-export const getPageData = (id: string): Promise<any> => Api('get', `/api/PageData/${encodeURIComponent(id)}`, null, getPageDataActions);
+export const getPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get';
+export const getPageData = (id: string): Promise<any> => Api(`getPageDataActionId`, 'get', `/api/PageData/${encodeURIComponent(id)}`, null);
 // State for put: api/PageData/${encodeURIComponent(id)}
-export const putPageDataActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Api.PageDataController.PutPageData.put');
 // put: api/PageData/${encodeURIComponent(id)}
-export const putPageData = (id: string, pageData: PageDataEntity): Promise<any> => Api('put', `/api/PageData/${encodeURIComponent(id)}`, pageData, putPageDataActions);
+export const putPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.PutPageData.put';
+export const putPageData = (id: string, pageData: PageDataEntity): Promise<any> => Api(`putPageDataActionId`, 'put', `/api/PageData/${encodeURIComponent(id)}`, pageData);
 // State for post: api/PageData
-export const postPageDataActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Api.PageDataController.PostPageData.post');
 // post: api/PageData
-export const postPageData = (pageData: PageDataEntity): Promise<any> => Api('post', `/api/PageData`, pageData, postPageDataActions);
+export const postPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.PostPageData.post';
+export const postPageData = (pageData: PageDataEntity): Promise<Response<PageDataEntity>> => Api(`postPageDataActionId`, 'post', `/api/PageData`, pageData);
 // State for delete: api/PageData/${encodeURIComponent(id)}
-export const deletePageDataActions: ActionTypes = CreateStateAction('ProjectStart.WebApp.Controllers.Api.PageDataController.DeletePageData.delete');
 // delete: api/PageData/${encodeURIComponent(id)}
-export const deletePageData = (id: string): Promise<any> => Api('delete', `/api/PageData/${encodeURIComponent(id)}`, null, deletePageDataActions);
+export const deletePageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.DeletePageData.delete';
+export const deletePageData = (id: string): Promise<any> => Api(`deletePageDataActionId`, 'delete', `/api/PageData/${encodeURIComponent(id)}`, null);
 
