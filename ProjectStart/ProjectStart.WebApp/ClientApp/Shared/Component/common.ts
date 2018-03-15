@@ -50,13 +50,9 @@ let generatedIdNumber = 0;
 export const generateId = () => generatedIdNumber++;
 
 export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+export const GetPayloadValue = <T = any>(form, key: string, fallBackValue: T = null) =>
+    form && form.payload && form.payload[key] ? form.payload[key] : fallBackValue;
 
-export const getFormData = <T = any>(form: any, errorReturn: T = null): T =>
-    form && form.payload && form.payload.data ? form.payload.data : errorReturn;
-export const getFormError = (form: any): any => {
-    const hasPayload = form && form.payload ? true: false;
-    const hasError = hasPayload && form.status === StateLifeCycle.Error ? true : false;
-    const hasErrors = hasError && form.payload.errors ? true : false;
-    return hasErrors ? form.payload.errors : hasError ? 'System Error Found! Please contact the system administrator!' : '';
+export const getFormData = <T = any>(form: any, fallBackValue: T = null): T => GetPayloadValue<T>(form, 'data', fallBackValue);
 
-}
+export const getFormError = (form: any): any => GetPayloadValue<object>(form, 'errors', {});

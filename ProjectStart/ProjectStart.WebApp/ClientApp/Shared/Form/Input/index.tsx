@@ -120,7 +120,7 @@ export default class Input extends React.Component<Props, State> {
             type,
             clientValidate,
             formName,
-            classNames
+            classNames,
         } = this.props;
         const {
             generatedId,
@@ -150,7 +150,7 @@ export default class Input extends React.Component<Props, State> {
                 onBlur={e => this.onBlur(e)}
             />)
             : (
-                <div className={classnames("input-field col", { "s12": !classNames }, classNames)}>
+                <div className={classnames('input-field col', { 's12': !classNames }, classNames)}>
                     <input
                         id={generatedId}
                         name={name}

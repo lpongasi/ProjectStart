@@ -65,5 +65,5 @@ $Methods[
 // State for $HttpMethod: $Url
 // $HttpMethod: $Url
 export const $MethodAction = '$FullName.$HttpMethod';
-export const $Method = ($CustomParameters): Promise<$ReturnType> => Api(`$MethodAction`, '$HttpMethod', `/$Url`, $RequestData);]]
+export const $Method = ($CustomParameters): Promise<$ReturnType> => Api($MethodAction, '$HttpMethod', `/$Url`, $RequestData);]]
 

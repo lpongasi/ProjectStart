@@ -1,18 +1,20 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'shared/modal';
+import { GetPayloadValue } from 'shared/Component/common';
 import Input from 'shared/Form/Input';
 import { Form } from 'shared/Form/Common';
 import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataController';
+import { getPages } from 'shared/AppModels/PageDataController';
 
 
-class CreatePage extends React.Component {
+class CreatePage extends React.Component<any, any> {
     public form: Form;
     constructor(props) {
         super(props);
         this.form =
             Form
-                .createFrom(postPageDataActionId)
+            .createFrom(postPageDataActionId)
                 .addInputs([
                     {
                         name: 'name',
@@ -30,10 +32,6 @@ class CreatePage extends React.Component {
                         name: 'keywords',
                         label: 'Keywords',
                     },
-                    {
-                        type: 'hidden',
-                        name: 'parentId',
-                    },
                 ]);
         this.formSubmit = this.formSubmit.bind(this);
 
@@ -42,14 +40,15 @@ class CreatePage extends React.Component {
         e.preventDefault();
         postPageData(this.props.createPageForm).then(response => {
             if (response.success) {
-                var elem = document.getElementById('create-page-modal');
-                var instance = M.Modal.getInstance(elem);
+                const elem = document.getElementById('create-page-modal');
+                const instance = M.Modal.getInstance(elem);
                 instance.close();
             }
         });
     }
     public render() {
         const form = this.form;
+        const parentData = GetPayloadValue<string>(this.props.createPageForm, 'parentData', null);
         return (
             <form method="post" id={form.id} onSubmit={this.formSubmit}>
                 <Modal

@@ -5,15 +5,15 @@ import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
 type Props = {
     parentId?: string;
     pages: IPageDataEntity[],
-    createNewPage?: (parent: IPageDataEntity) => void;
-}
+    createNewPage?: (e, parent: IPageDataEntity) => void;
+};
 
 export default class Pages extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = {
             pages: [],
-        }
+        };
     }
     public loadPages(e, parentId) {
         e.preventDefault();
@@ -28,7 +28,7 @@ export default class Pages extends React.Component<Props, any> {
     public createNewPage(e, parent: IPageDataEntity) {
         e.preventDefault();
         if (this.props.createNewPage) {
-            this.props.createNewPage(parent);
+            this.props.createNewPage(e, parent);
         }
     }
     public render() {
