@@ -17,6 +17,7 @@
     "noEmitOnError": false,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
+    "strictPropertyInitialization": false,
     "lib": [ "es5", "es6", "es2017.object", "dom" ],
     "paths": {
       "shared/*": [ "./ClientApp/Shared/*" ],

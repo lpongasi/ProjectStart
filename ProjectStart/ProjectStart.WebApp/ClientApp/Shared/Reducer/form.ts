@@ -2,7 +2,7 @@
 import { StateLifeCycle } from 'shared/Component/common';
 import { Response } from 'shared/AppModels/Response';
 
-export default function (state = {}, action) {
+export default function (state = {}, action)  {
     let newState = { ...state };
     switch (action.type) {
         case UPDATE_FORM_INPUT:

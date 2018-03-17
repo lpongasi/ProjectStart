@@ -1,57 +1,92 @@
 ﻿import * as React from 'react';
-import { getPages } from 'shared/AppModels/PageDataController';
+import { getPages, getPagesActionId } from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
+import { Connector, FormData } from 'shared/Component/common';
 
-type Props = {
+
+
+interface StateProps {
+    pages?: { [key: string]: IPageDataEntity },
+}
+
+interface OwnProps {
     parentId?: string;
-    pages: IPageDataEntity[],
-    createNewPage?: (e, parent: IPageDataEntity) => void;
+}
+interface OwnState {
+    firstLoad: boolean,
+    pages: {
+        [key: string]: IPageDataEntity
+    }
+    isActive: {
+        [key: string]: boolean
+    }
 };
+type OwnStateProps = OwnProps & StateProps;
 
-export default class Pages extends React.Component<Props, any> {
+@Connector<OwnProps, StateProps>(
+    state => ({
+        pages: FormData(state.form[getPagesActionId], {})
+    })
+)
+export default class Pages extends React.Component<OwnStateProps, OwnState> {
     constructor(props) {
         super(props);
         this.state = {
-            pages: [],
-        };
+            firstLoad: true,
+            pages: {},
+            isActive: {}
+        }
+        this.loadPages = this.loadPages.bind(this);
     }
     public loadPages(e, parentId) {
         e.preventDefault();
-        if (this.state[parentId] && this.state[parentId].lenth > 0) {
-            this.setState({ [`${parentId}-isActive`]: !this.state[`${parentId}-isActive`] });
-        } else {
-            getPages(parentId).then(t => {
-                this.setState({ [parentId]: t.data, [`${parentId}-isActive`]: !this.state[`${parentId}-isActive`] });
-            });
-        }
+        this.setState({
+            isActive: {
+                ...this.state.isActive,
+                [parentId]: !this.state.isActive[parentId]
+            }
+        });
+
     }
-    public createNewPage(e, parent: IPageDataEntity) {
+    private createNewPage(e, parent: IPageDataEntity) {
         e.preventDefault();
-        if (this.props.createNewPage) {
-            this.props.createNewPage(e, parent);
-        }
+        console.log('CREATE THIS', parent);
+    }
+
+    componentDidMount() {
+        getPages(this.props.parentId ? this.props.parentId : '').then(data => {
+            console.log('THE DATA', data);
+            this.setState({
+                pages: {
+                    ...this.state.pages,
+                    ...data.data
+                }
+            });
+        });
     }
     public render() {
-        const { pages } = this.props;
+        const { pages } = this.state;
         return (
             <div className="page-list">
-                {pages.map(page => (
+                {pages && Object.values(pages).filter(f => f.parentId == this.props.parentId).map(page => (
                     <div key={page.id} className="row">
                         <a className="col s2" href="#" onClick={e => this.loadPages(e, page.id)}>[[[]]]</a>
                         <a className="col s8" href="#">{page.name}</a>
                         <a className="col s2 center" href="#">[[[]]]</a>
-                        <Pages pages={this.state[`${page.id}-isActive`] ? this.state[page.id] : []} parentId="" createNewPage={this.props.createNewPage} />
-                        {this.state[`${page.id}-isActive`]
+                        {this.state.isActive[page.id] ?
+                            (<Pages parentId={page.id} />)
+                            : (<span />)}
+                        {this.state.isActive[page.id]
                             ? (<div className="row page-list">
                                 <a href="#" className="waves-effect waves-blue col s12" onClick={e => this.createNewPage(e, page)} >Add sub pages for {page.name}</a>
                             </div>)
                             : (<span />)
                         }
                     </div>
-                ))}
+                )
+                )}
             </div>
         );
     }
 }
-
 

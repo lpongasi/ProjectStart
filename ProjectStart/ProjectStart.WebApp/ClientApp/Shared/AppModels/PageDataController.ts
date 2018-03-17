@@ -10,7 +10,7 @@ export const getPageData = (): Promise<PageDataEntity[]> => Api(getPageDataActio
 // State for get: api/PageData/GetPages?id=${encodeURIComponent(id)}
 // get: api/PageData/GetPages?id=${encodeURIComponent(id)}
 export const getPagesActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPages.get';
-export const getPages = (id: string): Promise<Response<PageDataEntity[]>> => Api(getPagesActionId, 'get', `/api/PageData/GetPages?id=${encodeURIComponent(id)}`, null);
+export const getPages = (id: string): Promise<Response<{ [key: string]: PageDataEntity; }>> => Api(getPagesActionId, 'get', `/api/PageData/GetPages?id=${encodeURIComponent(id)}`, null);
 // State for get: api/PageData/${encodeURIComponent(id)}
 // get: api/PageData/${encodeURIComponent(id)}
 export const getPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get';

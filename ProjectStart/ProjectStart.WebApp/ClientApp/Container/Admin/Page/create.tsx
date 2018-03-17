@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'shared/modal';
-import { GetPayloadValue } from 'shared/Component/common';
+import { PayLoadValue } from 'shared/Component/common';
 import Input from 'shared/Form/Input';
 import { Form } from 'shared/Form/Common';
 import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataController';
@@ -48,7 +48,7 @@ class CreatePage extends React.Component<any, any> {
     }
     public render() {
         const form = this.form;
-        const parentData = GetPayloadValue<string>(this.props.createPageForm, 'parentData', null);
+        const parentData = PayLoadValue<string>(this.props.createPageForm, 'parentData', null);
         return (
             <form method="post" id={form.id} onSubmit={this.formSubmit}>
                 <Modal

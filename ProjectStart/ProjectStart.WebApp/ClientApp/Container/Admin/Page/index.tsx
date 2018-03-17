@@ -6,23 +6,13 @@ import { getPages, postPageDataActionId } from 'shared/AppModels/PageDataControl
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
 import Pages from './pages';
 
-type State = {
-    pages: IPageDataEntity[];
-}
 
-export default class Page extends React.Component<any, State> {
+export default class Page extends React.Component<any, any> {
     constructor(props) {
         super(props);
-        this.state = {
-            pages: [],
-        };
         this.createNewPage = this.createNewPage.bind(this);
     }
-    public componentDidMount() {
-        getPages('').then(t => {
-            this.setState({ pages: t.data });
-        });
-    }
+
     public createNewPage(e, page: IPageDataEntity) {
         e.preventDefault();
         addInitialData(postPageDataActionId, { parentData: page });
@@ -32,12 +22,11 @@ export default class Page extends React.Component<any, State> {
         instance.open();
     }
     public render() {
-
         return (
             <div>
                 <a data-target="slide-out" className="sidenav-trigger btn btn-small">Pages</a>
                 <SideNav id="slide-out">
-                    <Pages pages={this.state.pages} createNewPage={this.createNewPage} />
+                    <Pages parentId={null} />
                     <div className="row page-list">
                         <a href="#" className="waves-effect waves-blue col s12" onClick={e => this.createNewPage(e, null)} >Add new Page</a>
                     </div>

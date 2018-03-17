@@ -34,9 +34,9 @@ namespace ProjectStart.WebApp.Controllers.Api
         // GET: api/PageData
         [HttpGet]
         [Route("GetPages")]
-        public Response<List<PageDataEntity>> GetPages(string id)
+        public Response<Dictionary<string,PageDataEntity>> GetPages(string id)
         {
-            var pages = _context.PageData.Where(w => w.ParentId == id).ToList();
+            var pages = _context.PageData.Where(w => w.ParentId == id).ToList().ToDictionary(k => k.Id, value => value);
 
             return Success(pages);
         }

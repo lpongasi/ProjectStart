@@ -1,4 +1,5 @@
 ﻿import Store from 'shared/Component/store';
+import { connect } from 'react-redux';
 
 export enum StateLifeCycle {
     Init = ('Initialize') as any,
@@ -25,11 +26,11 @@ export type ActionTypes = {
 };
 
 
+
 export type RootState = {
-    form?: any;
+    form?: { [key: string]: any; };
     page?: any;
 };
-
 export const CreateStateAction = (id: string): ActionTypes => {
     return ({
         id,
@@ -50,9 +51,17 @@ let generatedIdNumber = 0;
 export const generateId = () => generatedIdNumber++;
 
 export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
-export const GetPayloadValue = <T = any>(form, key: string, fallBackValue: T = null) =>
+
+export const PayLoadValue = <T = any>(form, key: string, fallBackValue: T = null) =>
     form && form.payload && form.payload[key] ? form.payload[key] : fallBackValue;
 
-export const getFormData = <T = any>(form: any, fallBackValue: T = null): T => GetPayloadValue<T>(form, 'data', fallBackValue);
+export const FormData = <T = any>(form: any, fallBackValue: T = null): T => PayLoadValue<T>(form, 'data', fallBackValue);
 
-export const getFormError = (form: any): any => GetPayloadValue<object>(form, 'errors', {});
+export const FormError = (form: any): any => PayLoadValue<object>(form, 'errors', {});
+
+
+export const Connector =
+    <OwnProps, StateProps = any, DispatchProps = any>(mapStateToProps: (state: RootState) => StateProps, mapDispatchToProps: DispatchProps = null) =>
+        <T>(target: T): T => {
+            return connect<StateProps, DispatchProps, OwnProps, RootState>(mapStateToProps, mapDispatchToProps)(target as any) as any;
+        };

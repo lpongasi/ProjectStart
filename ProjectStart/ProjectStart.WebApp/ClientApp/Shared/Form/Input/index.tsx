@@ -1,11 +1,10 @@
 ﻿import * as classnames from 'classnames';
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { getFormError } from 'shared/Component/common';
+import { FormError, Connector } from 'shared/Component/common';
 import { updateFormInput } from 'shared/Component/action';
 import * as Uuid from 'uuid/v4';
 
-interface Props {
+interface OwnProps {
     children?: any;
     defaultValue?: string;
     error?: any;
@@ -24,8 +23,11 @@ interface Props {
     clientValidate?: boolean;
     classNames?: classnames;
 }
+interface StateProps {
+    form?: any;
+}
 
-type State = {
+interface State {
     generatedId: string,
     isFirstLoad: boolean,
 };
@@ -41,10 +43,12 @@ const patterns: object = {
     },
 };
 
-@connect(state => ({
-    form: state.form,
-}), null)
-export default class Input extends React.Component<Props, State> {
+@Connector<OwnProps, StateProps>(
+    state => ({
+        form: state.form
+    })
+)
+export default class Input extends React.Component<OwnProps, State> {
 
     constructor(props) {
         super(props);
@@ -131,7 +135,7 @@ export default class Input extends React.Component<Props, State> {
             : patterns[name] && clientValidate
                 ? patterns[name]
                 : null;
-        const formError = formName ? getFormError(this.props.form[formName])[name] : '';
+        const formError = formName ? FormError(this.props.form[formName])[name] : '';
         const errorMessage = formError ? formError : generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
         const successMessage = this.format(this.ConvertToString(success, name), label, value);
         return type === 'hidden'
