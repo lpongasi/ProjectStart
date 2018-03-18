@@ -1,20 +1,28 @@
 ﻿import * as React from 'react';
-import { connect } from 'react-redux';
 import Modal from 'shared/modal';
-import { PayLoadValue } from 'shared/Component/common';
+import { PayLoad, Connector } from 'shared/Component/common';
 import Input from 'shared/Form/Input';
 import { Form } from 'shared/Form/Common';
+import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
 import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataController';
-import { getPages } from 'shared/AppModels/PageDataController';
+import { ModalClose } from 'shared/modal';
 
+type Props = {
+    createPageForm?: any;
+    createPageModal?: any;
+}
 
-class CreatePage extends React.Component<any, any> {
+@Connector<any, Props, any>(state => ({
+    createPageForm: state.form[postPageDataActionId],
+    createPageModal: state.form['create-page-modal'],
+}))
+export default class CreatePage extends React.Component<Props, any> {
     public form: Form;
     constructor(props) {
         super(props);
         this.form =
             Form
-            .createFrom(postPageDataActionId)
+                .createFrom(postPageDataActionId)
                 .addInputs([
                     {
                         name: 'name',
@@ -40,15 +48,13 @@ class CreatePage extends React.Component<any, any> {
         e.preventDefault();
         postPageData(this.props.createPageForm).then(response => {
             if (response.success) {
-                const elem = document.getElementById('create-page-modal');
-                const instance = M.Modal.getInstance(elem);
-                instance.close();
+                ModalClose('create-page-modal', {});
             }
         });
     }
     public render() {
         const form = this.form;
-        const parentData = PayLoadValue<string>(this.props.createPageForm, 'parentData', null);
+        const parentData = PayLoad<IPageDataEntity>(this.props.createPageModal, null);
         return (
             <form method="post" id={form.id} onSubmit={this.formSubmit}>
                 <Modal
@@ -58,17 +64,10 @@ class CreatePage extends React.Component<any, any> {
                     options={{ dismissible: false }}
                     footer={(<button type="submit" className="btn waves-effect waves-green">Create</button>)}
                 >
+                    {parentData && parentData.title && (<h4>New sub page for {parentData.title}</h4>)}
                     <div className="row">
                         {form.inputs.map(item => (
-                            <Input
-                                key={item.id}
-                                formName={form.id}
-                                label={item.label}
-                                name={item.name}
-                                type={item.type}
-                                defaultValue={item.value}
-                                classNames={item.classNames}
-                            />
+                            <Input key={item.id} {...item} />
                         ))}
                     </div>
                 </Modal>
@@ -76,7 +75,3 @@ class CreatePage extends React.Component<any, any> {
         );
     }
 }
-
-export default connect(state => ({
-    createPageForm: state.form[postPageDataActionId],
-}))(CreatePage);

@@ -1,42 +1,27 @@
-﻿import * as classnames from 'classnames';
-import * as Uuid from 'uuid/v4';
+﻿import * as Uuid from 'uuid/v4';
+import { InputProps } from 'shared/Form/Input';
+
 export class Form {
     public id: string;
-    public inputs: Input[] = [];
+    public inputs: InputProps[] = [];
     constructor(id: string) {
-        this.id = id;
+        this.id = id ? id : Uuid();
     }
     public static createFrom(formId: string): Form {
         return new Form(formId);
     }
-    public addInput(input: Input): Form {
-        input = input.id ? input.id : Uuid();
-        this.inputs.push(input);
+    public addInput(input: InputProps): Form {
+        const transformInput = { ...input, id: input.id ? input.id : Uuid(), formName: this.id };
+        this.inputs.push(transformInput);
         return this;
     }
-    public addInputs(inputs: Input[]): Form {
+    public addInputs(inputs: InputProps[]): Form {
         inputs.forEach(e => {
             e.id = e.id ? e.id : Uuid();
+            e.formName = this.id;
+
         });
         this.inputs = this.inputs.concat(inputs);
         return this;
     }
-}
-
-export class Input {
-    type?: string = 'text';
-    label?: any | string;
-    name: string;
-    id?: string;
-    classNames?: classnames;
-    disabled?: boolean = false;
-    textHelper?: string;
-    iconPrefix?: string;
-    placeholder?: string;
-    value?: string;
-    options?: Options;
-}
-
-export class Options {
-
 }

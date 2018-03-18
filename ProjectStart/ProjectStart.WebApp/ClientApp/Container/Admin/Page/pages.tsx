@@ -1,8 +1,9 @@
 ﻿import * as React from 'react';
-import { getPages, getPagesActionId } from 'shared/AppModels/PageDataController';
+import { getPages, getPagesActionId, postPageDataActionId } from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
 import { Connector, FormData } from 'shared/Component/common';
-
+import { updateFormInput } from 'shared/Component/action';
+import { ModalOpen } from 'shared/modal';
 
 
 interface StateProps {
@@ -50,12 +51,12 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
     }
     private createNewPage(e, parent: IPageDataEntity) {
         e.preventDefault();
-        console.log('CREATE THIS', parent);
+        ModalOpen('create-page-modal', parent);
+        updateFormInput(postPageDataActionId, 'parentId', parent.id);
     }
 
     componentDidMount() {
         getPages(this.props.parentId ? this.props.parentId : '').then(data => {
-            console.log('THE DATA', data);
             this.setState({
                 pages: {
                     ...this.state.pages,

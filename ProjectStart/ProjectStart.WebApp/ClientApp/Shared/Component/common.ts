@@ -52,6 +52,9 @@ export const generateId = () => generatedIdNumber++;
 
 export const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 
+export const PayLoad = <T = any>(form, fallBackValue: T = null): T =>
+    (form && form.payload ? form.payload : fallBackValue) as T;
+
 export const PayLoadValue = <T = any>(form, key: string, fallBackValue: T = null) =>
     form && form.payload && form.payload[key] ? form.payload[key] : fallBackValue;
 

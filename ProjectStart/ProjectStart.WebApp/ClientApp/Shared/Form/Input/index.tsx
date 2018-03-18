@@ -4,12 +4,12 @@ import { FormError, Connector } from 'shared/Component/common';
 import { updateFormInput } from 'shared/Component/action';
 import * as Uuid from 'uuid/v4';
 
-interface OwnProps {
+export interface InputProps {
     children?: any;
     defaultValue?: string;
     error?: any;
     form?: any;
-    formName: string;
+    formName?: string;
     helperText?: string;
     id?: string;
     label: string;
@@ -22,6 +22,11 @@ interface OwnProps {
     type?: string;
     clientValidate?: boolean;
     classNames?: classnames;
+    value?: string;
+    options?: InputOptions;
+}
+export interface InputOptions {
+
 }
 interface StateProps {
     form?: any;
@@ -43,12 +48,12 @@ const patterns: object = {
     },
 };
 
-@Connector<OwnProps, StateProps>(
+@Connector<InputProps, StateProps>(
     state => ({
         form: state.form
     })
 )
-export default class Input extends React.Component<OwnProps, State> {
+export default class Input extends React.Component<InputProps, State> {
 
     constructor(props) {
         super(props);
