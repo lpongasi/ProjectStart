@@ -7,7 +7,7 @@ import {
     devApplicationUrl,
     isProd,
     nodeEnv,
-    outputPath
+    outputPath,
 } from './global';
 
 export const entry = {
@@ -19,7 +19,7 @@ export const entry = {
         'redux-thunk',
         'react-router-dom',
         path.resolve(clientAppPath, 'Library', 'Materialize', 'js', `materialize${isProd ? '.min' : ''}.js`),
-        path.resolve(clientAppPath, 'Library', 'Materialize', 'sass', 'materialize.scss')
+        path.resolve(clientAppPath, 'Library', 'Materialize', 'sass', 'materialize.scss'),
     ],
     client: path.resolve(clientAppPath, 'client.tsx'),
     admin: path.resolve(clientAppPath, 'admin.tsx'),
@@ -98,16 +98,9 @@ export const plugins = [
         allChunks: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({
-        name: "common",
+        name: 'common',
         minChunks: Infinity,
     }),
-    //new webpack.optimize.CommonsChunkPlugin({
-    //    name: 'main',
-    //    // filename: '[name].bundle.js',
-    //    children: true,
-    //    async: true,
-    //    minChunks: 2,
-    //}),
     new webpack.LoaderOptionsPlugin({
         minimize: isProd,
         debug: !isProd,
@@ -116,14 +109,8 @@ export const plugins = [
     ? [
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
-            mangle: {
-                screw_ie8: true,
-                keep_fnames: true,
-            },
-            compress: {
-                warnings: false,
-                screw_ie8: true,
-            },
+            mangle: true,
+            compress: true,
             comments: false,
         }),
     ]

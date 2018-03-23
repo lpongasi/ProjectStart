@@ -5,7 +5,7 @@ type Prop = {
     id?: string;
     options?: object;
     getId?: (id: string) => void;
-}
+};
 
 export default class SideNav extends React.Component<Prop, Prop> {
     constructor(props) {
@@ -13,10 +13,10 @@ export default class SideNav extends React.Component<Prop, Prop> {
         this.state = {
             id: props.id ? props.id : Uuid(),
             options: props.options ? props.options : {},
-        }
+        };
     }
     public componentDidMount() {
-        var elem = document.getElementById(this.state.id);
+        const elem = document.getElementById(this.state.id);
         M.Sidenav.init(elem, { ...this.props.options });
         if (this.props.getId) {
             this.props.getId(this.state.id);
@@ -30,4 +30,4 @@ export default class SideNav extends React.Component<Prop, Prop> {
             </div>
         );
     }
-} 
+}

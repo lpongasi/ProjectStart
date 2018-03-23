@@ -1,6 +1,7 @@
 ﻿import * as React from 'react';
+import { AddInitialData } from 'shared/Component/common';
 import * as Uuid from 'uuid/v4';
-import { addInitialData } from 'shared/Component/action';
+
 type Prop = {
     id?: string;
     options?: object;
@@ -8,20 +9,20 @@ type Prop = {
     header?: string;
     footer?: any;
     footerCloseText?: string;
-}
+};
 
 export const ModalOpen = (id: string, data: object = {}) => {
-    addInitialData(id, { ...data });
+    AddInitialData(id, { ...data });
     const instance = M.Modal.getInstance(document.getElementById(id));
     instance.open();
-}
+};
 
 export const ModalClose = (id: string, data: object = {}) => {
-    addInitialData(id, { ...data });
+    AddInitialData(id, { ...data });
     const instance = M.Modal.getInstance(document.getElementById(id));
     instance.close();
 
-}
+};
 
 export default class Modal extends React.Component<Prop, Prop> {
     constructor(props) {
@@ -29,11 +30,11 @@ export default class Modal extends React.Component<Prop, Prop> {
         this.state = {
             id: props.id ? props.id : Uuid(),
             options: props.options ? props.options : {},
-        }
+        };
         this.modalClose = this.modalClose.bind(this);
     }
     public componentDidMount() {
-        var elem = document.getElementById(this.state.id);
+        const elem = document.getElementById(this.state.id);
         M.Modal.init(elem, { ...this.props.options });
         if (this.props.getId) {
             this.props.getId(this.state.id);
@@ -59,4 +60,4 @@ export default class Modal extends React.Component<Prop, Prop> {
             </div>
         );
     }
-} 
+}

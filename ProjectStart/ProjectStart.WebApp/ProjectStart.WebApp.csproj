@@ -152,6 +152,9 @@
     <None Update="ClientApp\Shared\AppModels\TwoFactorAuthenticationViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\TwoFactorAuthenticationViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\Component\response.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\Response.cs</CustomToolNamespace>
+    </None>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

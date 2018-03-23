@@ -18,8 +18,7 @@ export class Form {
     public addInputs(inputs: InputProps[]): Form {
         inputs.forEach(e => {
             e.id = e.id ? e.id : Uuid();
-            e.formName = this.id;
-
+            e.formId = this.id;
         });
         this.inputs = this.inputs.concat(inputs);
         return this;

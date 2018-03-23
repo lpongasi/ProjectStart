@@ -1,11 +1,11 @@
 ﻿import * as React from 'react';
-import SideNav from 'shared/sidenav';
-import CreatePage from './create';
-import { addInitialData, updateFormInput } from 'shared/Component/action';
 import { postPageDataActionId } from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
-import Pages from './pages';
+import { AddInitialData, UpdateFormInput } from 'shared/Component/common';
 import { ModalOpen } from 'shared/modal';
+import SideNav from 'shared/sidenav';
+import CreatePage from './create';
+import Pages from './pages';
 
 
 export default class Page extends React.Component<any, any> {
@@ -16,8 +16,7 @@ export default class Page extends React.Component<any, any> {
 
     public createNewPage(e, page: IPageDataEntity) {
         e.preventDefault();
-        addInitialData(postPageDataActionId, { parentData: page });
-        updateFormInput(postPageDataActionId, 'parentId', page ? page.id : null);
+        UpdateFormInput(postPageDataActionId, 'parentId', page ? page.id : null);
         ModalOpen('create-page-modal', {});
     }
     public render() {

@@ -1,6 +1,6 @@
 ﻿import * as React from 'react';
 import Modal from 'shared/modal';
-import { PayLoad, Connector } from 'shared/Component/common';
+import { PayLoad, Connector, IResponse, FormInputs } from 'shared/Component/common';
 import Input from 'shared/Form/Input';
 import { Form } from 'shared/Form/Common';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
@@ -8,12 +8,12 @@ import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataCon
 import { ModalClose } from 'shared/modal';
 
 type Props = {
-    createPageForm?: any;
+    createPageForm?: IPageDataEntity;
     createPageModal?: any;
-}
+};
 
 @Connector<any, Props, any>(state => ({
-    createPageForm: state.form[postPageDataActionId],
+    createPageForm: FormInputs<IPageDataEntity>(state.form[postPageDataActionId]),
     createPageModal: state.form['create-page-modal'],
 }))
 export default class CreatePage extends React.Component<Props, any> {

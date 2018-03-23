@@ -1,15 +1,14 @@
 ﻿import * as classnames from 'classnames';
 import * as React from 'react';
-import { FormError, Connector } from 'shared/Component/common';
-import { updateFormInput } from 'shared/Component/action';
+import { Connector, FormError, IResponse, UpdateFormInput } from 'shared/Component/common';
 import * as Uuid from 'uuid/v4';
 
 export interface InputProps {
     children?: any;
     defaultValue?: string;
     error?: any;
-    form?: any;
-    formName?: string;
+    form?: { [key: string]: IResponse };
+    formId?: string;
     helperText?: string;
     id?: string;
     label: string;
@@ -29,13 +28,13 @@ export interface InputOptions {
 
 }
 interface StateProps {
-    form?: any;
+    form?: { [key: string]: IResponse };
 }
 
 interface State {
-    generatedId: string,
-    isFirstLoad: boolean,
-};
+    generatedId: string;
+    isFirstLoad: boolean;
+}
 
 const patterns: object = {
     email: {
@@ -50,9 +49,8 @@ const patterns: object = {
 
 @Connector<InputProps, StateProps>(
     state => ({
-        form: state.form
-    })
-)
+        form: state.form,
+    }))
 export default class Input extends React.Component<InputProps, State> {
 
     constructor(props) {
@@ -69,8 +67,8 @@ export default class Input extends React.Component<InputProps, State> {
         this.setValue(e.target.value);
     }
     public setValue(value: string) {
-        if (this.props.formName && this.props.name) {
-            updateFormInput(this.props.formName, this.props.name, value);
+        if (this.props.id && this.props.name) {
+            UpdateFormInput(this.props.formId, this.props.name, value);
         }
     }
     public onBlur(e: React.FocusEvent<HTMLInputElement>) {
@@ -110,8 +108,8 @@ export default class Input extends React.Component<InputProps, State> {
         return tempValue;
     }
     public getCurrentValue() {
-        const { form, formName, name } = this.props;
-        return form && form[formName] && form[formName][name] ? form[formName][name] : '';
+        const { form, formId, name } = this.props;
+        return form && form[formId] && form[formId].inputs && form[formId].inputs[name] ? form[formId].inputs[name] : '';
     }
     public componentDidMout() {
         this.setValue(this.props.defaultValue);
@@ -128,7 +126,7 @@ export default class Input extends React.Component<InputProps, State> {
             pattern,
             type,
             clientValidate,
-            formName,
+            formId,
             classNames,
         } = this.props;
         const {
@@ -140,7 +138,7 @@ export default class Input extends React.Component<InputProps, State> {
             : patterns[name] && clientValidate
                 ? patterns[name]
                 : null;
-        const formError = formName ? FormError(this.props.form[formName])[name] : '';
+        const formError = formId ? FormError(this.props.form[formId])[name] : '';
         const errorMessage = formError ? formError : generatedPattern ? generatedPattern.message : this.format(this.ConvertToString(error, name), label, value);
         const successMessage = this.format(this.ConvertToString(success, name), label, value);
         return type === 'hidden'
@@ -159,7 +157,7 @@ export default class Input extends React.Component<InputProps, State> {
                 onBlur={e => this.onBlur(e)}
             />)
             : (
-                <div className={classnames('input-field col', { 's12': !classNames }, classNames)}>
+                <div className={classnames('input-field col', { s12: !classNames }, classNames)}>
                     <input
                         id={generatedId}
                         name={name}

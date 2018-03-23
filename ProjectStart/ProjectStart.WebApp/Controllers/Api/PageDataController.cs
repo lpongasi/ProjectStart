@@ -34,11 +34,11 @@ namespace ProjectStart.WebApp.Controllers.Api
         // GET: api/PageData
         [HttpGet]
         [Route("GetPages")]
-        public Response<Dictionary<string,PageDataEntity>> GetPages(string id)
+        public Response<Dictionary<string, PageDataEntity>> GetPages(string id)
         {
             var pages = _context.PageData.Where(w => w.ParentId == id).ToList().ToDictionary(k => k.Id, value => value);
 
-            return Success(pages);
+            return Success(pages, isClientCache: true);
         }
 
         // GET: api/PageData/5

@@ -1,70 +1,68 @@
-﻿import { UPDATE_FORM, UPDATE_FORM_INIT, UPDATE_FORM_INPUT } from 'shared/Component/action';
+﻿import { UPDATE_FORM, UPDATE_FORM_INPUT } from 'shared/Component/action';
 import { StateLifeCycle } from 'shared/Component/common';
-import { Response } from 'shared/AppModels/Response';
+import { IResponse } from 'shared/Component/response';
 
-export default function (state = {}, action)  {
+type ActionPayload = {
+    type: string;
+    payload: IResponse
+};
+
+export default function (state: { [key: string]: IResponse; } = {}, action: ActionPayload) {
     let newState = { ...state };
     switch (action.type) {
         case UPDATE_FORM_INPUT:
+            const inputs = state[action.payload.formId] && state[action.payload.formId].inputs ? state[action.payload.formId].inputs : {};
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                    ...state[action.payload.formName],
-                    [action.payload.inputName]: action.payload.value,
+                [action.payload.formId]: {
+                    ...state[action.payload.formId],
+                    inputs: {
+                        ...inputs,
+                        [action.payload.currentInput]: action.payload.currentInputValue,
+                    },
                 },
             };
             break;
         case UPDATE_FORM.started:
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                    ...state[action.payload.formName],
+                [action.payload.formId]: {
+                    ...state[action.payload.formId],
                     status: StateLifeCycle.Started,
-                },
-            };
-            break;
-        case UPDATE_FORM_INIT:
-            newState = {
-                ...state,
-                [action.payload.formName]: {
-                    ...state[action.payload.formName],
-                    status: StateLifeCycle.End,
-                    payload: new Response<string>(),
                 },
             };
             break;
         case UPDATE_FORM.init:
             const initPayload = { ...action.payload };
-            delete initPayload.formName;
+            delete initPayload.formId;
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                     ...state[action.payload.formName],
-                    payload: initPayload,
+                [action.payload.formId]: {
+                    ...state[action.payload.formId],
+                    ...initPayload,
                     status: StateLifeCycle.Init,
                 },
             };
             break;
         case UPDATE_FORM.success:
-            const payload = { ...action.payload };
-            delete payload.formName;
+            const successPayload = { ...action.payload };
+            delete successPayload.formId;
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                    // ...state[action.payload.formName], to empty the form
-                    payload,
+                [action.payload.formId]: {
+                    ...successPayload,
                     status: StateLifeCycle.Success,
                 },
             };
             break;
         case UPDATE_FORM.error:
             const errorPayload = { ...action.payload };
-            delete errorPayload.formName;
+            delete errorPayload.formId;
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                    ...state[action.payload.formName],
-                    payload: { ...errorPayload },
+                [action.payload.formId]: {
+                    ...state[action.payload.formId],
+                    ...errorPayload,
                     status: StateLifeCycle.Error,
                 },
             };
@@ -72,8 +70,8 @@ export default function (state = {}, action)  {
         case UPDATE_FORM.end:
             newState = {
                 ...state,
-                [action.payload.formName]: {
-                    ...state[action.payload.formName],
+                [action.payload.formId]: {
+                    ...state[action.payload.formId],
                     status: StateLifeCycle.End,
                 },
             };

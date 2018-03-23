@@ -1,46 +1,50 @@
 ﻿import axios, { AxiosResponse } from 'axios';
 import * as local from 'localforage';
-import { IResponse } from 'shared/AppModels/Response';
 import { UPDATE_FORM } from 'shared/Component/action';
 import { dispatcher } from 'shared/Component/common';
+import { IResponse } from 'shared/Component/response';
 
 const getLocalId = (id, url, method) => `${id}.${url}.${method}`;
 
-const appResponse = (url: string, method: string, id: string, value: AxiosResponse<IResponse<any>>, isCache: boolean): IResponse<any> => {
+const appResponse = (url: string, method: string, id: string, value: AxiosResponse<IResponse<any>>, isCache: boolean, localData: (data: any) => void): IResponse<any> => {
     if (value.data.success) {
         if (isCache) {
             local.setItem(getLocalId(id, url, method), { ...value.data });
+            if (localData) {
+                localData(value.data);
+            }
         }
-        dispatcher(UPDATE_FORM.success, { ...value.data, formName: id });
+        dispatcher(UPDATE_FORM.success, { ...value.data, formId: id });
     } else {
-        dispatcher(UPDATE_FORM.error, { ...value, formName: id });
+        dispatcher(UPDATE_FORM.error, { ...value.data, formId: id });
     }
     dispatcher('LOADING_END', {});
     return value.data;
 };
-const errorResponse = (id: string, error: any) => {
-    const transformError = error && error.response && error.response.data ? error.response.data : error;
-    dispatcher(UPDATE_FORM.error, { ...transformError, formName: id });
+const errorResponse = (id: string, error: IResponse) => {
+    dispatcher(UPDATE_FORM.error, { errors: error.errors, formId: id });
     dispatcher('LOADING_END', {});
     return error;
 };
 
-export const Api = async <T = any>(
+export const Api = <T = any>(
     id: string,
     method: string,
     url: string,
     requestData: any,
     isCache: boolean = true,
+    localData?: (data: T) => void,
 ): Promise<IResponse<T>> => {
     dispatcher('LOADING_START', {});
     if (isCache) {
-        const localValue = await local.getItem(getLocalId(id, url, method));
-        if (localValue) {
-            dispatcher(UPDATE_FORM.init, { ...localValue, ...requestData, formName: id });
-        }
+        local.getItem(getLocalId(id, url, method)).then(data => {
+            if (localData) {
+                localData(data as T);
+            }
+            dispatcher(UPDATE_FORM.init, { ...data, formId: id });
+        });
     }
-    
-    dispatcher(UPDATE_FORM.started, { ...requestData, formName: id });
+    dispatcher(UPDATE_FORM.started, { formId: id });
 
     const transformRequestData = { ...requestData };
     delete transformRequestData.payload;
@@ -59,6 +63,11 @@ export const Api = async <T = any>(
         onDownloadProgress: (progressEvent: ProgressEvent) => {
             dispatcher('DOWNLOAD_PROGRESS', { percent: Math.floor((progressEvent.loaded * 100) / progressEvent.total) });
         },
-    }).then(value => appResponse(url, method, id, value, isCache)).catch(error => errorResponse(id, error));
+    }).then(value => appResponse(url, method, id, value, isCache, localData)).catch(error => {
+        const errors = error && error.response && error.response.data ? error.response.data : {
+            errors: {},
+        };
+        return errorResponse(id, { ...errors });
+    });
 };
 
