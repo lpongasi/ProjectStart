@@ -17,10 +17,10 @@ namespace ProjectStart.WebApp.Controllers
             Response.StatusCode = 400;
             return new Response<T>(data, message, errors);
         }
-        protected Response<T> Success<T>(T data, string message = null, bool isClientCache = false)
+        protected Response<T> Success<T>(T data, string message = null)
         {
             Response.StatusCode = 200;
-            return new Response<T>(data, message, isClientCache: isClientCache);
+            return new Response<T>(data, message);
         }
     }
 }

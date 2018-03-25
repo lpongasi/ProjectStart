@@ -38,7 +38,7 @@ namespace ProjectStart.WebApp.Controllers.Api
         {
             var pages = _context.PageData.Where(w => w.ParentId == id).ToList().ToDictionary(k => k.Id, value => value);
 
-            return Success(pages, isClientCache: true);
+            return Success(pages);
         }
 
         // GET: api/PageData/5
