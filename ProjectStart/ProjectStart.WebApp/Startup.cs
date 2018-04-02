@@ -44,7 +44,6 @@ namespace ProjectStart.WebApp
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
-
                 // Password settings
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
@@ -104,7 +103,8 @@ namespace ProjectStart.WebApp
                 }
             );
 
-            services.Configure<RazorViewEngineOptions>(options => {
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
                 options.ViewLocationExpanders.Add(new ViewLocationExpander());
             });
 
@@ -170,7 +170,8 @@ namespace ProjectStart.WebApp
                     );
                 routes.MapRoute(
                     name: "defaultArea",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                    //:exists
+                    template: "{area}/{controller=Home}/{action=Index}/{id?}"
                     );
                 routes.MapRoute(
                     name: "default",

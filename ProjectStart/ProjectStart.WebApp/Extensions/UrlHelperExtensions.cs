@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ProjectStart.WebApp.Controllers;
+using ProjectStart.WebApp.Controllers.Client;
 
 namespace ProjectStart.WebApp.Extensions
 {

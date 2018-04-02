@@ -41,7 +41,11 @@
         font-weight: bold;
     }
 }
-
+.text {
+    &-danger {
+        color: color("red", "accent-4");
+    }
+}
 .progress {
     margin: 0px;
 }

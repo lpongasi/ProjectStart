@@ -5,7 +5,6 @@ namespace ProjectStart.Common
 {
     public class Response<T>
     {
-        public const string GlobalError = "globalError";
         public Response(T data, string message = null, IDictionary<string, string> errors = null)
         {
             Data = data;

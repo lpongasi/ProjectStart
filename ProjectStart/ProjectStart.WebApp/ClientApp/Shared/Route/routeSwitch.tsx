@@ -9,6 +9,7 @@ import Navigation from 'container/Navbar';
 import ErrorPage from 'shared/errorPage';
 import Login from 'shared/Form/Login';
 import Page from 'container/Page';
+import Register from 'container/Client/Account/Register';
 
 
 export default () => (
@@ -20,6 +21,7 @@ export default () => (
                 <Route exact path="/Home" component={Home} />
                 <Route exact path="/Home/Index" component={Home} />
                 <Route exact path="/Account/Login" component={Login} />
+                <Route exact path="/Account/Register" component={Register} />
                 <Route path="/Page" component={Page} />
                 <Route component={ErrorPage} />
         </Switch>

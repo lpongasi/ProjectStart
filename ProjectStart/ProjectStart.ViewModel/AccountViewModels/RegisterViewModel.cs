@@ -19,5 +19,26 @@ namespace ProjectStart.ViewModel.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        public string MiddleName { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+        public string Address2 { get; set; }
+        [Required]
+        [Display(Name = "Postal Code")]
+        public string PostalCode { get; set; }
+        [Required]
+        public string City { get; set; }
+
     }
 }

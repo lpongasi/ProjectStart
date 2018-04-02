@@ -13,9 +13,10 @@ using ProjectStart.ViewModel.ManageViewModels;
 using ProjectStart.WebApp.Services;
 using ProjectStart.Entity;
 
-namespace ProjectStart.WebApp.Controllers
+namespace ProjectStart.WebApp.Controllers.Client
 {
     [Authorize]
+    [Area("Client")]
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
@@ -45,7 +46,7 @@ namespace ProjectStart.WebApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string namessss)
+        public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)

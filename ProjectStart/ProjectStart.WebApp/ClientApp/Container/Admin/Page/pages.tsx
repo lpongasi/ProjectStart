@@ -6,7 +6,7 @@ import {
     postPageDataActionId,
 } from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
-import { AddInitialFormInputs, UpdateFormInput  } from 'shared/Component/common';
+import { AddInitialFormInputs, UpdateFormInput } from 'shared/Component/common';
 import { ModalOpen } from 'shared/modal';
 
 
@@ -87,28 +87,31 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
                 even: !this.props.odd,
             })}>
                 <a className="drop" href="#" onClick={e => this.loadPages(e, page.id)}>
-                    <i className="material-icons">{this.state.isActive[page.id] ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
+                    <i className={classnames('fas', 'fa-lg', {
+                        'fa-caret-right': !this.state.isActive[page.id],
+                        'fa-caret-down': this.state.isActive[page.id],
+                    })} />
                 </a>
                 <a className="content" href="#" onClick={e => this.loadPages(e, page.id)}>
-                    {page.name}
+                    <i className="fas fa-newspaper fa-lg" /> {page.name}
                 </a>
                 <a id={`dropdown-trigger-${page.id}`} className="dropdown-trigger menu" href="#" data-target={`dropdown-${page.id}`} >
-                    <i className="material-icons">menu</i>
+                    <i className="fas fa-bars fa-lg" />
                 </a>
                 <ul id={`dropdown-${page.id}`} className="dropdown-content">
                     <li>
                         <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
-                            <i className="material-icons">add_box</i> Add
+                            <i className="fas fa-plus-square fa-lg" /> Add
                         </a>
                     </li>
                     <li>
                         <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
-                            <i className="material-icons">mode_edit</i> Edit
+                            <i className="fas fa-pen-square fa-lg" /> Edit
                         </a>
                     </li>
                     <li>
                         <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
-                            <i className="material-icons">delete</i> Delete
+                            <i className="fas fa-trash fa-lg" />Delete
                         </a>
                     </li>
                 </ul>

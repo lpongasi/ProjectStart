@@ -12,9 +12,10 @@ using ProjectStart.ViewModel.AccountViewModels;
 using ProjectStart.WebApp.Services;
 using ProjectStart.Entity;
 
-namespace ProjectStart.WebApp.Controllers
+namespace ProjectStart.WebApp.Controllers.Client
 {
     [Authorize]
+    [Area("Client")]
     [Route("[controller]/[action]")]
     public class AccountController : BaseController
     {
@@ -207,23 +208,34 @@ namespace ProjectStart.WebApp.Controllers
             return View();
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public IActionResult Register(string returnUrl = null)
+        //{
+        //    ViewData["ReturnUrl"] = returnUrl;
+        //    return View();
+        //}
 
         [HttpPost]
         [AllowAnonymous]
+        [Produces("application/json")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<Response<RegisterViewModel>> Register([FromBody]RegisterViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    MiddleName = model.LastName,
+                    Address = model.Address,
+                    Address2 = model.Address2,
+                    PostalCode = model.PostalCode,
+                    City = model.City
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -235,13 +247,13 @@ namespace ProjectStart.WebApp.Controllers
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return Success<RegisterViewModel>(null, null);
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return ErrorState(model, errors: ModelState);
         }
 
         [HttpPost]
@@ -313,7 +325,10 @@ namespace ProjectStart.WebApp.Controllers
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

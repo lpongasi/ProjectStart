@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectStart.Common;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
+using ProjectStart.Common.Constants;
 
 namespace ProjectStart.WebApp.Controllers
 {
@@ -10,7 +11,7 @@ namespace ProjectStart.WebApp.Controllers
     {
         protected Response<T> ErrorState<T>(T data, string message = null, ModelStateDictionary errors = null)
         {
-            return Error(data, message, errors.ToDictionary(k => k.Key, v => string.Join(", ", v.Value.Errors.Select(s => s.ErrorMessage))));
+            return Error(data, message, errors.ToDictionary(k => string.IsNullOrEmpty(k.Key) ? ResponseConstants.GlobalError : k.Key, v => string.Join(", ", v.Value.Errors.Select(s => s.ErrorMessage))));
         }
         protected Response<T> Error<T>(T data, string message = null, IDictionary<string, string> errors = null)
         {

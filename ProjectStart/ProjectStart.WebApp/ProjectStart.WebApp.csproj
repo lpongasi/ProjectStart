@@ -67,7 +67,7 @@
 
   <ItemGroup>
     <None Update="ClientApp\Shared\AppModels\AccountController.ts">
-      <CustomToolNamespace>Controllers\AccountController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Client\AccountController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\BaseController.ts">
       <CustomToolNamespace>Controllers\BaseController.cs</CustomToolNamespace>
@@ -80,6 +80,9 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\ChangePasswordViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\ChangePasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\ControlsEntity.ts">
+      <CustomToolNamespace>..\ProjectStart.Entity\Cms\ControlsEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\EnableAuthenticatorViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\EnableAuthenticatorViewModel.cs</CustomToolNamespace>
@@ -95,6 +98,9 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\ForgotPasswordViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ForgotPasswordViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\FormsEntity.ts">
+      <CustomToolNamespace>..\ProjectStart.Entity\Cms\FormsEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\GenerateRecoveryCodesViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\GenerateRecoveryCodesViewModel.cs</CustomToolNamespace>
@@ -118,7 +124,7 @@
       <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\LoginWithRecoveryCodeViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ManageController.ts">
-      <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Client\ManageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\ModeEnum.ts">
       <CustomToolNamespace>..\ProjectStart.Common\Enum\ModeEnum.cs</CustomToolNamespace>
@@ -127,7 +133,7 @@
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>
