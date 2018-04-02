@@ -120,6 +120,9 @@
     <None Update="ClientApp\Shared\AppModels\ManageController.ts">
       <CustomToolNamespace>Controllers\ManageController.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\ModeEnum.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\Enum\ModeEnum.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\NodeEntity.ts">
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>

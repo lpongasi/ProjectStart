@@ -1,4 +1,5 @@
-﻿using ProjectStart.Entity.Common;
+﻿using ProjectStart.Common.Enum;
+using ProjectStart.Entity.Common;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,5 +15,7 @@ namespace ProjectStart.Entity.Cms
         [Required]
         public string Keywords { get; set; }
         public string Url { get; set; }
+        [NotMapped]
+        public ModeEnum? Mode { get; set; }
     }
 }

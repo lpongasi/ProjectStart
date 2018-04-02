@@ -1,11 +1,12 @@
 ﻿import * as classnames from 'classnames';
 import * as React from 'react';
+import { ModeEnum } from 'shared/AppModels/ModeEnum';
 import {
     getPages,
     postPageDataActionId,
-    } from 'shared/AppModels/PageDataController';
+} from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
-import { UpdateFormInput } from 'shared/Component/common';
+import { AddInitialFormInputs, UpdateFormInput  } from 'shared/Component/common';
 import { ModalOpen } from 'shared/modal';
 
 
@@ -51,8 +52,9 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
         });
 
     }
-    public createNewPage(e, parent: IPageDataEntity) {
+    public createNewPage(e: React.MouseEvent<HTMLElement>, parent: IPageDataEntity) {
         e.preventDefault();
+        AddInitialFormInputs(postPageDataActionId, {});
         ModalOpen('create-page-modal', parent);
         UpdateFormInput(postPageDataActionId, 'parentId', parent.id);
     }
@@ -60,8 +62,8 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
         Object.keys(this.state.pages).forEach(pageId => {
             const elem = document.getElementById(`dropdown-trigger-${pageId}`);
             const instance = M.Dropdown.getInstance(elem);
-            if(!instance){  
-                M.Dropdown.init(elem, { constrainWidth: false});
+            if (!instance) {
+                M.Dropdown.init(elem, { constrainWidth: false });
             }
         });
     }
@@ -79,7 +81,7 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
     }
     public render() {
         const { pages } = this.state;
-        return pages && Object.values(pages).filter(f => f.parentId == this.props.parentId).map(page => (
+        return pages && Object.values(pages).filter(f => (f.parentId ? f.parentId : null) === (this.props.parentId ? this.props.parentId : null)).map(page => (
             <div key={page.id} className={classnames('page-row', {
                 odd: this.props.odd,
                 even: !this.props.odd,
@@ -87,7 +89,9 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
                 <a className="drop" href="#" onClick={e => this.loadPages(e, page.id)}>
                     <i className="material-icons">{this.state.isActive[page.id] ? 'keyboard_arrow_down' : 'keyboard_arrow_right'}</i>
                 </a>
-                <div className="content">{page.name}</div>
+                <a className="content" href="#" onClick={e => this.loadPages(e, page.id)}>
+                    {page.name}
+                </a>
                 <a id={`dropdown-trigger-${page.id}`} className="dropdown-trigger menu" href="#" data-target={`dropdown-${page.id}`} >
                     <i className="material-icons">menu</i>
                 </a>
@@ -96,9 +100,17 @@ export default class Pages extends React.Component<OwnStateProps, OwnState> {
                         <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
                             <i className="material-icons">add_box</i> Add
                         </a>
-                        </li>
-                    <li><a href="#!">two</a></li>
-                    <li><a href="#!">three</a></li>
+                    </li>
+                    <li>
+                        <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
+                            <i className="material-icons">mode_edit</i> Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" className="waves-effect waves-blue" onClick={e => this.createNewPage(e, page)} >
+                            <i className="material-icons">delete</i> Delete
+                        </a>
+                    </li>
                 </ul>
                 {this.state.isActive[page.id] ?
                     (

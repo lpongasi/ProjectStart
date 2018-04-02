@@ -77,10 +77,13 @@ export const FormData = <T = any>(form: IResponse, fallBackValue: T = null): T =
 
 export const FormError = (form: IResponse): { [key: string]: any; } => PayLoadValue<object>(form, 'errors', {});
 
-export const FormInputs = <T = any>(form: IResponse): any => PayLoadValue<T>(form, 'inputs',  null);
+export const FormInputs = <T = any>(form: IResponse): any => PayLoadValue<T>(form, 'inputs', null);
 
 export const AddInitialData = (formId: string, data: object) =>
     dispatcher(UPDATE_FORM.init, { formId, ...data });
+
+export const AddInitialFormInputs = (formId: string, data: object) =>
+    dispatcher(UPDATE_FORM.init, { formId, inputs: { ...data } });
 
 export const UpdateFormInput = (formId: string, input: string, value: any) =>
     dispatcher(UPDATE_FORM_INPUT, { formId, currentInput: input, currentInputValue: value });

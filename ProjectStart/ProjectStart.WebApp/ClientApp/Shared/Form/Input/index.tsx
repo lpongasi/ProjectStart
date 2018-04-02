@@ -172,7 +172,9 @@ export default class Input extends React.Component<InputProps, State> {
                         onChange={e => this.onChange(e)}
                         onBlur={e => this.onBlur(e)}
                     />
-                    <label htmlFor={generatedId}>{label}</label>
+                    <label htmlFor={generatedId} className={classnames({
+                        active: value,
+                    })}>{label}</label>
                     <span className="helper-text"
                         data-error={errorMessage}
                         data-success={successMessage}>{helperText}</span>

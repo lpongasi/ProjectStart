@@ -7,6 +7,7 @@ export interface IPageDataEntity extends INodeEntity<PageDataEntity> {
     description: string;
     keywords: string;
     url: string;
+    mode?: ModeEnum;
 }
 /**
  * Base view model for ProjectStart.Entity.Cms.PageDataEntity
@@ -16,4 +17,5 @@ export class PageDataEntity extends NodeEntity<PageDataEntity> implements IPageD
     description: string;
     keywords: string;
     url: string;
+    mode?: ModeEnum;
 }

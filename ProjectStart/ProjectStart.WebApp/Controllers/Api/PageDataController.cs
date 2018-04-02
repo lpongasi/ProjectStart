@@ -107,6 +107,7 @@ namespace ProjectStart.WebApp.Controllers.Api
 
             var urlEncoded = WebUtility.UrlEncode(pageData.Name);
             pageData.Url = parent != null ? $"{parent.Url}/{urlEncoded}" : $"/{urlEncoded}";
+            
             _context.PageData.Add(pageData);
 
             await _context.SaveChangesAsync();

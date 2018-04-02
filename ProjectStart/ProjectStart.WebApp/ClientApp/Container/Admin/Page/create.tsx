@@ -1,11 +1,14 @@
 ﻿import * as React from 'react';
-import Modal from 'shared/modal';
-import { PayLoad, Connector, IResponse, FormInputs } from 'shared/Component/common';
-import Input from 'shared/Form/Input';
-import { Form } from 'shared/Form/Common';
-import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
 import { postPageData, postPageDataActionId } from 'shared/AppModels/PageDataController';
+import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
+import {
+    Connector,
+    FormInputs,
+} from 'shared/Component/common';
+import { Form } from 'shared/Form/Common';
+import Input from 'shared/Form/Input';
 import { ModalClose } from 'shared/modal';
+import Modal from 'shared/modal';
 
 type Props = {
     createPageForm?: IPageDataEntity;
@@ -54,7 +57,7 @@ export default class CreatePage extends React.Component<Props, any> {
     }
     public render() {
         const form = this.form;
-        const parentData = PayLoad<IPageDataEntity>(this.props.createPageModal, null);
+        const parentData = this.props.createPageModal as IPageDataEntity;
         return (
             <form method="post" id={form.id} onSubmit={this.formSubmit}>
                 <Modal
@@ -64,7 +67,7 @@ export default class CreatePage extends React.Component<Props, any> {
                     options={{ dismissible: false }}
                     footer={(<button type="submit" className="btn waves-effect waves-green">Create</button>)}
                 >
-                    {parentData && parentData.title && (<h4>New sub page for {parentData.title}</h4>)}
+                    {parentData && parentData.name && (<h4>New sub page for {parentData.name}</h4>)}
                     <div className="row">
                         {form.inputs.map(item => (
                             <Input key={item.id} {...item} />

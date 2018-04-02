@@ -6,7 +6,9 @@
     <title>WebApp</title>
     <base href="~/" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="~/assets/common.bundle.css" rel="stylesheet" asp-append-version="true" />
+    <environment exclude="Development">
+        <link href="~/assets/common.bundle.css" rel="stylesheet" asp-append-version="true" />
+    </environment>   
 </head>
 <body>
     <main id="main-app">

@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import { postPageDataActionId } from 'shared/AppModels/PageDataController';
 import { IPageDataEntity } from 'shared/AppModels/PageDataEntity';
-import { AddInitialData, UpdateFormInput } from 'shared/Component/common';
+import { UpdateFormInput } from 'shared/Component/common';
 import { ModalOpen } from 'shared/modal';
 import SideNav from 'shared/sidenav';
 import CreatePage from './create';
@@ -22,7 +22,7 @@ export default class Page extends React.Component<any, any> {
     public render() {
         return (
             <div>
-                <a data-target="slide-out" className="sidenav-trigger btn btn-small">Pages</a>
+                <a data-target="slide-out" className="sidenav-trigger btn btn-small red">Pages</a>
                 <SideNav id="slide-out">
                     <Pages parentId={null} />
                     <div className="row page-list">
