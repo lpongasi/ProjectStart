@@ -133,7 +133,7 @@
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>
@@ -152,9 +152,6 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\ResetPasswordViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ResetPasswordViewModel.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\Shared\AppModels\Response.ts">
-      <CustomToolNamespace>..\ProjectStart.Common\Response.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\SetPasswordViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\SetPasswordViewModel.cs</CustomToolNamespace>

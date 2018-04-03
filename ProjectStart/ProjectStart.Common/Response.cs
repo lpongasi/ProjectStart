@@ -3,11 +3,10 @@ using System.Linq;
 
 namespace ProjectStart.Common
 {
-    public class Response<T>
+    public class Response
     {
-        public Response(T data, string message = null, IDictionary<string, string> errors = null)
+        public Response(string message = null, IDictionary<string, string> errors = null)
         {
-            Data = data;
             Message = message;
             Errors = errors;
         }
@@ -15,6 +14,14 @@ namespace ProjectStart.Common
         public bool Error => Errors != null && Errors.Any();
         public string Message { get; set; }
         public IDictionary<string, string> Errors { get; set; }
+    }
+    public class Response<T> : Response
+    {
+        public Response(T data, string message = null, IDictionary<string, string> errors = null)
+        : base(message, errors)
+        {
+            Data = data;
+        }
         public T Data { get; set; }
     }
 }

@@ -54,7 +54,7 @@ namespace ProjectStart.WebApp.Controllers.Client
         [AllowAnonymous]
         [Produces("application/json")]
         [ValidateAntiForgeryToken]
-        public async Task<Response<string>> Login([FromBody]LoginViewModel model)
+        public async Task<Response> Login([FromBody]LoginViewModel model)
         {
             //ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)

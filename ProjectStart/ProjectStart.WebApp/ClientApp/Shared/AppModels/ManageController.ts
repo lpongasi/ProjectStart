@@ -4,6 +4,7 @@ import { IndexViewModel } from 'shared/AppModels/IndexViewModel';
 import { RemoveLoginViewModel } from 'shared/AppModels/RemoveLoginViewModel';
 import { SetPasswordViewModel } from 'shared/AppModels/SetPasswordViewModel';
 import { Api } from 'shared/Component/api';
+import { IResponse, IResponseData } from 'shared/Component/response';
 
 
 // State for get: Manage/index

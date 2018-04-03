@@ -4,7 +4,11 @@
     using Typewriter.Extensions.Types;
 	using Typewriter.Extensions.WebApi;
 
-	string ReturnType(Method m) => m.Type.Name == "IActionResult" ? "any" : m.Type.Name;
+	string ReturnType(Method m){
+     var returnType =  m.Type.Name == "IActionResult" ? "any" : m.Type.Name;
+     returnType =returnType.Contains("Response<") ? returnType.Replace("Response<","IResponseData<") : returnType.Replace("Response","IResponse");
+     return returnType;
+    }
     string ServiceName(Class c) => c.Name.Replace("ApiController", "Controller");
     string ParentServiceName(Method m) => ServiceName((Class)m.Parent);
    List<string> AnyProperties(){
@@ -33,7 +37,8 @@
     string Imports(Class c){
       List<string> neededImports = new List<string>();
       neededImports.AddRange(new []{
-      "import { Api } from 'shared/Component/api';"
+      "import { Api } from 'shared/Component/api';",
+      "import { IResponse, IResponseData } from 'shared/Component/response';"
       });
      neededImports.AddRange(c.Properties
 	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
@@ -41,7 +46,7 @@
 
       c.Methods.ToList().ForEach(e =>
       {
-        if(!e.Type.IsPrimitive && e.Type.Name != "IActionResult") {
+        if(!e.Type.IsPrimitive && e.Type.Name != "IActionResult" && !e.Type.Name.Contains("Response")) {
             if(!e.Type.IsGeneric || e.Type.IsEnumerable){
                 neededImports.Add("import { " +  e.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" +  e.Type.Name.TrimEnd('[',']') + "';");   
             }else{               

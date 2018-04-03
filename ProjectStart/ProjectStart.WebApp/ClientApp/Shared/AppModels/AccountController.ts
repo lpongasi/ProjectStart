@@ -5,14 +5,14 @@ import { LoginWith2faViewModel } from 'shared/AppModels/LoginWith2faViewModel';
 import { LoginWithRecoveryCodeViewModel } from 'shared/AppModels/LoginWithRecoveryCodeViewModel';
 import { RegisterViewModel } from 'shared/AppModels/RegisterViewModel';
 import { ResetPasswordViewModel } from 'shared/AppModels/ResetPasswordViewModel';
-import { Response } from 'shared/AppModels/Response';
 import { Api } from 'shared/Component/api';
+import { IResponse, IResponseData } from 'shared/Component/response';
 
 
 // State for post: Account/login
 // post: Account/login
 export const postLoginActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.Login.post';
-export const postLogin = (model: LoginViewModel, localData?: (data: Response<string>) => void): Promise<Response<string>> => Api(postLoginActionId, 'post', `/Account/login`, model, true , localData);
+export const postLogin = (model: LoginViewModel, localData?: (data: IResponse) => void): Promise<IResponse> => Api(postLoginActionId, 'post', `/Account/login`, model, true , localData);
 // State for get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
 // get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
 export const getLoginWith2faActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.LoginWith2fa.get';
@@ -36,7 +36,7 @@ export const getLockout = (localData?: (data: any) => void): Promise<any> => Api
 // State for post: Account/register
 // post: Account/register
 export const postRegisterActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.Register.post';
-export const postRegister = (model: RegisterViewModel, localData?: (data: Response<RegisterViewModel>) => void): Promise<Response<RegisterViewModel>> => Api(postRegisterActionId, 'post', `/Account/register`, model, true , localData);
+export const postRegister = (model: RegisterViewModel, localData?: (data: IResponseData<RegisterViewModel>) => void): Promise<IResponseData<RegisterViewModel>> => Api(postRegisterActionId, 'post', `/Account/register`, model, true , localData);
 // State for post: Account/logout
 // post: Account/logout
 export const postLogoutActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.Logout.post';
