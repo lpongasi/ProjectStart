@@ -1,10 +1,11 @@
 ﻿import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { postRegister, postRegisterActionId } from 'shared/AppModels/AccountController';
 import { IRegisterViewModel } from 'shared/AppModels/RegisterViewModel';
 import {
     Connector,
-    FormInputs,
     FormError,
+    FormInputs,
 } from 'shared/Component/common';
 import { Form } from 'shared/Form/Common';
 import Input from 'shared/Form/Input';
@@ -18,7 +19,7 @@ type Props = {
 
 @Connector<any, Props, any>(state => ({
     registerViewModel: FormInputs<IRegisterViewModel>(state.form[postRegisterActionId]),
-    formError: FormError(state.form[postRegisterActionId])
+    formError: FormError(state.form[postRegisterActionId]),
 }))
 
 export default class Register extends React.Component<Props, any> {
@@ -32,18 +33,55 @@ export default class Register extends React.Component<Props, any> {
                 .createFrom(postRegisterActionId)
                 .addInputs([
                     {
+                        name: 'lastName',
+                        label: 'Last Name',
+                        classNames: 's5',
+                    },
+                    {
+                        name: 'firstName',
+                        label: 'First Name',
+                        classNames: 's5',
+                    },
+                    {
+                        name: 'middleName',
+                        label: 'Middle Name',
+                        classNames: 's2',
+                    },
+                    {
+                        name: 'address',
+                        label: 'Address',
+                    },
+                    {
+                        name: 'address2',
+                        label: 'Alternative Address (Optional)',
+                    },
+                    {
+                        name: 'city',
+                        label: 'City',
+                        classNames: 's8',
+                    },
+                    {
+                        name: 'postalCode',
+                        label: 'Postal Code',
+                        classNames: 's4',
+                    },
+                    {
+                        name: 'phoneNumber',
+                        label: 'PhoneNumber',
+                    },
+                    {
                         name: 'email',
                         label: 'Email',
                     },
                     {
                         name: 'password',
                         label: 'Password',
-                        type: 'password'
+                        type: 'password',
                     },
                     {
                         name: 'confirmPassword',
                         label: 'Confirm Password',
-                        type: 'password'
+                        type: 'password',
                     },
                 ]);
     }
@@ -69,8 +107,10 @@ export default class Register extends React.Component<Props, any> {
                             <Input key={item.id} {...item} />
                         ))}
                     </div>
+                    
                     <div className="row">
                         <button type="submit" className="btn waves-effect waves-green">Register</button>
+                        <Link to="/Account/Login" className="btn waves-effect waves-green">Login</Link>
                     </div>
                 </form>
             </div>

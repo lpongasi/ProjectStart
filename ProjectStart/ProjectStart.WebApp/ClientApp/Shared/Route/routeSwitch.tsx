@@ -4,27 +4,25 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import Home from 'container/Home';
-import Navigation from 'container/Navbar';
-import ErrorPage from 'shared/errorPage';
-import Login from 'shared/Form/Login';
-import Page from 'container/Page';
 import Register from 'container/Client/Account/Register';
+import Login from 'container/Client/Account/Login';
+import ErrorPage from 'shared/errorPage';
 
 
-export default () => (
-<div>
-    <Navigation />
-    <div className="container">
-        <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/Home" component={Home} />
-                <Route exact path="/Home/Index" component={Home} />
-                <Route exact path="/Account/Login" component={Login} />
-                <Route exact path="/Account/Register" component={Register} />
-                <Route path="/Page" component={Page} />
-                <Route component={ErrorPage} />
-        </Switch>
-    </div>
-</div>
-);
+export default class RouteSwitch extends React.Component {
+
+    public render() {
+        return (
+            <div>
+                <div className="container">
+                    <Switch>
+                        <Route exact path="/Account/Register" component={Register} />
+                        <Route exact path="/Account/Login" component={Login} />
+                        <Route component={ErrorPage} />
+                    </Switch>
+                </div>
+            </div>
+        );
+    }
+
+} 

@@ -9,14 +9,10 @@ import { Response } from 'shared/AppModels/Response';
 import { Api } from 'shared/Component/api';
 
 
-// State for get: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-// get: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-export const getLoginActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.Login.get';
-export const getLogin = (returnUrl: string = null, localData?: (data: any) => void): Promise<any> => Api(getLoginActionId, 'get', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, null, true , localData);
-// State for post: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
-// post: Account/login?returnUrl=${encodeURIComponent(returnUrl)}
+// State for post: Account/login
+// post: Account/login
 export const postLoginActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.Login.post';
-export const postLogin = (model: LoginViewModel, returnUrl: string = null, localData?: (data: Response<string>) => void): Promise<Response<string>> => Api(postLoginActionId, 'post', `/Account/login?returnUrl=${encodeURIComponent(returnUrl)}`, model, true , localData);
+export const postLogin = (model: LoginViewModel, localData?: (data: Response<string>) => void): Promise<Response<string>> => Api(postLoginActionId, 'post', `/Account/login`, model, true , localData);
 // State for get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
 // get: Account/loginWith2fa?rememberMe=${rememberMe}&returnUrl=${encodeURIComponent(returnUrl)}
 export const getLoginWith2faActionId = 'ProjectStart.WebApp.Controllers.Client.AccountController.LoginWith2fa.get';
