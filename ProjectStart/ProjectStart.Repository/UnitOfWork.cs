@@ -7,28 +7,19 @@ namespace ProjectStart.Repository
 {
     internal class UnitOfWork : IUnitOfWork
     {
-        //public CommerceDbContext DbContext { get; }
-        //public UnitOfWork(CommerceDbContext entityDbContext)
-        //{
-        //    DbContext = entityDbContext;
-        //}
-        //private IBaseRepository<T> Initialize<T>(IBaseRepository<T> repository) where T : class
-        //    => repository ?? (repository = new BaseRepository<T>(DbContext));
+        public ApplicationDbContext ApplicationDbContext { get; }
+        public CmsDbContext CmsDbContext { get; }
+        public UnitOfWork(ApplicationDbContext applicationDbContext, CmsDbContext cmsDbContext)
+        {
+            CmsDbContext = cmsDbContext;
+            ApplicationDbContext = applicationDbContext;
+        }
+        private IBaseRepository<T> Initialize<T, TContext>(IBaseRepository<T> repository, TContext dbContext)
+            where T : class
+            where TContext : DbContext
+            => repository ?? (repository = new BaseRepository<T, TContext>(dbContext));
 
-        //private IBaseRepository<NodeEntity> _nodeRepository;
-        //public IBaseRepository<NodeEntity> NodeRepository
-        //    => Initialize(_nodeRepository);
-        
-
-
-        //public void SaveChanges()
-        //{
-        //    DbContext.SaveChanges();
-        //}
-
-        //public async Task<int> SaveChangesAsync()
-        //{
-        //    return await DbContext.SaveChangesAsync();
-        //}
+        private IBaseRepository<ApplicationUser> _userRepository;
+        public IBaseRepository<ApplicationUser> UserRepository => Initialize(_userRepository, ApplicationDbContext);
     }
 }

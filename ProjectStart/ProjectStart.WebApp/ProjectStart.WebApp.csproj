@@ -29,14 +29,16 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -132,6 +134,9 @@
     <None Update="ClientApp\Shared\AppModels\NodeEntity.ts">
       <CustomToolNamespace>..\ProjectStart.Entity\Common\NodeEntity.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\OrderEnum.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\Enum\OrderEnum.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
       <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
     </None>
@@ -158,6 +163,12 @@
     </None>
     <None Update="ClientApp\Shared\AppModels\TwoFactorAuthenticationViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\TwoFactorAuthenticationViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\UserController.ts">
+      <CustomToolNamespace>Controllers\Admin\UserController.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\UserViewModel.ts">
+      <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\UserViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\Component\response.ts">
       <CustomToolNamespace>..\ProjectStart.Common\Response.cs</CustomToolNamespace>

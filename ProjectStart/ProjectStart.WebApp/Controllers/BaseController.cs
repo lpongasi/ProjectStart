@@ -4,11 +4,26 @@ using ProjectStart.Common;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
 using ProjectStart.Common.Constants;
+using ProjectStart.Entity;
+using ProjectStart.Repository;
+using AutoMapper;
 
 namespace ProjectStart.WebApp.Controllers
 {
     public class BaseController : Controller
     {
+        protected readonly IUnitOfWork CurrentService;
+        protected readonly IMapper CurrentMapper;
+        public BaseController() { }
+        public BaseController(IUnitOfWork currentService)
+        {
+            CurrentService = currentService;
+        }
+        public BaseController(IUnitOfWork currentService, IMapper currentMapper)
+        {
+            CurrentService = currentService;
+            CurrentMapper = currentMapper;
+        }
         protected Response Success(string message = null)
         {
             Response.StatusCode = 200;

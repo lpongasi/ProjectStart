@@ -9,6 +9,7 @@ using ProjectStart.Entity;
 using ProjectStart.Entity.Cms;
 using System.Net;
 using ProjectStart.Common;
+using ProjectStart.Repository;
 
 namespace ProjectStart.WebApp.Controllers.Api
 {
@@ -16,12 +17,10 @@ namespace ProjectStart.WebApp.Controllers.Api
     [Route("api/PageData")]
     public class PageDataController : BaseController
     {
-        private readonly CmsDbContext _context;
+        private CmsDbContext _context => CurrentService.CmsDbContext;
 
-        public PageDataController(CmsDbContext context)
-        {
-            _context = context;
-        }
+        public PageDataController(IUnitOfWork currentService) : base(currentService)
+        { }
 
         // GET: api/PageData
         [HttpGet]

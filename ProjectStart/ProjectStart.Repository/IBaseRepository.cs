@@ -11,13 +11,22 @@ namespace ProjectStart.Repository
     public interface IBaseRepository<T> where T : class
     {
         DbSet<T> Entity { get; }
-        TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate);
+        TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate = null);
         IEnumerable<TResult> GetAll<TResult>(
             Expression<Func<T, TResult>> output,
-            Expression<Func<TResult, bool>> predicate = null,
-            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null,
             int? page = null,
-            int? pageSize = null);
+            int? pageSize = null,
+            Expression<Func<TResult, bool>> predicate = null,
+            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
+            );
+        IEnumerable<TResult> GetAll<TResult>(
+            Expression<Func<T, TResult>> output,
+            out int totalCount,
+            int? page = null,
+            int? pageSize = null,
+            Expression<Func<TResult, bool>> predicate = null,
+            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
+            );
         void Add(IEnumerable<T> entities);
         void Add(T entity);
         void Update(T entity);

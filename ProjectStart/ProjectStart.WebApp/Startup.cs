@@ -17,6 +17,7 @@ using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc.Razor;
 using ProjectStart.WebApp.Configuration;
+using AutoMapper;
 
 namespace ProjectStart.WebApp
 {
@@ -90,6 +91,8 @@ namespace ProjectStart.WebApp
 
 
 
+
+            services.AddAutoMapper();
 
             services
                 .AddMvc()
