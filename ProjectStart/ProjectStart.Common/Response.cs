@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ProjectStart.Common.Constants;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProjectStart.Common
@@ -23,5 +24,29 @@ namespace ProjectStart.Common
             Data = data;
         }
         public T Data { get; set; }
+    }
+
+    public abstract class ResponseTypes
+    {
+        public virtual Response Success(string message = null)
+        {
+            return new Response(message);
+        }
+        public virtual Response Error(string message = null)
+        {
+            return new Response(null, new Dictionary<string, string> { { ResponseConstants.GlobalError, message } });
+        }
+        public virtual Response Error(IDictionary<string, string> errors = null)
+        {
+            return new Response(null, errors);
+        }
+        public virtual Response<T> Error<T>(T data, string message = null, IDictionary<string, string> errors = null) where T : class
+        {
+            return new Response<T>(data, message, errors);
+        }
+        public virtual Response<T> Success<T>(T data, string message = null) where T : class
+        {
+            return new Response<T>(data, message);
+        }
     }
 }

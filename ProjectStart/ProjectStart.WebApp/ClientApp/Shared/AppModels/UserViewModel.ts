@@ -1,6 +1,4 @@
-﻿/**
- * Interface for: ProjectStart.ViewModel.AccountViewModels.UserViewModel
- */
+﻿
 export interface IUserViewModel  {
     email: string;
     phoneNumber: string;
@@ -12,9 +10,6 @@ export interface IUserViewModel  {
     postalCode: string;
     city: string;
 }
-/**
- * Base view model for ProjectStart.ViewModel.AccountViewModels.UserViewModel
- */
 export class UserViewModel  implements IUserViewModel {
     email: string;
     phoneNumber: string;

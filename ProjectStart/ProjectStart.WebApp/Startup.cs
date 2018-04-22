@@ -173,7 +173,6 @@ namespace ProjectStart.WebApp
                     );
                 routes.MapRoute(
                     name: "defaultArea",
-                    //:exists
                     template: "{area}/{controller=Home}/{action=Index}/{id?}"
                     );
                 routes.MapRoute(

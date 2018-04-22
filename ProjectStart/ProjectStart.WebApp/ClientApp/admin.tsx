@@ -8,7 +8,8 @@ import {
     BrowserRouter,
 } from 'react-router-dom';
 import ErrorPage from 'shared/errorPage';
-import Page from 'container/admin/Page';
+import Page from 'container/Admin/Page';
+import User from 'container/Admin/User';
 
 
 ReactDOM.render(
@@ -16,7 +17,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route exact path="/Admin/Page" component={Page} />
-                <Route exact path="/Admin/Page/Index" component={Page} />
+                <Route exact path="/Admin/User" component={User} />
                 <Route component={ErrorPage} />
             </Switch>
         </BrowserRouter>

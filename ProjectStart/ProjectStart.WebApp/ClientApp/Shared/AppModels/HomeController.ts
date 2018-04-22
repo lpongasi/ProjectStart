@@ -1,5 +1,4 @@
 ﻿import { Api } from 'shared/Component/api';
-import { IResponse, IResponseData } from 'shared/Component/response';
 
 
 // State for post: api/Home/

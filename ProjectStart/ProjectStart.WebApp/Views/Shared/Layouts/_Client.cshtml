@@ -8,7 +8,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <environment exclude="Development">
         <link href="~/assets/common.bundle.css" rel="stylesheet" asp-append-version="true" />
-    </environment>   
+    </environment>
+    @RenderSection("HeaderScripts", required: false)
 </head>
 <body>
     <main id="main-app">
@@ -21,7 +22,6 @@
     </main>
     @Html.AntiForgeryToken()
     @RenderBody()
-    @RenderSection("DataScripts", required: false)
     <script src="~/assets/common.bundle.js" asp-append-version="true"></script>
     <script src="~/assets/client.bundle.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

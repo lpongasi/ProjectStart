@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectStart.Entity\ProjectStart.Entity.csproj" />
+    <ProjectReference Include="..\ProjectStart.ViewModel\ProjectStart.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

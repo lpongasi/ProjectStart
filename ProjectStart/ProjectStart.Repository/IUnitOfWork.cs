@@ -1,16 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectStart.Entity;
-using System.Threading.Tasks;
+﻿using ProjectStart.Entity;
+using System;
 
 namespace ProjectStart.Repository
 {
     public interface IUnitOfWork
     {
         ApplicationDbContext ApplicationDbContext { get; }
-        CmsDbContext CmsDbContext { get; }        
+        CmsDbContext CmsDbContext { get; }
+        IServiceProvider Service { get; }
         IBaseRepository<ApplicationUser> UserRepository { get; }
-
-        //CommerceDbContext DbContext { get; }
-        //IBaseRepository<NodeEntity> NodeRepository { get; }
+        AccountRepository AccountRepository { get; }
     }
 }

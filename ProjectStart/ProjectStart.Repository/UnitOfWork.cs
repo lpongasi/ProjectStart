@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using ProjectStart.Entity;
 
@@ -9,17 +10,18 @@ namespace ProjectStart.Repository
     {
         public ApplicationDbContext ApplicationDbContext { get; }
         public CmsDbContext CmsDbContext { get; }
-        public UnitOfWork(ApplicationDbContext applicationDbContext, CmsDbContext cmsDbContext)
+        public IServiceProvider Service { get; }
+        public UnitOfWork(ApplicationDbContext applicationDbContext, CmsDbContext cmsDbContext, IServiceProvider service)
         {
             CmsDbContext = cmsDbContext;
             ApplicationDbContext = applicationDbContext;
+            Service = service;
         }
-        private IBaseRepository<T> Initialize<T, TContext>(IBaseRepository<T> repository, TContext dbContext)
-            where T : class
-            where TContext : DbContext
-            => repository ?? (repository = new BaseRepository<T, TContext>(dbContext));
-
-        private IBaseRepository<ApplicationUser> _userRepository;
-        public IBaseRepository<ApplicationUser> UserRepository => Initialize(_userRepository, ApplicationDbContext);
+        private T GetService<T>() where T : class
+        {
+            return Service.GetService(typeof(T)) as T;
+        }
+        public IBaseRepository<ApplicationUser> UserRepository => GetService<IBaseRepository<ApplicationUser>>();
+        public AccountRepository AccountRepository => GetService<AccountRepository>();
     }
 }

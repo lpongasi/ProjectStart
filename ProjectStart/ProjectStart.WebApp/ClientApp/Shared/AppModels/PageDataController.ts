@@ -1,6 +1,6 @@
 ﻿import { PageDataEntity } from 'shared/AppModels/PageDataEntity';
 import { Api } from 'shared/Component/api';
-import { IResponse, IResponseData } from 'shared/Component/response';
+import Response from 'shared/Component/response';
 
 
 // State for get: api/PageData
@@ -10,7 +10,7 @@ export const getPageData = (localData?: (data: PageDataEntity[]) => void): Promi
 // State for get: api/PageData/GetPages?id=${encodeURIComponent(id)}
 // get: api/PageData/GetPages?id=${encodeURIComponent(id)}
 export const getPagesActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPages.get';
-export const getPages = (id: string, localData?: (data: IResponseData<{ [key: string]: PageDataEntity; }>) => void): Promise<IResponseData<{ [key: string]: PageDataEntity; }>> => Api(getPagesActionId, 'get', `/api/PageData/GetPages?id=${encodeURIComponent(id)}`, null, true , localData);
+export const getPages = (id: string, localData?: (data: Response<{ [key: string]: PageDataEntity; }>) => void): Promise<Response<{ [key: string]: PageDataEntity; }>> => Api(getPagesActionId, 'get', `/api/PageData/GetPages?id=${encodeURIComponent(id)}`, null, true , localData);
 // State for get: api/PageData/${encodeURIComponent(id)}
 // get: api/PageData/${encodeURIComponent(id)}
 export const getPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.GetPageData.get';
@@ -22,7 +22,7 @@ export const putPageData = (id: string, pageData: PageDataEntity, localData?: (d
 // State for post: api/PageData
 // post: api/PageData
 export const postPageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.PostPageData.post';
-export const postPageData = (pageData: PageDataEntity, localData?: (data: IResponseData<PageDataEntity>) => void): Promise<IResponseData<PageDataEntity>> => Api(postPageDataActionId, 'post', `/api/PageData`, pageData, true , localData);
+export const postPageData = (pageData: PageDataEntity, localData?: (data: Response<PageDataEntity>) => void): Promise<Response<PageDataEntity>> => Api(postPageDataActionId, 'post', `/api/PageData`, pageData, true , localData);
 // State for delete: api/PageData/${encodeURIComponent(id)}
 // delete: api/PageData/${encodeURIComponent(id)}
 export const deletePageDataActionId = 'ProjectStart.WebApp.Controllers.Api.PageDataController.DeletePageData.delete';

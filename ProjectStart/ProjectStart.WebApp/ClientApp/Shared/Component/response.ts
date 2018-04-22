@@ -1,7 +1,7 @@
 ﻿import { StateLifeCycle } from 'shared/Component/common';
 
 
-export interface IResponse {
+export default interface Response<T = any> {
     status: StateLifeCycle;
     success: boolean;
     error: boolean;
@@ -11,9 +11,6 @@ export interface IResponse {
     currentInput: string;
     currentInputValue: any;
     inputs: { [key: string]: any; };
-}
-
-export interface IResponseData<T = any> extends IResponse {
     data: T;
 }
 

@@ -14,7 +14,7 @@
       List<string> neededImports = new List<string>();
 
      neededImports.AddRange(c.Properties
-	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
+	    .Where(p =>!p.Type.Name.Equals("T") && !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')) && !p.Type.IsGeneric)
 	    .Select(p => "import { " + p.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" + p.Type.Name.TrimEnd('[',']') + "';").ToList());
 
       c.Methods.ToList().ForEach(e =>
@@ -28,15 +28,10 @@
      }
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";
     }
-}$Classes(*ViewModel)[$Imports/**
- * Interface for: $FullName
- */
+}$Classes(*ViewModel)[$Imports
 export interface I$Name$TypeParameters $BaseClass[extends I$Name$TypeArguments] {$Properties[
     $TypeGenerator;]
 }
-/**
- * Base view model for $FullName
- */
 export class $Name$TypeParameters $BaseClass[extends $Name$TypeArguments] implements I$Name$TypeArguments {$Properties[
     $TypeGenerator;]
 }]

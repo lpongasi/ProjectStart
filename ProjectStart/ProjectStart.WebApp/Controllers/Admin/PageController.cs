@@ -12,13 +12,7 @@ namespace ProjectStart.WebApp.Controllers.Admin
     {
         public IActionResult Index()
         {
-            var logInViewModel = new LoginViewModel();
-            return Json(logInViewModel);
-        }
-        public IActionResult Form()
-        {
-            var logInViewModel = new LoginViewModel();
-            return Json(logInViewModel);
+            return View("MainBody", null);
         }
     }
 }

@@ -11,6 +11,8 @@ using ProjectStart.WebApp.Extensions;
 using ProjectStart.ViewModel.AccountViewModels;
 using ProjectStart.WebApp.Services;
 using ProjectStart.Entity;
+using ProjectStart.Repository;
+using AutoMapper;
 
 namespace ProjectStart.WebApp.Controllers.Client
 {
@@ -25,10 +27,12 @@ namespace ProjectStart.WebApp.Controllers.Client
         private readonly ILogger _logger;
 
         public AccountController(
+            IUnitOfWork unit,
+            IMapper mapper,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger) : base(unit, mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -56,36 +60,14 @@ namespace ProjectStart.WebApp.Controllers.Client
         [ValidateAntiForgeryToken]
         public async Task<Response> Login([FromBody]LoginViewModel model)
         {
-            //ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    // RedirectToLocal(returnUrl)
-                    return Success("User logged in.");
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    //return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
-                    return Error("RequiresTwoFactor");
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    //return RedirectToAction(nameof(Lockout));
-                    return Error("User account locked out.");
-                }
-                else
-                {
-                    //ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    //return View(model);
-                    return Error("Invalid login attempt.");
-                }
+                var result = await CurrentService.AccountRepository.Login(model);
+                SetResponse(result.Success);
+                if (!result.Success)
+                    return result;
+                return Success(CurrentMapper.Map<UserViewModel>(await CurrentService.AccountRepository.UserManager.GetUserAsync(User)));
             }
 
             // If we got this far, something failed, redisplay form
@@ -225,7 +207,8 @@ namespace ProjectStart.WebApp.Controllers.Client
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
@@ -326,7 +309,8 @@ namespace ProjectStart.WebApp.Controllers.Client
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
                 }
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     UserName = model.Email,
                     Email = model.Email
                 };

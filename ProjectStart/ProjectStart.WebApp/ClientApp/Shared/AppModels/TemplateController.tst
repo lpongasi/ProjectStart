@@ -1,12 +1,11 @@
 ﻿${
     // Enable extension methods by adding using Typewriter.Extensions.*
-    //using System.Linq;
     using Typewriter.Extensions.Types;
 	using Typewriter.Extensions.WebApi;
 
 	string ReturnType(Method m){
      var returnType =  m.Type.Name == "IActionResult" ? "any" : m.Type.Name;
-     returnType =returnType.Contains("Response<") ? returnType.Replace("Response<","IResponseData<") : returnType.Replace("Response","IResponse");
+     // returnType =returnType.Contains("Response<") ? returnType.Replace("Response<","IResponseData<") : returnType.Replace("Response","IResponse");
      return returnType;
     }
     string ServiceName(Class c) => c.Name.Replace("ApiController", "Controller");
@@ -35,15 +34,18 @@
       return string.Join(", ",parameters);
     }
     string Imports(Class c){
-      List<string> neededImports = new List<string>();
-      neededImports.AddRange(new []{
-      "import { Api } from 'shared/Component/api';",
-      "import { IResponse, IResponseData } from 'shared/Component/response';"
-      });
+      var neededImports = new List<string>();
+      var extendedImports = new Dictionary<string,string>
+     {
+          {"Api","import { Api } from 'shared/Component/api';"},
+          {"Response","import Response from 'shared/Component/response';"},
+          {"FilterDataViewModel","import { FilterDataViewModel } from 'shared/AppModels/FilterDataViewModel';"},
+          {"UserViewModel","import { UserViewModel } from 'shared/AppModels/UserViewModel';"}
+      };
      neededImports.AddRange(c.Properties
 	    .Where(p => !p.Type.IsPrimitive && p.Type.Name.TrimEnd('[',']') != c.Name && !AnyProperties().Contains(p.Type.Name.TrimEnd('[',']')))
 	    .Select(p => "import { " + p.Type.Name.TrimEnd('[',']') + " } from 'shared/AppModels/" + p.Type.Name.TrimEnd('[',']') + "';").ToList());
-
+        
       c.Methods.ToList().ForEach(e =>
       {
         if(!e.Type.IsPrimitive && e.Type.Name != "IActionResult" && !e.Type.Name.Contains("Response")) {
@@ -64,6 +66,11 @@
       var baseImports = string.Join(", ",new List<string>{c.BaseClass.Name, $"I{c.BaseClass.Name}"}.OrderBy(o=>o));
 	   neededImports.Add("import { " + baseImports +"} from 'shared/AppModels/" + c.BaseClass.Name + "';");
      }
+     var methodReturnTypes = c.Methods.ToList().Select(s=>ReturnType(s));
+
+     extendedImports.Where(w=>w.Key.Equals("Api")||methodReturnTypes.Any(a=>a.Contains(w.Key))).ToList().ForEach(e=>{
+        neededImports.Add(e.Value);
+     });
       return neededImports.Any() ? String.Join("\r\n", neededImports.OrderBy(o=>o.Substring(o.IndexOf("from"))).Distinct()) + "\r\n":"";
     }
 }$Classes(*Controller)[$Imports

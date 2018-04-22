@@ -1,4 +1,4 @@
 ﻿@{
     var area = ViewContext.RouteData.Values["area"] as string;
-    Layout = (string.IsNullOrEmpty(area) ? "_Layout" : $"Layouts/_{area}");
+    Layout = (string.IsNullOrEmpty(area) ? "Layouts/_Client" : $"Layouts/_{area}");
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ProjectStart.Common;
+using ProjectStart.Common.ViewModel;
 using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
@@ -12,18 +14,9 @@ namespace ProjectStart.Repository
     {
         DbSet<T> Entity { get; }
         TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate = null);
-        IEnumerable<TResult> GetAll<TResult>(
+        FilterDataViewModel<TResult> GetAll<TResult>(
             Expression<Func<T, TResult>> output,
-            int? page = null,
-            int? pageSize = null,
-            Expression<Func<TResult, bool>> predicate = null,
-            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
-            );
-        IEnumerable<TResult> GetAll<TResult>(
-            Expression<Func<T, TResult>> output,
-            out int totalCount,
-            int? page = null,
-            int? pageSize = null,
+            FilterQueryViewModel filter = null,
             Expression<Func<TResult, bool>> predicate = null,
             Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
             );

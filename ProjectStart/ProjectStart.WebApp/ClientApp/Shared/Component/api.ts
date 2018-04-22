@@ -2,11 +2,11 @@
 import * as local from 'localforage';
 import { UPDATE_FORM } from 'shared/Component/action';
 import { dispatcher } from 'shared/Component/common';
-import { IResponse } from 'shared/Component/response';
+import { IResponseData } from 'shared/Component/response';
 
 const getLocalId = (id, url, method) => `${id}.${url}.${method}`;
 
-const appResponse = (url: string, method: string, id: string, value: AxiosResponse<IResponse<any>>, isCache: boolean, localData: (data: any) => void): IResponse<any> => {
+const appResponse = (url: string, method: string, id: string, value: AxiosResponse<IResponseData<any>>, isCache: boolean, localData: (data: any) => void): IResponseData<any> => {
     if (value.data.success) {
         if (isCache) {
             local.setItem(getLocalId(id, url, method), { ...value.data });
@@ -21,7 +21,7 @@ const appResponse = (url: string, method: string, id: string, value: AxiosRespon
     dispatcher('LOADING_END', {});
     return value.data;
 };
-const errorResponse = (id: string, error: IResponse) => {
+const errorResponse = (id: string, error: IResponseData<any>) => {
     dispatcher(UPDATE_FORM.error, { errors: error.errors, formId: id });
     dispatcher('LOADING_END', {});
     return error;
@@ -34,7 +34,7 @@ export const Api = <T = any>(
     requestData: any,
     isCache: boolean = true,
     localData?: (data: T) => void,
-): Promise<IResponse<T>> => {
+): Promise<IResponseData<T>> => {
     dispatcher('LOADING_START', {});
     if (isCache) {
         local.getItem(getLocalId(id, url, method)).then(data => {
@@ -49,7 +49,7 @@ export const Api = <T = any>(
     const transformRequestData = { ...requestData };
     delete transformRequestData.payload;
     delete transformRequestData.status;
-    return axios.request<IResponse<T>>({
+    return axios.request<IResponseData<T>>({
         headers: {
             'Content-Type': 'application/json',
             'X-XSRF-Token': (document.querySelector('input[name="__RequestVerificationToken"]') as HTMLInputElement).value,

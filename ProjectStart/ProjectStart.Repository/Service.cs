@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
 {
@@ -6,6 +7,8 @@ namespace ProjectStart.Repository
     {
         public static void Inject(IServiceCollection services)
         {
+            services.AddTransient<IBaseRepository<ApplicationUser>, BaseRepository<ApplicationUser, ApplicationDbContext>>();
+            services.AddTransient<AccountRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }
     }

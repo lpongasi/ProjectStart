@@ -8,18 +8,32 @@ using ProjectStart.Entity;
 using ProjectStart.Repository;
 using ProjectStart.ViewModel.AccountViewModels;
 using AutoMapper;
+using ProjectStart.Common.ViewModel;
+using ProjectStart.Common;
+
 namespace ProjectStart.WebApp.Controllers.Admin
 {
-    [Produces("application/json")]
-    [Route("api/User")]
+    [Area("Admin")]
     public class UserController : BaseController
     {
         public UserController(IUnitOfWork currentService, IMapper currentMapper) : base(currentService, currentMapper)
         { }
-        [HttpGet]
-        public IEnumerable<UserViewModel> GetUser()
+        public IActionResult Index()
         {
-            return CurrentService.UserRepository.GetAll(s => new UserViewModel { FirstName = s.FirstName });
+            return View("MainBody", null);
+        }
+        [Produces("application/json")]
+        [HttpGet]
+        public Response<FilterDataViewModel<UserViewModel>> GetUser(
+            [FromQuery] FilterQueryViewModel filterQuery
+            )
+        {
+            filterQuery.WithTotalRecord = true;
+            var filterData = CurrentService.UserRepository.GetAll(
+                s => new UserViewModel { FirstName = s.FirstName },
+                filterQuery);
+
+            return Success(filterData);
         }
     }
 }

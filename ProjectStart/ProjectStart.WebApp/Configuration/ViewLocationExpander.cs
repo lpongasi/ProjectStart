@@ -19,8 +19,7 @@ namespace ProjectStart.WebApp.Configuration
         {     
             //{2} is area, {1} is controller,{0} is the action
             string[] locations = new string[] {
-                "/Views/{2}/{1}/{0}.cshtml",
-                "/Views/Client/{1}/{0}.cshtml"
+                "/Views/{2}/{1}/{0}.cshtml"
             };
             return locations.Union(viewLocations);          //Add mvc default locations after ours
 

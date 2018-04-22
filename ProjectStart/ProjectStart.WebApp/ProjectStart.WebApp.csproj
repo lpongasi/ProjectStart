@@ -98,6 +98,12 @@
     <None Update="ClientApp\Shared\AppModels\ExternalLoginViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ExternalLoginViewModel.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\Shared\AppModels\FilterDataViewModel.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\ViewModel\FilterDataViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\Shared\AppModels\FilterQueryViewModel.ts">
+      <CustomToolNamespace>..\ProjectStart.Common\ViewModel\FilterQueryViewModel.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\Shared\AppModels\ForgotPasswordViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\AccountViewModels\ForgotPasswordViewModel.cs</CustomToolNamespace>
     </None>
@@ -138,7 +144,7 @@
       <CustomToolNamespace>..\ProjectStart.Common\Enum\OrderEnum.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>

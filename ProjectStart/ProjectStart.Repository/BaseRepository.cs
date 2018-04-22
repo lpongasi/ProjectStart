@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using ProjectStart.Common;
+using ProjectStart.Common.ViewModel;
 
 namespace ProjectStart.Repository
 {
@@ -51,52 +51,40 @@ namespace ProjectStart.Repository
             : Entity.Select(output).FirstOrDefault();
 
 
-
-        public virtual IEnumerable<TResult> GetAll<TResult>(
-           Expression<Func<T, TResult>> output,
-           int? page = null,
-           int? pageSize = null,
-           Expression<Func<TResult, bool>> predicate = null,
-           Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
-           )
-        {
-            var result = Entity.Select(output);
-            if (predicate != null)
-            {
-                result = result.Where(predicate);
-            }
-
-            if (order != null)
-                result = order(result);
-
-            return page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
-              ? result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList()
-              : result.Take(100).ToList();
-        }
-        public virtual IEnumerable<TResult> GetAll<TResult>(
+     
+        public virtual FilterDataViewModel<TResult> GetAll<TResult>(
             Expression<Func<T, TResult>> output,
-            out int totalCount,
-            int? page = null,
-            int? pageSize = null,
+            FilterQueryViewModel filter = null,
             Expression<Func<TResult, bool>> predicate = null,
             Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
             )
         {
-
+            var filterData = new FilterDataViewModel<TResult>();
             var result = Entity.Select(output);
             if (predicate != null)
             {
                 result = result.Where(predicate);
             }
+            var page = filter?.Page;
+            var pageSize = filter?.PageSize;
 
-            totalCount = result.Count();
+            if (filter!=null && filter.WithTotalRecord)
+            {
+                filterData.TotalRecord = result.Count();
+            }
+            else
+            {
+                filterData.TotalRecord = 0;
+            }
 
             if (order != null)
                 result = order(result);
 
-            return page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
+            filterData.Data = page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0
               ? result.Skip((page.Value - 1) * pageSize.Value).Take(pageSize.Value).ToList()
               : result.Take(100).ToList();
+
+            return filterData;
         }
         public virtual void Update(T entity)
         {
