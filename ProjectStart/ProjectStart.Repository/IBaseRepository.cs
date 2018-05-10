@@ -13,12 +13,19 @@ namespace ProjectStart.Repository
     public interface IBaseRepository<T> where T : class
     {
         DbSet<T> Entity { get; }
-        TResult Get<TResult>(Expression<Func<T, TResult>> output, Expression<Func<TResult, bool>> predicate = null);
+        TResult Get<TResult>(
+            string[] select = null,
+            string tableName = null,
+            string where = null,
+            object param = null
+            );
+
         FilterDataViewModel<TResult> GetAll<TResult>(
-            Expression<Func<T, TResult>> output,
-            FilterQueryViewModel filter = null,
-            Expression<Func<TResult, bool>> predicate = null,
-            Func<IQueryable<TResult>, IOrderedQueryable<TResult>> order = null
+            string[] select = null,
+            string tableName = null,
+            string where = null,
+            string[] order = null,
+            FilterViewModel param = null
             );
         void Add(IEnumerable<T> entities);
         void Add(T entity);

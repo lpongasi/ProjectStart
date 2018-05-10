@@ -1,13 +1,9 @@
 ﻿
-export interface IFilterQueryViewModel  {
-    q: { [key: string]: any; };
+export interface IFilterViewModel  {
     page: number;
     pageSize: number;
-    withTotalRecord: boolean;
 }
-export class FilterQueryViewModel  implements IFilterQueryViewModel {
-    q: { [key: string]: any; };
+export class FilterViewModel  implements IFilterViewModel {
     page: number;
     pageSize: number;
-    withTotalRecord: boolean;
 }

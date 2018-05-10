@@ -1,5 +1,5 @@
 ﻿import { FilterDataViewModel } from 'shared/AppModels/FilterDataViewModel';
-import { FilterQueryViewModel } from 'shared/AppModels/FilterQueryViewModel';
+import { FilterViewModel } from 'shared/AppModels/FilterViewModel';
 import { UserViewModel } from 'shared/AppModels/UserViewModel';
 import { Api } from 'shared/Component/api';
 import Response from 'shared/Component/response';
@@ -12,5 +12,5 @@ export const postIndex = (localData?: (data: any) => void): Promise<any> => Api(
 // State for get: api/User/
 // get: api/User/
 export const getUserActionId = 'ProjectStart.WebApp.Controllers.Admin.UserController.GetUser.get';
-export const getUser = (filterQuery: FilterQueryViewModel, localData?: (data: Response<FilterDataViewModel<UserViewModel>>) => void): Promise<Response<FilterDataViewModel<UserViewModel>>> => Api(getUserActionId, 'get', `/api/User/`, filterQuery, true , localData);
+export const getUser = (filterQuery: FilterViewModel, localData?: (data: Response<FilterDataViewModel<UserViewModel>>) => void): Promise<Response<FilterDataViewModel<UserViewModel>>> => Api(getUserActionId, 'get', `/api/User/`, filterQuery, true , localData);
 

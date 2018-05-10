@@ -26,7 +26,7 @@ namespace ProjectStart.WebApp.Controllers
         
         public IActionResult Index(string url, [FromQuery]bool isJson = false)
         {
-            var page = _context.DbConnection.QueryFirstOrDefault<PageDataViewModel>(SqlResource.GetPageData, new { parentUrl = url });
+            var page = _context.DbConnection.QueryFirstOrDefault<PageDataViewModel>(SqlResource.GetPageData, new { url });
 
             return isJson
                 ? (IActionResult)Json(new Response<PageDataViewModel>(page))

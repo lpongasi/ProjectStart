@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-ProjectStart.WebApp-284F66ED-6869-492B-B9C0-CD4E0B2BD123</UserSecretsId>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TypeScriptToolsVersion>2.7</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <StartupObject>ProjectStart.WebApp.Program</StartupObject>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -117,7 +117,7 @@
       <CustomToolNamespace>..\ProjectStart.Entity\Common\HistoryEntity.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\HomeController.ts">
-      <CustomToolNamespace>Controllers\HomeController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\Admin\HomeController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\IndexViewModel.ts">
       <CustomToolNamespace>..\ProjectStart.ViewModel\ManageViewModels\IndexViewModel.cs</CustomToolNamespace>
@@ -144,7 +144,7 @@
       <CustomToolNamespace>..\ProjectStart.Common\Enum\OrderEnum.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageController.ts">
-      <CustomToolNamespace>Controllers\Admin\PageController.cs</CustomToolNamespace>
+      <CustomToolNamespace>Controllers\PageController.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\Shared\AppModels\PageDataController.ts">
       <CustomToolNamespace>Controllers\Api\PageDataController.cs</CustomToolNamespace>

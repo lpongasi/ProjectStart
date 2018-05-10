@@ -14,6 +14,7 @@ using ProjectStart.Common;
 namespace ProjectStart.WebApp.Controllers.Admin
 {
     [Area("Admin")]
+    [Produces("application/json")]
     public class UserController : BaseController
     {
         public UserController(IUnitOfWork currentService, IMapper currentMapper) : base(currentService, currentMapper)
@@ -22,16 +23,12 @@ namespace ProjectStart.WebApp.Controllers.Admin
         {
             return View("MainBody", null);
         }
-        [Produces("application/json")]
         [HttpGet]
         public Response<FilterDataViewModel<UserViewModel>> GetUser(
-            [FromQuery] FilterQueryViewModel filterQuery
+            [FromQuery] FilterViewModel filterQuery
             )
         {
-            filterQuery.WithTotalRecord = true;
-            var filterData = CurrentService.UserRepository.GetAll(
-                s => new UserViewModel { FirstName = s.FirstName },
-                filterQuery);
+            var filterData = CurrentService.UserRepository.GetAll<UserViewModel>(param: filterQuery);
 
             return Success(filterData);
         }

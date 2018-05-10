@@ -11,9 +11,10 @@ using System;
 namespace ProjectStart.WebApp.Migrations.Cms
 {
     [DbContext(typeof(CmsDbContext))]
-    partial class CmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180509081416_Cms_20180509_161342")]
+    partial class Cms_20180509_161342
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
