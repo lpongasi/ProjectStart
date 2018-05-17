@@ -10,6 +10,7 @@ using ProjectStart.ViewModel.AccountViewModels;
 using AutoMapper;
 using ProjectStart.Common.ViewModel;
 using ProjectStart.Common;
+using ProjectStart.Common.Extensions;
 
 namespace ProjectStart.WebApp.Controllers.Admin
 {
@@ -28,7 +29,7 @@ namespace ProjectStart.WebApp.Controllers.Admin
             [FromQuery] FilterViewModel filterQuery
             )
         {
-            var filterData = CurrentService.UserRepository.GetAll<UserViewModel>(param: filterQuery);
+            var filterData = CurrentService.UserRepository.Entity.Select(s => CurrentMapper.Map<UserViewModel>(s)).OrderBy(o=>o.FirstName).AsQueryable().Paginate(filterQuery);
 
             return Success(filterData);
         }

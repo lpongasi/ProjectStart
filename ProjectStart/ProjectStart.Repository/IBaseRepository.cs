@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using ProjectStart.Common;
 using ProjectStart.Common.ViewModel;
-using ProjectStart.Entity;
 
 namespace ProjectStart.Repository
 {
